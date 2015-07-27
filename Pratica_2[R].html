@@ -70,33 +70,31 @@ img {
 
 <p>Nesta prática veremos como:</p>
 <ul>
-<li>Utilizar um conjunto de dados exemplo contido no R</li>
-<li>Lidar com diretório de trabalho (<em>Working directory</em>)</li>
+<li>Carregar arquivos .Rdata</li>
 <li>Exportar <em>data frames</em> do R</li>
 <li>Importar tabelas como <em>data frames</em> para analise no R</li>
+<li>Utilizar um conjunto de dados exemplo contido no R</li>
 </ul>
-<p>Se você está vindo diretamente da Prática 1, vamos organizar o ambiente antes de começar um novo trabalho. Para isso, esvazie o “Global Environment” utilizando o comando <em>rm()</em>, deixando apenas a “tabela1” conforme segue:</p>
-<pre class="r"><code>rm(C_0, C_1, V_0, V_1, cha, int, Massa, massa_total, mistura, num, comp, log, x, X) #Remove os objetos do ambiente </code></pre>
+<p>Se você está vindo diretamente da Prática 1, apenas vamos carregar o(s) objeto(s) do arquivo <em>tabela1.Rdata</em> salvo. Não esqueça que seu diretório de trabalho precisa ser a pasta que contém a tabela1, ou indique todo o caminho até ele junto com o nome do arquivo.</p>
+<pre class="r"><code>load(&quot;tabela1.Rdata&quot;) #Carrega o(s) objeto(s) salvo(s) no arquivo contido no diretório de trabalho
+load(&quot;~/Downloads/Arquivos_workshop-master/R_intro/tabela1.Rdata&quot;) #Caso você não esteja no diretório que contém o arquivo, mostre o caminho até ele. Mas aconselho que você esteja, vai facilitar seu trabalho</code></pre>
 <p>Caso você não tenha a “tabela1” criada na Prática 1, corra os comandos abaixo:</p>
 <pre class="r"><code>tabela1 &lt;- data.frame( Cinit = c(0.3, 0.6, 0.7, 0.4), Vinit = c(3.5, 2.3, 1.7, 3.2), Cfin = rep(0.25, 4), Vfin = c(4.2, 5.52, 4.76, 5.12), Massa = c(1.05, 1.38, 1.19, 1.28))
 
-row.names(tabela1) &lt;- c(&quot;Sódio&quot;, &quot;Potássio&quot;, &quot;Magnésio&quot;, &quot;Cálcio&quot;)</code></pre>
+row.names(tabela1) &lt;- c(&quot;Na&quot;, &quot;K&quot;, &quot;Mg&quot;, &quot;Ca&quot;)</code></pre>
 <div id="exportacao-de-dados-tabelares" class="section level2">
 <h2>Exportação de dados tabelares</h2>
-<p>Antes de mais nada é necessário definir onde o arquivo contendo os dados será salvo no seu computador. Para isso verificaremos qual é o diretório de trabalho (<em>Working Directory</em>) atual e mudaremos para um diretório desejado:</p>
-<pre class="r"><code>getwd()  #Verificando diretório de trabalho atual
-setwd(&quot;~/Downloads/Arquivos_workshop-master/R_intro/&quot;)  #Alterando o diretório de trabalho, neste caso o arquivo será salvo na mesma pasta que contém todos os arquivos para os mini-cursos</code></pre>
-<p>Os formatos mais utilizados para exportação de dados do R são o <em>.csv</em> (comma-separated values) e <em>.tsv</em> (tab-separated values) pois esses formatos não são vinculados a um programa específico (mesmo o bloco de notas pode edita-los). Além desses, o R possui muitas possibilidades de formatos, e também pode incluir o auxílio de pacotes como o “xlsx” para exportação no formato de Excel e o “foreign” para formatos compatíveis com Minitab, S, SAS, SPSS, Stata, Systat entre outros.</p>
+<p>Os formatos mais utilizados para exportação de dados do R são o <em>.csv</em> (comma-separated values), <em>.txt</em> (text files) e <em>.tsv</em> (tab-separated values) pois esses formatos não são vinculados a um programa específico (mesmo o bloco de notas pode edita-los). Além desses, o R possui muitas possibilidades de formatos, e também pode incluir o auxílio de pacotes como o “xlsx” para exportação no formato de Excel e o “foreign” para formatos compatíveis com Minitab, S, SAS, SPSS, Stata, Systat entre outros.</p>
 <p>Não é o caso da nossa pobre “tabela1”, mas é comum que <em>data frames</em> criadas no R sejam grandes, na verdade essa é uma das vantagens do R em relação a programas, portanto tenha cautela ao abrir esses arquivos no Excel, por exemplo, cuja parte gráfica poderá ficar muito lenta.</p>
 <pre class="r"><code>#Para exportação da tabela1 em formato csv
-write.csv(tabela1, &quot;diluições.csv&quot;, row.names=TRUE)
+write.csv(tabela1, &quot;tabela1.csv&quot;, row.names=TRUE)
 
 #Como denominados as linhas, é útil para nos mantermos seus nomes
 #Veja o que acontece se usarmos row.names=FALSE
 #Repare que se você não alterar o nome do arquivo, ele vai substituir o já existinte sem perguntar se pode, portanto tome cuidado com isso
 
-#Para exportar em formato .tsv
-write.table(tabela1, &quot;diluições.tsv&quot;, sep=&quot;\t&quot;, row.names = TRUE, col.names=TRUE)
+#Para exportar em formato .txt
+write.table(tabela1, &quot;tabela1.txt&quot;, sep=&quot;\t&quot;, row.names = TRUE, col.names=TRUE)
 
 #Visualize a diferença entre os arquivos abrindo-os no bloco de notas.</code></pre>
 </div>
@@ -106,7 +104,6 @@ write.table(tabela1, &quot;diluições.tsv&quot;, sep=&quot;\t&quot;, row.names 
 <pre class="r"><code>#Para adquirir a tabela da internet é esse comando que você deve rodar 
 alturas &lt;- read.table(&quot;https://onlinecourses.science.psu.edu/stat501/sites/onlinecourses.science.psu.edu.stat501/files/data/stat_females.txt&quot;, sep=&quot;\t&quot;, dec=&quot;.&quot;, head = TRUE)
 
-#Ressalto que utilizer os dados desse site para esta prática
 
 #Se ela esta em uma pasta no seu computador:
 alturas &lt;- read.table(&quot;~/Downloads/Arquivos_workshop-master/R_intro/stat_females.txt&quot;, sep=&quot;\t&quot;, dec=&quot;.&quot;, head = TRUE)</code></pre>
@@ -133,9 +130,9 @@ plot(alturas$Height, alturas$momheight, main= &quot;Aluna_Mãe&quot;,
      col.lab=&quot;purple&quot;, col.main=&quot;pink&quot;)
 
 plot(alturas$Height, alturas$dadheight, main= &quot;Aluna_Pai&quot;, 
-     xlab = &quot;Aluna&quot;, ylab= &quot;Pai&quot;, col= 490, col.axis=589, 
-     col.lab= 562, col.main= 490)</code></pre>
-<p>Os números usados para descrever as cores funcionam num sistema hexadecimal (assim como o binário é na base 2, o hexadecimal é na base 16) adotado pelo R o que fornece muitas possibilidades de cores. Observe um exemplo de quadro de cores <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">aqui</a>.</p>
+     xlab = &quot;Aluna&quot;, ylab= &quot;Pai&quot;, col= colors()[490], col.axis= colors()[589], 
+     col.lab= colors()[562], col.main= colors()[490])</code></pre>
+<p>Os números usados para descrever as cores funcionam num sistema hexadecimal (assim como o binário é na base 2, o hexadecimal é na base 16) adotado pelo R o que fornece muitas possibilidades de cores. Observe um exemplo de quadro de cores <a href="http://research.stowers-institute.org/efg/R/Color/Chart/">aqui</a>.</p>
 <p>Agora realizaremos uma regressão linear simples, dessa forma podemos traçar a “linha de tendência” que fazemos no excel, ajustando um modelo linear.</p>
 <pre class="r"><code>plot(alturas$Height, alturas$momheight)
 rmom &lt;- lm(alturas$Height ~ alturas$momheight) #Regressão linear

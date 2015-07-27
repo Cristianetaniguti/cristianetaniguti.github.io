@@ -73,6 +73,8 @@ img {
 <li>Apresentar as principais classes de objetos</li>
 <li>Fazer operações matemáticas simples com vetores</li>
 <li>Criar e manipular uma <em>data frame</em></li>
+<li>Lidar com diretório de trabalho (<em>Working directory</em>)</li>
+<li>Salvar objetos em arquivo .Rdata</li>
 <li>Deixar algumas dicas para facilitar a inicialização no <em>R</em> e <em>RStudio</em></li>
 </ul>
 <p><br />Para começar é necessário saber o que são os <strong>objetos</strong>, pois tudo no R gira em torno deles, eles são todas as entidades criadas e manipuladas.</p>
@@ -114,7 +116,7 @@ V_1</code></pre>
 <li><strong>Matrizes</strong> são vetores com dimensões</li>
 <li><strong>Fatores</strong> são utilizados para representar dados categóricos</li>
 <li><strong>Data frames</strong> são utilizados para armazenar dados tabulares, semelhante a tabelas que vemos no excel.</li>
-<li>As <strong>funções</strong> também são objetos do R, e os usuários também podem criar e utilizar as suas próprias adicionando-as ao ambiente de trabalho. É uma forma muito conveniente de expandir o R.<br />Nesta prática daremos destaque apenas as <em>data frames</em>.<br /><br /></li>
+<li>As <strong>funções</strong> também são objetos do R, e os usuários também podem criar e utilizar as suas próprias adicionando-as ao ambiente de trabalho. É uma forma muito conveniente de expandir o R.<br /><br />Nesta prática daremos destaque apenas as <em>data frames</em>.<br /><br /></li>
 </ul>
 <p>As <em>data frames</em> são um conjunto de vetores de <strong>mesmo tamanho</strong> organizados em colunas.<br /></p>
 <pre class="r"><code>C_0 #Tamanho 4
@@ -127,7 +129,7 @@ V_1 #Tamanho 4
 
 tabela1 &lt;- data.frame(C_0 = C_0, V_0 = V_0, C_1, V_1) #Gerando a data frame
 
-row.names(tabela1) &lt;- c(&quot;Sódio&quot;, &quot;Potássio&quot;, &quot;Magnésio&quot;, &quot;Cálcio&quot;) #Além dos vetores com os valores que já obtemos anteriormente, também adicionamos um vetor com o nome dos solutos em cada solução
+row.names(tabela1) &lt;- c(&quot;Na&quot;, &quot;K&quot;, &quot;Mg&quot;, &quot;Ca&quot;) #Além dos vetores com os valores que já obtemos anteriormente, também adicionamos um vetor com o nome dos solutos em cada solução
 
 colnames (tabela1) &lt;- c(&quot;Cinit&quot;, &quot;Vinit&quot;, &quot;Cfin&quot;, &quot;Vfin&quot;) #Caso queira mudar o nome das colunas
 
@@ -137,12 +139,37 @@ class(tabela1) #Fala qual é a classe do objeto, funciona também para indicar o
 
 Massa &lt;- tabela1$Cfin*tabela1$Vfin #Alternativamente podemos utilizar o simbolo &quot;$&quot; para indicar a coluna conforme o seu nome
 
-#Podemos adicionar o novo vetor criado a tabela1 com:
+#Também podemos utilizar o comando &quot;attach&quot;&quot; para podermos nos referir diretamente à coluna
 
-cbind(tabela1, Massa) #a função &quot;cbind()&quot; é específica para adicionar o vetor como uma nova coluna</code></pre>
-<p>E, por fim, para obter o total da massa dos solutos de todas as soluções:</p>
+attach(tabela1)
+Massa &lt;- Cfin*Vfin
+
+#Mas é importante lembrar de usar um &quot;detach&quot; depois, para evitar confusões futuras
+detach(tabela1)
+
+
+#Adicionando o novo vetor criado à tabela1 com:
+
+cbind(tabela1, Massa) #a função &quot;cbind()&quot; adiciona o vetor como uma nova coluna</code></pre>
+<p>Para obter o total da massa dos solutos de todas as soluções:</p>
 <pre class="r"><code>massa_total &lt;- sum(Massa) #A função &quot;sum()&quot; soma todos os elementos do vetor</code></pre>
-<p><br />Na próxima prática mostraremos como exportar os dados tabulares criados. Também veremos como importar dados para serem analisados dentro do R.<br /><br /><br /><em>Este material faz parte do mini-curso de “Introdução ao R” do IX Workshop de Férias em Genética e Melhoramento de Plantas organizado pelos alunos de pós-graduação do programa de Genética e Melhoramento de Plantas da ESALQ-USP.</em></p>
+<p><br />Antes de partimos para a próxima prática, vamos organizar nosso ambiente de trabalho: Salvaremos a tabela1, pois precisaremos dela, e removeremos o restante dos objetos.<br /><br />Para isso é necessário definir onde o arquivo .Rdata com a tabela1 será salvo no seu computador. Então verificaremos qual é o diretório de trabalho (<em>Working Directory</em>) atual e mudaremos para um diretório desejado:</p>
+<pre class="r"><code>getwd()  #Verificando diretório de trabalho atual
+setwd(&quot;~/Downloads/Arquivos_workshop-master/R_intro/&quot;)  #Alterando o diretório de trabalho, neste caso o arquivo será salvo na mesma pasta que contém todos os arquivos para os mini-cursos</code></pre>
+<p>Então guardamos a tabela1:</p>
+<pre class="r"><code>save(tabela1, file=&quot;tabela1.Rdata&quot;, envir=.GlobalEnv) #salva objeto em arquivo .Rdata
+
+#Caso quisessemos salvar mais de um objeto poderiamos usar:
+#save(tabela1, Massa, x, file=&quot;objetos_pratica1.Rdata&quot;, envir=.GlobalEnv)
+
+#Ou salvar todo o Ambiente Global
+#save.image(file = &quot;todos_objetos_pratica1.RData&quot;)</code></pre>
+<p>Agora podemos remover todos os objetos:</p>
+<pre class="r"><code>rm(list=ls()) #remove todos os objetos
+
+#Caso quisessemos remover apenas alguns deles
+#rm(tabela1, x, X, C_0)</code></pre>
+<p>Na próxima prática mostraremos como exportar os dados tabulares criados. Também veremos como importar dados para serem analisados dentro do R.<br /><br /><br /><em>Este material faz parte do mini-curso de “Introdução ao R” do IX Workshop de Férias em Genética e Melhoramento de Plantas organizado pelos alunos de pós-graduação do programa de Genética e Melhoramento de Plantas da ESALQ-USP.</em></p>
 
 
 </div>
