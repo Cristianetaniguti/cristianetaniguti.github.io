@@ -91,7 +91,7 @@ log &lt;- x &lt; X
 
 comp          #Para observar o conteúdo do objeto basta digitar seu nome</code></pre>
 <pre><code>## [1] 0+2i</code></pre>
-<pre class="r"><code>mode(cha)    #Esta função nos fala qual é a modo do objeto</code></pre>
+<pre class="r"><code>class(cha)    #Esta função nos fala qual é a modo do objeto</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Tente você identificar o modo do objeto “int”, altere-a para inteiro e em seguida faça o mesmo com o objeto “num”. Observe o resultado.<br /><br />Os <strong>vetores</strong> são os objetos mais básicos, neles é possível armazenar apenas elementos de mesmo modo. Os objetos já criados (X, cha, comp, int, log, num, x) são todos vetores com apenas uma posição “ocupada”, por isso quando os vizualisamos aparece o [1] na frente, que indica a posição no vetor. Para acrescentar mais valores aos vetores criados, podemos usar a função de concatenação <em>c()</em>.<br /><br />Se você esta fazendo um script .R no RStudio e esqueceu os argumento de alguma função base, como a c(), digite “c(” e aperte a tecla “Tab” que terá algumas informações.<br /><br />Também é muito útil saber que o próprio R fornece informações de todas as suas funções através da função <em>help()</em>, que equivale a digitar no console “?” antes do nome da função, como “?c”.<br /><br />Existe também a função <em>help.search()</em>, que é o mesmo que utilizar “??” antes do nome da função, para procurar informações de várias formas, experimente “??c”.<br /></p>
 <pre class="r"><code>?c                                  #Pedindo ajuda para o R para ter informações sobre a função &quot;c()&quot;, a página com as informações aparece no navegador da internet ou em uma das janelas do RStudio
@@ -99,7 +99,7 @@ cha &lt;- c(cha, &quot;cidade&quot;, &quot;tal&quot;)
 cha[2]                               #Quando queremos lidar com um elemento específico dentro do vetor basta indicar sua posição utilizando []
 num &lt;- 5:45                         #Cria um vetor com a sequencia de 5 a 45 substituindo o objeto &quot;num&quot; que já existia
 mistura &lt;- c(&quot;nome&quot;, 1837, TRUE, 2i) #Tentativa de criar um vetor com várias classes
-mode(mistura)                       #Monstra que o R interpretou todos os objetos como sendo caracteres</code></pre>
+class(mistura)                       #Monstra que o R interpretou todos os objetos como sendo caracteres</code></pre>
 <p>Uma vez criados vetores, é possivel realizar operações matemáticas entre eles, como em uma calculadora.<br /><br />Veja o que acontece quando tentamos realizar uma operação adicionando 3 ao número na posição 2 do vetor “num”.</p>
 <pre class="r"><code>num[2] + 3</code></pre>
 <p>Agora faça o mesmo com o vetor “mistura”. Por que isso acontece?<br /><br />Tudo certo até agora? Podemos testar os conhecimentos adquiridos para resolver um probleminha de laboratório?<br /><br />Imagine que você não armazenou corretamente suas soluções e o solvente evaporou deixando-as em concentrações desiguais de cada soluto:</p>

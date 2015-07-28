@@ -134,12 +134,12 @@ plot(alturas$Height, alturas$dadheight, main= &quot;Aluna_Pai&quot;,
      col.lab= colors()[562], col.main= colors()[490])</code></pre>
 <p>Os números usados para descrever as cores funcionam num sistema hexadecimal (assim como o binário é na base 2, o hexadecimal é na base 16) adotado pelo R o que fornece muitas possibilidades de cores. Observe um exemplo de quadro de cores <a href="http://research.stowers-institute.org/efg/R/Color/Chart/">aqui</a>.</p>
 <p>Agora realizaremos uma regressão linear simples, dessa forma podemos traçar a “linha de tendência” que fazemos no excel, ajustando um modelo linear.</p>
-<pre class="r"><code>plot(alturas$Height, alturas$momheight)
-rmom &lt;- lm(alturas$Height ~ alturas$momheight) #Regressão linear
+<pre class="r"><code>plot(alturas$Height, alturas$momheight) # plot(x,y)
+rmom &lt;- lm(alturas$momheight ~ alturas$Height) #Regressão linear, o sinal &quot;~&quot; estabelece uma relação de y = ax + b da regressão linear, portanto é que esteja nessa ordem: y ~ x 
 abline(rmom) #Com esse comando a linha será traçado no último gráfico que foi gerado
 
 plot(alturas$Height, alturas$dadheight)
-rdad &lt;- lm(alturas$Height ~ alturas$dadheight)
+rdad &lt;- lm(alturas$dadheight ~ alturas$Height)
 abline(rdad)</code></pre>
 <p>Este foi apenas um exemplo simples, o R tem capacidade de criar gráficos incríveis através de pacotes como o ggplot2.</p>
 <p>Caso queira praticar os conhecimentos adquiridos em outros conjuntos de dados, o próprio R disponibiliza, para fins principalmente didáticos, aproximadamente 100 conjunto de dados que são listados com o comando <em>data()</em>.</p>
