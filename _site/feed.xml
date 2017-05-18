@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Cristiane Taniguti</title>
+		<description>Aqui deixarei disponíveis alguns trabalhos desenvolvidos na minha pós-graduação em Genética e Melhoramento de Plantas da ESALQ-USP.</description>
+		<link>/</link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Trabalho da Disciplina de Genômica e Bioinformática do CENA</title>
+				<description>&lt;p&gt;O trabalho foi desenvolvido durante a disciplina de Genômica e Bioinformática do CENA. Foram fornecidos dados de sequenciamento paired-end de metagenoma, provindo de uma represa de água doce. O objetivo foi montar genomas bem representados no conjunto de dados.&lt;/p&gt;
+
+&lt;p&gt;Acesso o material &lt;a href=&quot;http://cristianetaniguti.github.io/htmls/2017-05-12-projeto.html&quot;&gt;aqui&lt;/a&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 12 May 2017 00:00:00 -0300</pubDate>
+				<link>/2017/05/12/Bioinform%C3%A1tica-CENA.html</link>
+				<guid isPermaLink="true">/2017/05/12/Bioinform%C3%A1tica-CENA.html</guid>
+			</item>
+		
+			<item>
+				<title>Introdução ao R - Workshop da Genética 2015</title>
+				<description>&lt;p&gt;Os mini-cursos foram realizados durante o IX Workshop de Férias de Genética e Melhoramento de Plantas pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. Mais informações sobre o Workshop pode ser &lt;a href=&quot;http://www.genetica.esalq.usp.br/cursogmp/&quot;&gt;encontradas aqui&lt;/a&gt;.\
+O material se encontra neste &lt;a href=&quot;http://cristianetaniguti.github.io/Workshop_genetica_2015/#&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 27 Jul 2015 00:00:00 -0300</pubDate>
+				<link>/2015/07/27/Mini-curso.html</link>
+				<guid isPermaLink="true">/2015/07/27/Mini-curso.html</guid>
+			</item>
+		
+	</channel>
+</rss>

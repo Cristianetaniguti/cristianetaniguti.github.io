@@ -1,1 +1,40 @@
-theme: jekyll-theme-minimal
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+
+paginate: 10 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: rouge
+markdown: kramdown
+disqus: 
+google_analytics: 
+title: Cristiane Taniguti
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: Cristiane Hayumi Taniguti
+
+description: Aqui deixarei disponíveis alguns trabalhos desenvolvidos na minha pós-graduação em Genética e Melhoramento de Plantas da ESALQ-USP.
+author:
+  name: Cris
+  email: 
+  github: cristianetaniguti
+  twitter: 
+  pinterest: 
+  linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
+  bio: Atividades da Pós-Graduação
+  email_md5: e00ead714ecee104d2b1fea40b7bf167
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+
+# set it as url of an image
+# sidebar_background_image: profile1.jpeg
+
+BASE_PATH:
+
+gems:
+  - jekyll-paginate
