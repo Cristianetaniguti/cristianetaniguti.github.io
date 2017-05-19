@@ -10,4 +10,4 @@ Para descrição completa da atividade requerida acesse a [página da disciplina
 
 Tomamos como base o mapa e publicado em [Fishman et al. (2001)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1461909/pdf/11779808.pdf), contruído para a mesma população com um número menor de marcadores.
 
-Organizamos o processo da construção do mapa em uma página principal, a qual servirá de guia para todas as etapas do processo. Portanto, acesse a [página principal](https://cristianetaniguti.github.io/htmls/mapa_mimulus/mapa_mimulus.html) para visualizar a análise.
+Organizamos o processo da construção do mapa em uma página principal, a qual servirá de guia para todas as etapas do processo. Portanto, acesse a [página principal](cristianetaniguti.github.io/htmls/mapa_mimulus/mapa_mimulus.html) para visualizar a análise.
