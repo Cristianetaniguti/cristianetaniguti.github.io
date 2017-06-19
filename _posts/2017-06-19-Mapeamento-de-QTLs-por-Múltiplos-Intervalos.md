@@ -10,6 +10,6 @@ Foi realizado o  mapeamento de QTLs por múltiplos intervalos para a caracterís
 
 Também foi realizado previamente o mapeamento por intervalos e mapeamento por intervalo composto, detalhes podem ser obtidos nesse [link](http://cristianetaniguti.github.io/2017/06/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html).
 
-Acesse a descrição da atividade de mapeamento de QTLs por mapeamento múltiplos neste [link](https://cristianetaniguti.github.io/htmls/Aula11.html).
+Acesse a descrição da atividade de  mapeamento de múltiplos intervalos  neste [link](https://cristianetaniguti.github.io/htmls/Aula11.html).
 
 Também foi feito um [vídeo](https://youtu.be/eSuNiVjeKeA) com discussões sobre a atividade e uma breve descrição do [material e métodos](https://cristianetaniguti.github.io/htmls/Aula11_mat_met.pdf) do processo realizado.
