@@ -12,4 +12,4 @@ Também foi realizado previamente o mapeamento por intervalos e mapeamento por i
 
 Acesse a descrição da atividade de mapeamento de QTLs por mapeamento múltiplos neste [link](https://cristianetaniguti.github.io/htmls/Aula11.html).
 
-Também foi feito um [vídeo](https://www.youtube.com/watch?v=2FXFO6M7QyA) com discussões sobre a atividade e uma breve descrição do [material e métodos](https://cristianetaniguti.github.io/htmls/Aula11_mat_met.pdf) do processo realizado.
+Também foi feito um [vídeo](https://youtu.be/eSuNiVjeKeA) com discussões sobre a atividade e uma breve descrição do [material e métodos](https://cristianetaniguti.github.io/htmls/Aula11_mat_met.pdf) do processo realizado.
