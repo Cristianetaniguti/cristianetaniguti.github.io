@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Cristiane Taniguti</title>
-		<description>Aqui deixarei disponíveis alguns trabalhos desenvolvidos na minha pós-graduação em Genética e Melhoramento de Plantas da ESALQ-USP.</description>
+		<description>Some works made during my graduate in Genetics and Plant Breeding (ESALQ-USP).</description>
 		<link>/</link>
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		

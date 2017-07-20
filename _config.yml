@@ -11,12 +11,12 @@ title: Cristiane Taniguti
 
 defaults:
   -
-    scope:
+    scope: 
       path: "" # empty string for all files
     values:
-      title: Cristiane Hayumi Taniguti
+      title: Some tutorials about Genetics, Statistics and Programming
 
-description: Aqui deixarei disponíveis alguns trabalhos desenvolvidos na minha pós-graduação em Genética e Melhoramento de Plantas da ESALQ-USP.
+description: Some works made during my graduate in Genetics and Plant Breeding (ESALQ-USP).
 author:
   name: Cris
   email: 
@@ -24,11 +24,11 @@ author:
   twitter: 
   pinterest: 
   linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
-  bio: Atividades da Pós-Graduação
+  bio: <a href="aboutme.md">About me</a>
   email_md5: e00ead714ecee104d2b1fea40b7bf167
 
 rss_path: feed.xml
-categories_path: categories.html
+categories_path: categoris.html
 tags_path: tags.html
 
 # set it as url of an image
