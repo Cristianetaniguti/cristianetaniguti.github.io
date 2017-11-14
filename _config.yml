@@ -24,7 +24,7 @@ author:
   twitter: 
   pinterest: 
   linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
-  bio: <a href="aboutme.md">About me</a>
+  bio: <a href="aboutme.html">About me</a>
   email_md5: e00ead714ecee104d2b1fea40b7bf167
 
 rss_path: feed.xml
