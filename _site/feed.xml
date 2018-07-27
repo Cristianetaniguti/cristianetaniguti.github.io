@@ -7,6 +7,37 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Aula "Construção de Mapas Genéticos, Mapeamento de QTLs e Aplicações no Melhoramento de Plantas"</title>
+				<description>&lt;p&gt;O material é baseado em aulas da disciplina &lt;a href=&quot;http://augustogarcia.me/Biometria-de-Marcadores/&quot;&gt;Biometria de marcadores genéticos&lt;/a&gt;, ministrada pelo professor Antonio Augusto Franco Garcia.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Acesse aqui o &lt;a href=&quot;https://cristianetaniguti.github.io/aula_iac/slides.pdf&quot;&gt;pdf&lt;/a&gt; da aula.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Thu, 26 Jul 2018 00:00:00 -0300</pubDate>
+				<link>/2018/07/26/Aula-Constru%C3%A7%C3%A3o-de-Mapas-Gen%C3%A9ticos,-Mapeamento-de-QTLs-e-Aplica%C3%A7%C3%B5es-no-Melhoramento-de-Plantas.html</link>
+				<guid isPermaLink="true">/2018/07/26/Aula-Constru%C3%A7%C3%A3o-de-Mapas-Gen%C3%A9ticos,-Mapeamento-de-QTLs-e-Aplica%C3%A7%C3%B5es-no-Melhoramento-de-Plantas.html</guid>
+			</item>
+		
+			<item>
+				<title>Aula "Informática na Genética"</title>
+				<description>&lt;p&gt;A atividade foi desenvolvida por Cristiane Taniguti, Fernando Espolador e Antonio Augusto Garcia.&lt;/p&gt;
+
+&lt;p&gt;Acesse:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/aula_genetica/Aula_genetica.html&quot;&gt;Os slides da aula&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/aula_genetica/script_aula.R&quot;&gt;O script em R dos exemplos dados&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/aula_genetica/planilhas.zip&quot;&gt;As planilhas com os dados do exercício 1 da 9ª aula prática&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Programas de simulação genética &lt;a href=&quot;http://evolution.gs.washington.edu/popgen/popg.html&quot;&gt;PopG&lt;/a&gt; e &lt;a href=&quot;http://vencovsky.esalq.usp.br:3838/shiny/be-breeder/&quot;&gt;Be-Breeder&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Mon, 20 Nov 2017 00:00:00 -0200</pubDate>
+				<link>/2017/11/20/Informatica-na-Gen%C3%A9tica-LGN0215.html</link>
+				<guid isPermaLink="true">/2017/11/20/Informatica-na-Gen%C3%A9tica-LGN0215.html</guid>
+			</item>
+		
+			<item>
 				<title>Minicursos de Introdução ao R</title>
 				<description>&lt;p&gt;Acesse &lt;a href=&quot;http://cristianetaniguti.github.io/Workshop_genetica_esalq/&quot;&gt;aqui&lt;/a&gt;!&lt;/p&gt;
 
