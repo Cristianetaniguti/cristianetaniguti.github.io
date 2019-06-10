@@ -7,6 +7,65 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Vignettes atualizadas do OneMap</title>
+				<description>&lt;p&gt;Nós, do laboratório de Genética Estatística da ESALQ, temos atualizado frequentemente os tutoriais do OneMap. Eles estão no meu repositório do github “Cristianetaniguti/onemap”. Instale essa versão do OneMap com:&lt;/p&gt;
+
+&lt;p&gt;devtools::install_github(“Cristianetaniguti/onemap”)&lt;/p&gt;
+
+&lt;p&gt;Em seguida, use o R para acessar os tutoriais internos do pacote ou acesse pelos seguintes links:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://cristianetaniguti.github.io/onemap/vignettes_highres/Inbred_Based_Populations.html&quot;&gt;How to build a linkage map for inbred-bases populations (F2, RIL and BC)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://cristianetaniguti.github.io/onemap/vignettes_highres/Outcrossing_Populations.html&quot;&gt;How to build a linkage map for outcrossing populations&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Atenção&lt;/strong&gt;: O tutorial esta sendo atualizado em conjunto com o pacote. Antes de seguir suas instruções, verifique se a versão do OneMap instalada é correspondente à do meu repositório. Para outras versões, esses tutoriais provavelmente não funcionarão.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 07 Jun 2019 00:00:00 -0300</pubDate>
+				<link>/2019/06/07/Vignettes-atualizadas-do-OneMap.html</link>
+				<guid isPermaLink="true">/2019/06/07/Vignettes-atualizadas-do-OneMap.html</guid>
+			</item>
+		
+			<item>
+				<title>OneMap updated vignettes</title>
+				<description>&lt;p&gt;We, from Statistical Genetics Lab at ESALQ-USP, frequently update the OneMap tutorials. They are in my github repo (“Cristianetaniguti/onemap”). Install this version of OneMap with:&lt;/p&gt;
+
+&lt;p&gt;devtools::install_github(“Cristianetaniguti/onemap”)&lt;/p&gt;
+
+&lt;p&gt;Then, use R to acess the package internal  vignettes or use the links:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://cristianetaniguti.github.io/onemap/vignettes_highres/Inbred_Based_Populations.html&quot;&gt;How to build a linkage map for inbred-bases populations (F2, RIL and BC)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://cristianetaniguti.github.io/onemap/vignettes_highres/Outcrossing_Populations.html&quot;&gt;How to build a linkage map for outcrossing populations&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: These vignettes are being updated together with the package. Before follow their instructions, check if your OneMap version is the same of my repository. For other OneMap versions these vignettes can not be useful.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 06 Jun 2019 00:00:00 -0300</pubDate>
+				<link>/2019/06/06/OneMap-updated-vignettes.html</link>
+				<guid isPermaLink="true">/2019/06/06/OneMap-updated-vignettes.html</guid>
+			</item>
+		
+			<item>
+				<title>Grupo GENt - Transportando Conhecimentos em Genética e Melhoramento de Plantas</title>
+				<description>&lt;p&gt;Eu, Cristiane, faço parte de um grupo de divulgação científica composto por diversos alunos do Programa de Genética e Melhoramento de Plantas da ESALQ. Super recomendo darem uma olhada nas atividades que temos desenvolvido.&lt;/p&gt;
+
+&lt;p&gt;Acesse &lt;a href=&quot;https://gent-esalq.github.io/&quot;&gt;aqui&lt;/a&gt; o site do grupo para saber mais.&lt;/p&gt;
+</description>
+				<pubDate>Sat, 15 Dec 2018 00:00:00 -0200</pubDate>
+				<link>/2018/12/15/Grupo-GENt.html</link>
+				<guid isPermaLink="true">/2018/12/15/Grupo-GENt.html</guid>
+			</item>
+		
+			<item>
 				<title>Vídeos tutoriais no YouTube</title>
 				<description>&lt;p&gt;Os vídeos foram feitos conforme proposta das disciplinas Genética Quantitativa e Biometria de Marcadores Genéticos, ministradas pelo professor Antonio Augusto Garcia da ESALQ-USP.&lt;/p&gt;
 
@@ -17,8 +76,8 @@ Acesse &lt;a href=&quot;https://www.youtube.com/playlist?list=PLZjrWdm3iq-jVzOSy
 Acesse &lt;a href=&quot;https://www.youtube.com/playlist?list=PLZjrWdm3iq-hxGb7zbliWO0vDw0_k2FFc&quot;&gt;aqui&lt;/a&gt;&lt;/p&gt;
 </description>
 				<pubDate>Fri, 10 Aug 2018 00:00:00 -0300</pubDate>
-				<link>/2018/08/10/V%C3%ADdeos-tutoriais-no-YouTube.html</link>
-				<guid isPermaLink="true">/2018/08/10/V%C3%ADdeos-tutoriais-no-YouTube.html</guid>
+				<link>/2018/08/10/V%C3%ADdeos-no-YouTube.html</link>
+				<guid isPermaLink="true">/2018/08/10/V%C3%ADdeos-no-YouTube.html</guid>
 			</item>
 		
 			<item>
