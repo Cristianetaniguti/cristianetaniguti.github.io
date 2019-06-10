@@ -6,7 +6,7 @@ exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
 disqus: 
-google_analytics: 
+google_analytics: UA-129436760-1
 title: Cristiane Taniguti
 
 defaults:
@@ -14,7 +14,7 @@ defaults:
     scope: 
       path: "" # empty string for all files
     values:
-      title: Some tutorials about Genetics, Statistics and Programming
+      title: Didatic materials about R programming and Statistical Genetics 
 
 description: Some works made during my graduate in Genetics and Plant Breeding (ESALQ-USP).
 author:
@@ -24,7 +24,7 @@ author:
   twitter: 
   pinterest: 
   linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
-  bio: <a href="aboutme.html">About me</a>
+  bio: Here are some materials (mostly in Portuguese) that I and other students of ESALQ(USP) produced to use in courses or classes. Access more information <a href="aboutme.html">About me</a>.
   email_md5: e00ead714ecee104d2b1fea40b7bf167
 
 rss_path: feed.xml
