@@ -126,14 +126,79 @@ Aproveite para dar uma olhada nas outras matérias do blog e acompanhar suas pub
 			</item>
 		
 			<item>
-				<title>Minicursos de Introdução ao R</title>
-				<description>&lt;p&gt;Acesse &lt;a href=&quot;http://cristianetaniguti.github.io/Workshop_genetica_esalq/&quot;&gt;aqui&lt;/a&gt;!&lt;/p&gt;
+				<title>Mapeamento de QTLs por Múltiplos Intervalos</title>
+				<description>&lt;p&gt;Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.&lt;/p&gt;
 
-&lt;p&gt;Os minicursos foram realizados durante o IX, X e XI  Workshop de Férias de Genética e Melhoramento de Plantas pelos alunos de pós-graduação dos laboratórios de Genética Estatística e de Bioinformática Aplicada à Bioenergia. Mais informações sobre o Workshop pode ser &lt;a href=&quot;http://www.genetica.esalq.usp.br/cursogmp/&quot;&gt;encontradas aqui&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Foi realizado o  mapeamento de QTLs por múltiplos intervalos para a característica de números de polens não viáveis numa população F2 provinda do cruzamento entre  &lt;em&gt;Mimulus guttatus&lt;/em&gt; e &lt;em&gt;Mimulus nasutus&lt;/em&gt;. O  mapa  genético utilizado foi construído numa atividade realizada previamente e descrita neste &lt;a href=&quot;http://cristianetaniguti.github.io/2017/05/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Também foi realizado previamente o mapeamento por intervalos e mapeamento por intervalo composto, detalhes podem ser obtidos nesse &lt;a href=&quot;http://cristianetaniguti.github.io/2017/06/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Acesse a descrição da atividade de  mapeamento de múltiplos intervalos  neste &lt;a href=&quot;https://cristianetaniguti.github.io/htmls/Aula11.html&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Também foi feito um &lt;a href=&quot;https://youtu.be/eSuNiVjeKeA&quot;&gt;vídeo&lt;/a&gt; com discussões sobre a atividade e uma breve descrição do &lt;a href=&quot;https://cristianetaniguti.github.io/htmls/Aula11_mat_met.pdf&quot;&gt;material e métodos&lt;/a&gt; do processo realizado.&lt;/p&gt;
 </description>
-				<pubDate>Mon, 17 Jul 2017 00:00:00 -0300</pubDate>
-				<link>/2017/07/17/Minicurso.html</link>
-				<guid isPermaLink="true">/2017/07/17/Minicurso.html</guid>
+				<pubDate>Tue, 19 Sep 2017 00:00:00 -0300</pubDate>
+				<link>/2017/09/19/Mapeamento-de-QTLs-por-M%C3%BAltiplos-Intervalos.html</link>
+				<guid isPermaLink="true">/2017/09/19/Mapeamento-de-QTLs-por-M%C3%BAltiplos-Intervalos.html</guid>
+			</item>
+		
+			<item>
+				<title>Mapeamento de QTLs - IM e CIM</title>
+				<description>&lt;p&gt;Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.&lt;/p&gt;
+
+&lt;p&gt;Como uma das atividades da disciplina de Biometria de Marcadores Genéticos da Esalq, foi realizado o  mapeamento de QTLs  por intervalos e mapeamento por intervalo composto. Para isso, foi utilizado um conjunto de dados de marcadores de uma população F2 do cruzamento entre  &lt;em&gt;Mimulus guttatus&lt;/em&gt; e &lt;em&gt;Mimulus nasutus&lt;/em&gt; e o mapa construído numa atividade realizada previamente e descrita neste &lt;a href=&quot;http://cristianetaniguti.github.io/2017/05/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Acesse a descrição da atividade de mapeamento de QTLs neste &lt;a href=&quot;https://cristianetaniguti.github.io/htmls/Aula10.html&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Também foi feito um &lt;a href=&quot;https://www.youtube.com/watch?v=2FXFO6M7QyA&quot;&gt;vídeo&lt;/a&gt; com discussões sobre a atividade.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 12 Sep 2017 00:00:00 -0300</pubDate>
+				<link>/2017/09/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html</link>
+				<guid isPermaLink="true">/2017/09/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html</guid>
+			</item>
+		
+			<item>
+				<title>Construção de mapa genético no Onemap</title>
+				<description>&lt;p&gt;Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolados e Ms Jhonathan Pedroso.&lt;/p&gt;
+
+&lt;p&gt;Como uma das atividades da disciplina de Biometria de Marcadores Genéticos da Esalq, foi construído um mapa genético no sotware Onemap. Para isso, foi utilizado um conjunto de dados de marcadores de uma população F2 do cruzamento entre  &lt;em&gt;Mimulus guttatus&lt;/em&gt; e &lt;em&gt;Mimulus nasutus&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para descrição completa da atividade requerida acesse a &lt;a href=&quot;http://augusto-garcia.github.io/Biometria-de-Marcadores/2017/04/25/Aula-6-(Mapas-Gen%C3%A9ticos-IV-Mapas-gen%C3%A9ticos-em-F1-segregante).html&quot;&gt;página da disciplina&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tomamos como base o mapa e publicado em &lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1461909/pdf/11779808.pdf&quot;&gt;Fishman et al. (2001)&lt;/a&gt;, contruído para a mesma população com um número menor de marcadores.&lt;/p&gt;
+
+&lt;p&gt;Organizamos o processo da construção do mapa em uma página principal, a qual servirá de guia para todas as etapas do processo. Os outros links que seguem são referentes às diferentes etapas do processo, mais detalhadamente explicadas na página principal.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/mapa_mimulus.html&quot;&gt;página principal&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG1.html&quot;&gt;GL1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG2.html&quot;&gt;GL2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG3.html&quot;&gt;GL3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG4.html&quot;&gt;GL4&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG5.html&quot;&gt;GL5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG6.html&quot;&gt;GL6&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG7.html&quot;&gt;GL7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG8.html&quot;&gt;GL8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG9.html&quot;&gt;GL9&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG10.html&quot;&gt;GL10&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG11.html&quot;&gt;LG11&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG12.html&quot;&gt;GL12&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG13.html&quot;&gt;GL13&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG14.html&quot;&gt;GL14&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/LG3.html&quot;&gt;Separações do LG3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/passo2.html&quot;&gt;Junção dos grupos 1 e 3; 9 e 14&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/passo3.html&quot;&gt;Avaliando marcadores com desvios na segregação esperada&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Também foi feito &lt;a href=&quot;https://youtu.be/RlaNkBqPEc4&quot;&gt;vídeo&lt;/a&gt; descrevendo todo o processo e uma &lt;a href=&quot;https://cristianetaniguti.github.io/htmls/mapa_mimulus/material_methods.pdf&quot;&gt;página&lt;/a&gt; descrevendo a metodologia aplicada.&lt;/p&gt;
+</description>
+				<pubDate>Sat, 19 Aug 2017 00:00:00 -0300</pubDate>
+				<link>/2017/08/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html</link>
+				<guid isPermaLink="true">/2017/08/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html</guid>
 			</item>
 		
 	</channel>
