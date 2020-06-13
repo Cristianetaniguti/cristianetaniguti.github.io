@@ -129,6 +129,8 @@ rcd1 <- rcd(lg1)
 seriation1 <- seriation(lg1)
 record1 <- record(lg1)
 mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
 
 p_ug_cod1 <- rf_graph_table(ug1)
 p_rcd_cod1 <- rf_graph_table(rcd1)
@@ -136,8 +138,9 @@ p_ser_cod1 <- rf_graph_table(seriation1)
 p_rec_cod1 <- rf_graph_table(record1)
 p_mds_cod1 <- rf_graph_table(mds1)
 p_map_cod1 <- rf_graph_table(map1)
+p_order_cod1 <- rf_graph_table(order1)
 
-save.image(file = "sim_cod_new.RData")
+save.image(file = "sim_cod_new2.RData")
 ```
 
 ## Old approach
@@ -221,6 +224,8 @@ rcd1 <- rcd(lg1)
 seriation1 <- seriation(lg1)
 record1 <- record(lg1)
 mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
 
 p_ug_cod_old1 <- rf_graph_table(ug1)
 p_rcd_cod_old1 <- rf_graph_table(rcd1)
@@ -228,6 +233,7 @@ p_ser_cod_old1 <- rf_graph_table(seriation1)
 p_rec_cod_old1 <- rf_graph_table(record1)
 p_mds_cod_old1 <- rf_graph_table(mds1)
 p_map_cod_old1 <- rf_graph_table(map1)
+p_order_cod_old1 <- rf_graph_table(order1)
 
 save.image(file = "sim_cod_old.RData")
 ```
@@ -333,6 +339,8 @@ rcd1 <- rcd(lg1)
 seriation1 <- seriation(lg1)
 record1 <- record(lg1)
 mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
 
 p_ug1 <- rf_graph_table(ug1)
 p_rcd1 <- rf_graph_table(rcd1)
@@ -340,6 +348,8 @@ p_ser1 <- rf_graph_table(seriation1)
 p_rec1 <- rf_graph_table(record1)
 p_mds1 <- rf_graph_table(mds1)
 p_map1 <- rf_graph_table(map1)
+p_order1 <- rf_graph_table(order1)
+
 
 save.image(file = "sim_new.RData")
 ```
@@ -425,6 +435,8 @@ rcd1 <- rcd(lg1)
 seriation1 <- seriation(lg1)
 record1 <- record(lg1)
 mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
 
 p_ug_old1 <- rf_graph_table(ug1)
 p_rcd_old1 <- rf_graph_table(rcd1)
@@ -432,6 +444,7 @@ p_ser_old1 <- rf_graph_table(seriation1)
 p_rec_old1 <- rf_graph_table(record1)
 p_mds_old1 <- rf_graph_table(mds1)
 p_map_old1 <- rf_graph_table(map1)
+p_order_old1 <- rf_graph_table(order1)
 
 save.image(file = "sim_old.RData")
 ```
@@ -462,6 +475,13 @@ p
 
 p <- ggarrange(p_rec_cod1, p_rec_cod_old1, p_rec1, p_rec_old1 , common.legend = TRUE,
           labels = c("rec sce1 new", "rec sce1 old", "rec sce2 old", "rec sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+p <- ggarrange(p_order_cod1, p_order_cod_old1, p_order1, p_order_old1 , common.legend = TRUE,
+          labels = c("order sce1 new", "order sce1 old", "order sce2 old", "order sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)
