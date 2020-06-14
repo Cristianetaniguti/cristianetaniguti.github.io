@@ -10,7 +10,7 @@ Nós, do laboratório de Genética Estatística da ESALQ, temos atualizado frequ
 
 devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
 
-Em seguida, use o R para acessar os tutoriais internos do pacote ou acesse pelos seguintes links:
+Em seguida, acesse as vignettes atualizadas pelos seguintes links:
 
 * [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](404.html) - Ainda em construção
 
@@ -25,7 +25,7 @@ We, from ESALQ's Statistical Genetics laboratory have frequently updated OneMap 
 
 devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
 
-Then use R to access the package's internal tutorials or access the following links:
+Then check the updated vignettes accessing the following links :
 
 * [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](404.html) - Still in development
 
