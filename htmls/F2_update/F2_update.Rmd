@@ -21,7 +21,7 @@ One big update needed to be done to OneMap proper deal with dominant markers in 
 
 **Warning**: Because all the modifications, users can find differences in estimations for this type of populations between this and older versions of OneMap.
 
-Here we perfom some simulations to show this differences and the need for updates. Two scenarios will be simulated, one with only codominant markers and other with codominant and dominant markers. The maps are composed by three metacentric chromosomes with 100 cM and a population size of 200 individuals. And:
+Here we perform some simulations to show this differences and the need for updates. Two scenarios will be simulated, one with only codominant markers and other with codominant and dominant markers. The maps are composed by three metacentric chromosomes with 100 cM and a population size of 200 individuals. And:
 
 * Scenario 1: 150 codominant (A.H.B) markers, 50 per chromosome and no missing data
 * Scenario 2: 50 codominant (A.H.B), 50 D.B markers and 50 C.A markers, 50 markers per chromosome and no missing data
@@ -460,35 +460,35 @@ load("sim_new.RData")
 load("sim_old.RData")
 
 p <- ggarrange(p_ug_cod1, p_ug_cod_old1, p_ug1, p_ug_old1 , common.legend = TRUE,
-          labels = c("ug sce1 new", "ug sce1 old", "ug sce2 old", "ug sce2 old"), 
+          labels = c("ug sce1 new", "ug sce1 old", "ug sce2 new", "ug sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)
 p
 
 p <- ggarrange(p_rcd_cod1, p_rcd_cod_old1, p_rcd1, p_rcd_old1 , common.legend = TRUE,
-          labels = c("rcd sce1 new", "rcd sce1 old", "rcd sce2 old", "rcd sce2 old"), 
+          labels = c("rcd sce1 new", "rcd sce1 old", "rcd sce2 new", "rcd sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)
 p
 
 p <- ggarrange(p_rec_cod1, p_rec_cod_old1, p_rec1, p_rec_old1 , common.legend = TRUE,
-          labels = c("rec sce1 new", "rec sce1 old", "rec sce2 old", "rec sce2 old"), 
+          labels = c("rec sce1 new", "rec sce1 old", "rec sce2 new", "rec sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)
 p
 
 p <- ggarrange(p_order_cod1, p_order_cod_old1, p_order1, p_order_old1 , common.legend = TRUE,
-          labels = c("order sce1 new", "order sce1 old", "order sce2 old", "order sce2 old"), 
+          labels = c("order sce1 new", "order sce1 old", "order sce2 new", "order sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)
 p
 
 p <- ggarrange(p_mds_cod1, p_mds_cod_old1, p_mds1, p_mds_old1 , common.legend = TRUE,
-          labels = c("mds sce1 new", "mds sce1 old", "mds sce2 old", "mds sce2 old"), 
+          labels = c("mds sce1 new", "mds sce1 old", "mds sce2 new", "mds sce2 old"), 
           vjust = 0.3,
           hjust= -1.5,
           ncol=2, nrow=2)

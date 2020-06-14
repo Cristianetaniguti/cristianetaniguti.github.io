@@ -16,7 +16,7 @@ Aqui está uma demonstração do impacto dessa alteração:
 
 ## English
 
-We notice that metodologies of older OneMap versions didn't deal properly with dominant markers in F2 populations. We did the correction in the version 2.3.0 and it is already available in github. Install with:
+We notice that methodologies of older OneMap versions didn't deal properly with dominant markers in F2 populations. We did the correction in the version 2.3.0 and it is already available in github. Install with:
 
 devtools::install_github("Cristianetaniguti/onemap", ref="solving_confli")
 
