@@ -12,7 +12,7 @@ devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
 
 Em seguida, acesse as vignettes atualizadas pelos seguintes links:
 
-* [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](404.html) - Ainda em construção
+* [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](https://cristianetaniguti.github.io/htmls/Inbred_Based_Populations.html)
 
 * [How to build a linkage map for outcrossing populations](https://cristianetaniguti.github.io/htmls/Outcrossing_Populations.html)
 
@@ -27,7 +27,7 @@ devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
 
 Then check the updated vignettes accessing the following links :
 
-* [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](404.html) - Still in development
+* [How to build a linkage map for inbred-bases populations (F2, RIL and BC)](https://cristianetaniguti.github.io/htmls/Inbred_Based_Populations.html)
 
 * [How to build a linkage map for outcrossing populations](https://cristianetaniguti.github.io/htmls/Outcrossing_Populations.html)
 
