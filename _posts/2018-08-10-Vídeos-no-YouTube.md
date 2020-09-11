@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Vídeos tutoriais no YouTube
-description: Vídeos explicando didaticamente alguns temas de genética, estatística e melhoramento de plantas. 
+title: Tutorial videos in YouTube
+description: Videos explaining didactically genetics, statistics, and plant breeding subjects (in Portuguese). 
 ---
 
 Os vídeos foram feitos conforme proposta das disciplinas Genética Quantitativa e Biometria de Marcadores Genéticos, ministradas pelo professor Antonio Augusto Garcia da ESALQ-USP.

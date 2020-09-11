@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Aula "Informática na Genética"
-description: Material utilizado na aula prática do dia 23 de novembro de 2017 da disciplina de Genética (LGN0215) da graduação da ESALQ.
+title: Talk  "Informatics in Genetics"
+description:  Slides of a talk given in November 2017 in the ESALQ Genetics discipline (LGN0215) for undergrad students (in Portuguese).
 ---
 
 A atividade foi desenvolvida por Cristiane Taniguti, Fernando Espolador e Antonio Augusto Garcia.

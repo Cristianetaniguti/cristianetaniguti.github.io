@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Mapeamento de QTLs por Múltiplos Intervalos
-description: Atividade desenvolvida durante a disciplina de Biometria de Marcadores Genéticos na Esalq-USP
+title: Multiple Interval QTL Mapping
+description: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
 ---
 
 Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.

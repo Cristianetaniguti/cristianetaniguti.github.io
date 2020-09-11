@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Mapeamento de QTLs - IM e CIM
-description: Atividade desenvolvida durante a disciplina de Biometria de Marcadores Genéticos na Esalq-USP
+title: QTL Mapping - IM e CIM
+description: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
 ---
 
 Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.
