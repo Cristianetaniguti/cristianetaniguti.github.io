@@ -6,9 +6,9 @@ description: Material developt during Genetic Markers Biometry discipline in ESA
 
 Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.
 
-Foi realizado o  mapeamento de QTLs por múltiplos intervalos para a característica de números de polens não viáveis numa população F2 provinda do cruzamento entre  _Mimulus guttatus_ e _Mimulus nasutus_. O  mapa  genético utilizado foi construído numa atividade realizada previamente e descrita neste [link](http://cristianetaniguti.github.io/2017/05/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html)
+Foi realizado o  mapeamento de QTLs por múltiplos intervalos para a característica de números de polens não viáveis numa população F2 provinda do cruzamento entre  _Mimulus guttatus_ e _Mimulus nasutus_. O  mapa  genético utilizado foi construído numa atividade realizada previamente e descrita neste [link](https://cristianetaniguti.github.io/2017/08/19/Contru%C3%A7%C3%A3o-de-Mapa-Gen%C3%A9tico-no-Onemap.html)
 
-Também foi realizado previamente o mapeamento por intervalos e mapeamento por intervalo composto, detalhes podem ser obtidos nesse [link](http://cristianetaniguti.github.io/2017/06/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html).
+Também foi realizado previamente o mapeamento por intervalos e mapeamento por intervalo composto, detalhes podem ser obtidos nesse [link](https://cristianetaniguti.github.io/2017/09/12/Mapeamento-por-intervalo-e-mapeamento-por-intervalo-composto.html).
 
 Acesse a descrição da atividade de  mapeamento de múltiplos intervalos  neste [link](https://cristianetaniguti.github.io/htmls/Aula11.html).
 
