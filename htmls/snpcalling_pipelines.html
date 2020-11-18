@@ -2465,9 +2465,9 @@ $(document).ready(function () {
       <li><a href="#pre-processing">Pre-processing</a></li>
       <li><a href="#alignment">Alignment</a></li>
       <li><a href="#snp-callers">SNP callers</a><ul>
-      <li><a href="#stacks">Stacks</a></li>
+      <li><a href="#stacks">STACKs</a></li>
       </ul></li>
-      <li><a href="#freebayes">Freebayes</a></li>
+      <li><a href="#freebayes">FreeBayes</a></li>
       <li><a href="#gatk---joint-call">GATK - Joint Call</a></li>
       <li><a href="#running-bigger-datasets">Running bigger datasets</a></li>
       <li><a href="#considerations">Considerations</a></li>
@@ -2481,7 +2481,7 @@ $(document).ready(function () {
 </div>
 
 <div id="main">
-<p>Before start, it is important to highlight that all software here presented has several parameters that can be adjusted for each given scenario. Here, we will use the default settings, but for the best usage of each one of them, it is important to explore their specificities. So.. use it carefully!</p>
+<p>Before start, it is important to highlight that all software here presented has several parameters that can be adjusted for each given scenario. Here, we will use the default settings, but for the best usage of each one of them, it is important to explore their specificities. So… use it carefully!</p>
 <div id="what-you-will-need-to-run-this-tutorial" class="section level1">
 <h1>What you will need to run this tutorial</h1>
 <ul>
@@ -2510,12 +2510,12 @@ $(document).ready(function () {
 <span id="cb1-12"><a href="#cb1-12"></a><span class="ex">docker</span> build -t <span class="op">&lt;</span>image_name<span class="op">&gt;</span> Dockerfile   <span class="co"># build image from a Dockerfile</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a><span class="ex">docker</span> push                               <span class="co"># Send the built image to a repository (Docker hub)</span></span></code></pre></div>
 <p>To save time during the tutorial, pull now all the needed images:</p>
-<p>Run this command and go take a coffee, it can take some time. After you finished your analysis, don’t forget to remove all images and containers, if you don’t do that, it will occupy space in your computer.</p>
+<p>Run this command and go take a coffee, it can take some time. After you finish your analysis, don’t forget to remove all images and containers, if you don’t do that, it will occupy space in your computer.</p>
 </div>
 <div id="example-data-subset" class="section level1">
 <h1>Example data subset</h1>
-<p>To this analysis be possible in personal computers, we will evaluate only three samples from <a href="https://bmcplantbiol.biomedcentral.com/articles/10.1186/s12870-019-2207-y#availability-of-data-and-materials">this study</a>. They made the cross <em>Catalpa bungei</em> × <em>Catalpa duclouxii</em> and obtain phenotypic and genotypic data for the 200 <span class="math inline">\(F_1\)</span> progenies. They made whole-genome sequencing for parents 16-PJ-3 and 7080 and RADseq for the 200 progenies. The sequences can be download from the SRA database with the accession number PRJNA551333. The enzyme EcoRI was used to reduce the representation of the genome. These species are diploid and, despite the paper mentioned a reference genome of <em>Catalpa bungei</em> I couldn’t find it in any database (if someone finds it, please, send me an e-mail chtaniguti in usp.br). But no worries, let’s try to use a related one, the <a href="https://www.ncbi.nlm.nih.gov/datasets/genomes/?acc=GCA_002762385.1&amp;term=&amp;utm_source=gquery&amp;utm_medium=referral&amp;utm_campaign=KnownItemSensor:org"><em>Handroanthus impetiginosus</em></a>.</p>
-<p>The PRJNA551333 is there, but, how can we download it?</p>
+<p>To this analysis be possible in personal computers, we will evaluate only three samples from <a href="https://bmcplantbiol.biomedcentral.com/articles/10.1186/s12870-019-2207-y#availability-of-data-and-materials">this study</a>. They made the cross <em>Catalpa bungei</em> × <em>Catalpa duclouxii</em> and obtain phenotypic and genotypic data for the 200 <span class="math inline">\(F_1\)</span> progenies. They made whole-genome sequencing for parents 16-PJ-3 and 7080 and RADseq for the 200 progenies. The sequences can be downloaded from the SRA database with the accession number PRJNA551333. The enzyme EcoRI was used to reduce the representation of the genome. These species are diploid and, despite the paper mentioned a reference genome of <em>Catalpa bungei</em> I couldn’t find it in any database (if someone finds it, please, send me an e-mail chtaniguti in usp.br). But no worries, let’s try to use a related one, the <a href="https://www.ncbi.nlm.nih.gov/datasets/genomes/?acc=GCA_002762385.1&amp;term=&amp;utm_source=gquery&amp;utm_medium=referral&amp;utm_campaign=KnownItemSensor:org"><em>Handroanthus impetiginosus</em></a>.</p>
+<p>The PRJNA551333 is there, but how can we download it?</p>
 <p>Let’s start with the magic of Docker (containers)! To download the sequences we will need to use the <a href="https://github.com/ncbi/sra-tools">sratoolkit</a>, more specifically the <em>fasterq-dump</em> tool. Fortunately, if you search in Docker Hub, there is already one image of the toolkit there, ready to use.</p>
 <p>Let’s suppose that we didn’t see it. How could we make our image? Check its Dockerfile:</p>
 <pre><code>FROM ubuntu:18.04
@@ -2528,15 +2528,15 @@ RUN apt update \
     &amp;&amp; ./vdb-config -i
 
 WORKDIR /sratoolkit.2.10.2-ubuntu64/bin</code></pre>
-<p>To more information about Dockerfiles, check <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">here</a>. Once we defined all we need in the image, we can just run the command:</p>
+<p>For more information about Dockerfiles, check <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">here</a>. Once we defined all we need in the image, we can just run the command:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">docker</span> build -t cristaniguti/sratoolkit . <span class="co">#if you are in the same directory of the Dockerfile</span></span></code></pre></div>
 <p>If you want to store the image in the docker hub, you just need to have an account, log in and push it.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">docker</span> push cristaniguti/sratoolkit</span></code></pre></div>
 <p>Okay! Now, we can run our container based on this image.</p>
-<p>To get the sequences we need their SRA id, you can find it looking in NCBI the project ID PRJNA551333. Click in SRA database and after in “Send results to Run Selector”, there, you can get a list with all 202 individuals. Let’s download only SRR9599311, SRR9599313, SRR9599314.</p>
+<p>To get the sequences we need their SRA id, you can find it looking in NCBI the project ID PRJNA551333. Click in the SRA database and after “Send results to Run Selector”, there, you can get a list with all 202 individuals. Let’s download only SRR9599311, SRR9599313, SRR9599314.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/sratoolkit ./fasterq-dump SRR9599314 -O /opt/</span></code></pre></div>
 <p>If you didn’t pull the image before, it will first do this before running the command (but only the first time you use this image).</p>
-<p>Despite we have only three samples, I let here a loop structure example in case later you want to download more samples and don’t want to write several lines of code to it.</p>
+<p>Despite having only three samples, I let here a loop structure example in case later you want to download more samples and don’t want to write several lines of code to it.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">echo</span> <span class="st">&quot;SRR9599311 SRR9599313 SRR9599314&quot;</span> <span class="op">&gt;</span> SRRs.txt</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">cat</span> SRRs.txt<span class="va">)</span><span class="kw">;</span> <span class="kw">do</span> </span>
@@ -2556,26 +2556,26 @@ WORKDIR /sratoolkit.2.10.2-ubuntu64/bin</code></pre>
 <span id="cb8-2"><a href="#cb8-2"></a>    <span class="bu">echo</span> <span class="va">$i</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>    <span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt biocontainers/fastqc:v0.11.9_cv7 fastqc /opt/<span class="va">$i</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="kw">done</span></span></code></pre></div>
-<p>It returns to us an HTML file with several precious pieces of information. Instead of check separated HTML by sample, we can joint them using the very fancy MULTIQC tool.</p>
+<p>It returns to us an HTML file with several precious pieces of information. Instead of checking separated HTML by sample, we can join them using the very fancy MULTIQC tool.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>  -w <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> ewels/multiqc . --title <span class="st">&quot;Tutorial samples&quot;</span></span></code></pre></div>
-<p>Results <a href="Tutorial-samples_multiqc_report.html">here</a>.</p>
-<p>This profile is typical from RADseq sequences, other types of libraries would return other profile and could have different problems. Check other examples:</p>
+<p>Results <a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/Tutorial-samples_multiqc_report.html">here</a>.</p>
+<p>This profile is typical from RADseq sequences, other types of libraries would return other profiles and could have different problems. Check other examples:</p>
 <ul>
 <li>RNA-seq (gently donate by Fernando Henrique Correr from BioProject ID PRJEB38368 (DOI: 10.1186/s12864-020-07091-y))</li>
 </ul>
-<p><a href="htmls_snpcalling/Fer/bad/multiqc_report.html">bad sequences</a> - They were discarded</p>
-<p><a href="htmls_snpcalling/Fer/good/multiqc_report.html">good sequences</a></p>
+<p><a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/Fer/bad/multiqc_report.html">bad sequences</a> - They were discarded</p>
+<p><a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/Fer/good/multiqc_report.html">good sequences</a></p>
 <ul>
 <li>Metagenomic (gently donate by Maria Letícia Bonatelli (data evaluated after in <a href="https://github.com/ucdavis-bioinformatics-training/HTStream_Training/blob/master/preproc.md">HTStream v.1.3.2 software</a> - unpublished))</li>
 </ul>
-<p><a href="htmls_snpcalling/MaLet/multiqc_report_before.html">bad sequences</a></p>
+<p><a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/MaLet/multiqc_report_before.html">bad sequences</a></p>
 <p>To solve the problems she removed adapters and contamination sequences (Phix), removed duplicated sequences, and N bases. She also did the overlap between paired-end sequences.</p>
-<p><a href="htmls_snpcalling/MaLet/multiqc_report_after.html">good sequences</a></p>
+<p><a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/MaLet/multiqc_report_after.html">good sequences</a></p>
 <ul>
-<li><a href="htmls_snpcalling/wgs.html">Whole-genome-sequence</a> - Parent 16-PJ-3 of the <em>Catalpa</em> study.</li>
+<li><a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/wgs.html">Whole-genome-sequence</a> - Parent 16-PJ-3 of the <em>Catalpa</em> study.</li>
 </ul>
 <p>Back to our example dataset:</p>
-<p>Now that we already check how are our sequences, we can decide which filters to use to clean them. Here, the samples are already demultiplexed, but if it is not, process_radtags from STACKs perform the demultiplexing and some other quality filters, as searching for the enzyme cut site and according to with sequence Phred scale. Check its manual <a href="https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php">here</a>. Our samples do not present problems, we will use the process_radtags default parameters. If fastqc identify adapters in your sequence, we suggest you to use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">cutadapt software</a> (<a href="https://hub.docker.com/r/kfdrc/cutadapt">docker image</a>).</p>
+<p>Now that we already check how our sequences are, we can decide which filters to use to clean them. Here, the samples are already demultiplexed, but if it is not, process_radtags from STACKs perform the demultiplexing and some other quality filters, as searching for the enzyme cut site and according to sequence Phred scale. Check its manual <a href="https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php">here</a>. Our samples do not present problems, we will use the process_radtags default parameters. If fastqc identify adapters in your sequence, we suggest you to use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">cutadapt software</a> (<a href="https://hub.docker.com/r/kfdrc/cutadapt">docker image</a>).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">mkdir</span> raw</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="fu">mv</span> *sub.fastq raw</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="fu">mkdir</span> filtered</span>
@@ -2609,12 +2609,12 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 </div>
 <div id="alignment" class="section level1">
 <h1>Alignment</h1>
-<p>There are many of them! You can find a comparison between some of them <a href="file:///home/cristiane/Downloads/plants-09-00439.pdf">here</a>. The most used is the BWA MEM, the reason is mainly because of a need to standardize the studies. Something to think about: subtle batch effects caused by the usage of different tools in pre-processing. In humans: <a href="https://www.nature.com/articles/s41467-018-06159-4">Functional Equivalence Specification</a></p>
+<p>There are many of them! The most used is the BWA MEM, the reason is mainly because of a need to standardize the studies. Something to think about: subtle batch effects caused by the usage of different tools in pre-processing. In humans: <a href="https://www.nature.com/articles/s41467-018-06159-4">Functional Equivalence Specification</a></p>
 <p>Did you already download the reference genome? Do it from <a href="https://www.ncbi.nlm.nih.gov/datasets/genomes/?acc=GCA_002762385.1&amp;term=&amp;utm_source=gquery&amp;utm_medium=referral&amp;utm_campaign=KnownItemSensor:org">here</a>.</p>
 <p>We will not make our personal computer soffer, we will use only a subset of it too, only the scaffold NKXS01000002.1:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">grep</span> -n <span class="st">&quot;&gt;&quot;</span> GCA_002762385.1_Himp0.1_genomic.fna <span class="op">&gt;</span> scaffolds.txt</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">head</span> -n 10439 GCA_002762385.1_Himp0.1_genomic.fna <span class="kw">|</span> <span class="fu">tail</span> -n 5904 <span class="op">&gt;</span> subset_genome.fa</span></code></pre></div>
-<p>BWA requires some index files before the aligment, you can build them with:</p>
+<p>BWA requires some index files before the alignment, you can build them with:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/subset_genome.fa</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Sample SRR9599311</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
@@ -2666,7 +2666,7 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 <p>There are many of them too! Here we will explore only three, the STACKs, FreeBayes, and HaplotypeCaller (from GATK toolkit). If you are interested in TASSEL, we suggest this other <a href="https://statgen-esalq.github.io/Genotyping-by-Sequencing-(a-TASSEL-Tutorial)/">tutorial</a>.</p>
 <p>TASSEL and STACKs were designed specifically for RADseq sequences and their tutorials don’t need adaptation for this usage, but they are not too flexible as FreeBayes and HaplotypeCaller. Because of their flexibility, they provide other measures to help users better understand what is happening in their particular dataset and suggest different filters. Particularly, HaplotypeCaller and the entire GATK toolkit provides lots of tools and tutorials to explore deeply the sequences you have in hands, but it is also more complex compared to others.</p>
 <div id="stacks" class="section level2">
-<h2>Stacks</h2>
+<h2>STACKs</h2>
 <p>STACKs and TASSEL offer pipelines that do not need a reference genome. The RADseq sequences are aligned between themselves. Comparisons between these approaches show that without a reference genome few SNPs are called compared to those using reference genomes (references <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4993469/">1</a>,<a href="https://www.researchsquare.com/article/rs-32336/v1">2</a>). Then, we suggest to use a reference genome, even if it is not from the same species but a related one. You can also use a combination of genomes or transcriptomes as made in <a href="https://www.g3journal.org/content/9/8/2463.abstract">this study</a>.</p>
 <p>Please, check the <a href="https://catchenlab.life.illinois.edu/stacks/">program documentation</a> to adjust the best parameters. Stacks also allows running each one of its steps separately.</p>
 <div id="with-the-reference-genome" class="section level3">
@@ -2686,7 +2686,7 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 </div>
 </div>
 <div id="freebayes" class="section level1">
-<h1>Freebayes</h1>
+<h1>FreeBayes</h1>
 <p>Check the program documentation <a href="https://github.com/ekg/freebayes">here</a>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">mkdir</span> freebayes</span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
@@ -2697,8 +2697,8 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 </div>
 <div id="gatk---joint-call" class="section level1">
 <h1>GATK - Joint Call</h1>
-<p>GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their <a href="https://gatk.broadinstitute.org/hc/en-us">website</a>. GATK also has workflows available <a href="https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows">here</a> for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS datasets. GATK workflows need adaptations to analyze these datasets. A good example is the duplicates, you can’t remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools as BQSR and Variant recalibrator. If you don’t have much previous information, GATK provides several quality measures for each marker called and you can apply what they call “hard filters” in your markers.</p>
-<p>The called Joint Call makes the variant calling by sample and produces the g.vcf files, a VCF which have records for every position in the genome. After a database is created to joint this information and we can extract it to the traditional VCF file. The analysis is done separately for several reasons, one is flexibility os processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don’t need to repeat all the analysis if you want to add an extra sample.</p>
+<p>GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their <a href="https://gatk.broadinstitute.org/hc/en-us">website</a>. GATK also has workflows available <a href="https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows">here</a> for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS datasets. GATK workflows need adaptations to analyze these datasets. A good example is the duplicates, you can’t remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you don’t have much previous information, GATK provides several quality measures for each marker called and you can apply what they call “hard filters” in your markers.</p>
+<p>The called Joint Call makes the variant calling by sample and produces the g.vcf files, a VCF which have records for every position in the genome. After a database is created to join this information and we can extract it to the traditional VCF file. The analysis is done separately for several reasons, one is flexibility of processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don’t need to repeat all the analysis if you want to add an extra sample.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># It requires other indexes</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar picard.jar CreateSequenceDictionary R=/opt/subset_genome.fa O=/opt/subset_genome.dict</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/r-samtools samtools faidx /opt/subset_genome.fa</span>
@@ -2750,13 +2750,13 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 <div id="running-bigger-datasets" class="section level1">
 <h1>Running bigger datasets</h1>
 <p>In the world outside this tutorial, you will face larger datasets, which will require more computational resources. Then, you need to run part of these analyses in clusters or clouds. If you don’t have access to any of this, try to make an account in Google Cloud, the firsts months and resources are free. You will need to explore better the configurations to that. Start from <a href="https://cloud.google.com/gcp/getting-started">here</a>.</p>
-<p>In HPC clusters administrators likely include a management workload as <a href="https://slurm.schedmd.com/documentation.html">slurm</a>. This tool allows that users don’t exceed the HPC capacity establish for individual usage. In other words, it makes the laws in the HPC, so all users can enjoy it as a civilized community. You will need to learn the rules before run your process, but usually, the administrator makes a tutorial available, just ask for it.</p>
+<p>In HPC clusters administrators likely include a management workload as <a href="https://slurm.schedmd.com/documentation.html">slurm</a>. This tool allows that users don’t exceed the HPC capacity established for individual usage. In other words, it makes the laws in the HPC, so all users can enjoy it as a civilized community. You will need to learn the rules before running your process, but usually, the administrator makes a tutorial available, just ask for it.</p>
 <p>Also, in HPCs, docker is not always available because of security issues. Instead, you can use docker through <a href="https://singularity.lbl.gov/">singularity</a>.</p>
-<p>Or, to automatization all these interactions with HPC and cloud, you can use a workflow language. There are several available. The Broad Institute team develop a combination of the WDL workflow language with workflow manager Cromwell, which already solved a lot of technical issues evolved with the analysis of biological sequences in Cloud or HPC. See <a href="https://www.amazon.com.br/Genomics-Cloud-Brian-%E2%80%B2connor/dp/1491975199">Genomics in the Cloud book</a> and GATK tutorials.</p>
+<p>Or, to automatize all these interactions with HPC and cloud, you can use a workflow language. There are several available. The Broad Institute team develop a combination of the WDL workflow language with workflow manager Cromwell, which already solved a lot of technical issues evolved with the analysis of biological sequences in Cloud or HPC. See <a href="https://www.amazon.com.br/Genomics-Cloud-Brian-%E2%80%B2connor/dp/1491975199">Genomics in the Cloud book</a> and GATK tutorials.</p>
 </div>
 <div id="considerations" class="section level1">
 <h1>Considerations</h1>
-<p>Scientists are always creating new things, and of course, it is great! All fields are evolving very fast and every time you look for, you find something new. But, if you are also creating new things, it is a good idea to freeze all other dependencies tools, so you have control of what is changing. You can do it with docker. But is important to keep the images updated so you can follow the science development rhythm.</p>
+<p>Scientists are always creating new things, and of course, it is great! All fields are evolving very fast and every time you look for, you find something new. But, if you are also creating new things, it is a good idea to freeze all other dependencies tools, so you have control of what is changing. You can do it with docker. But it is important to keep the images updated so you can follow the science development rhythm.</p>
 </div>
 </div>
 
