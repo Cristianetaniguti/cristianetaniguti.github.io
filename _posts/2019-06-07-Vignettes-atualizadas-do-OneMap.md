@@ -8,7 +8,7 @@ description: Versão chique do tutorial do OneMap contida no meu repositório do
 
 Nós, do laboratório de Genética Estatística da ESALQ, temos atualizado frequentemente os tutoriais do OneMap. Eles estão no meu repositório do github "Cristianetaniguti/onemap". Instale essa versão do OneMap com:
 
-devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
+devtools::install_github("Cristianetaniguti/onemap")
 
 Em seguida, acesse as vignettes atualizadas pelos seguintes links:
 
@@ -23,7 +23,7 @@ Em seguida, acesse as vignettes atualizadas pelos seguintes links:
 
 We, from ESALQ's Statistical Genetics laboratory have frequently updated OneMap tutorials. They are in my github repository  "Cristianetaniguti/onemap". Install this version of OneMap with:
 
-devtools::install_github("Cristianetaniguti/onemap", ref="rm_get")
+devtools::install_github("Cristianetaniguti/onemap")
 
 Then check the updated vignettes accessing the following links :
 
