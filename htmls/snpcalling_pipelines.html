@@ -2510,6 +2510,14 @@ $(document).ready(function () {
 <span id="cb1-12"><a href="#cb1-12"></a><span class="ex">docker</span> build -t <span class="op">&lt;</span>image_name<span class="op">&gt;</span> Dockerfile   <span class="co"># build image from a Dockerfile</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a><span class="ex">docker</span> push                               <span class="co"># Send the built image to a repository (Docker hub)</span></span></code></pre></div>
 <p>To save time during the tutorial, pull now all the needed images:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">docker</span> pull cristaniguti/sratoolkit:latest</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">docker</span> pull biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">docker</span> pull ewels/multiqc:latest</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ex">docker</span> pull taniguti/stacks:latest</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">docker</span> pull kfdrc/bwa-picard:latest-dev</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="ex">docker</span> pull kfdrc/samtools:latest</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="ex">docker</span> pull taniguti/freebayes:latest</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">docker</span> pull taniguti/gatk-picard:latest</span></code></pre></div>
 <p>Run this command and go take a coffee, it can take some time. After you finish your analysis, don’t forget to remove all images and containers, if you don’t do that, it will occupy space in your computer.</p>
 </div>
 <div id="example-data-subset" class="section level1">
@@ -2529,35 +2537,35 @@ RUN apt update \
 
 WORKDIR /sratoolkit.2.10.2-ubuntu64/bin</code></pre>
 <p>For more information about Dockerfiles, check <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">here</a>. Once we defined all we need in the image, we can just run the command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">docker</span> build -t cristaniguti/sratoolkit . <span class="co">#if you are in the same directory of the Dockerfile</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">docker</span> build -t cristaniguti/sratoolkit . <span class="co">#if you are in the same directory of the Dockerfile</span></span></code></pre></div>
 <p>If you want to store the image in the docker hub, you just need to have an account, log in and push it.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">docker</span> push cristaniguti/sratoolkit</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">docker</span> push cristaniguti/sratoolkit</span></code></pre></div>
 <p>Okay! Now, we can run our container based on this image.</p>
 <p>To get the sequences we need their SRA id, you can find it looking in NCBI the project ID PRJNA551333. Click in the SRA database and after “Send results to Run Selector”, there, you can get a list with all 202 individuals. Let’s download only SRR9599311, SRR9599313, SRR9599314.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/sratoolkit ./fasterq-dump SRR9599314 -O /opt/</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/sratoolkit ./fasterq-dump SRR9599314 -O /opt/</span></code></pre></div>
 <p>If you didn’t pull the image before, it will first do this before running the command (but only the first time you use this image).</p>
 <p>Despite having only three samples, I let here a loop structure example in case later you want to download more samples and don’t want to write several lines of code to it.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">echo</span> <span class="st">&quot;SRR9599311 SRR9599313 SRR9599314&quot;</span> <span class="op">&gt;</span> SRRs.txt</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">cat</span> SRRs.txt<span class="va">)</span><span class="kw">;</span> <span class="kw">do</span> </span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="bu">echo</span> <span class="va">$i</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/sratoolkit ./fasterq-dump </span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">SRR9599315</span> -O /opt/ <span class="co"># This command will take a while, the files are big ~ 1.2GB each</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">echo</span> <span class="st">&quot;SRR9599311 SRR9599313 SRR9599314&quot;</span> <span class="op">&gt;</span> SRRs.txt</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">cat</span> SRRs.txt<span class="va">)</span><span class="kw">;</span> <span class="kw">do</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="bu">echo</span> <span class="va">$i</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/sratoolkit ./fasterq-dump </span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">SRR9599315</span> -O /opt/ <span class="co"># This command will take a while, the files are big ~ 1.2GB each</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">done</span></span></code></pre></div>
 <p>We have only six files, but they are still big for the next steps, we will get only a sample of each one and only use one of the pairs:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">head</span> -n 80000 SRR9599311_1.fastq <span class="op">&gt;</span> SRR9599311_1.sub.fastq <span class="co"># Just a subset of the reads</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">head</span> -n 80000 SRR9599313_1.fastq <span class="op">&gt;</span> SRR9599313_1.sub.fastq <span class="co"># Just a subset of the reads</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">head</span> -n 80000 SRR9599314_1.fastq <span class="op">&gt;</span> SRR9599314_1.sub.fastq <span class="co"># Just a subset of the reads</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">head</span> -n 80000 SRR9599311_1.fastq <span class="op">&gt;</span> SRR9599311_1.sub.fastq <span class="co"># Just a subset of the reads</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">head</span> -n 80000 SRR9599313_1.fastq <span class="op">&gt;</span> SRR9599313_1.sub.fastq <span class="co"># Just a subset of the reads</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">head</span> -n 80000 SRR9599314_1.fastq <span class="op">&gt;</span> SRR9599314_1.sub.fastq <span class="co"># Just a subset of the reads</span></span></code></pre></div>
 </div>
 <div id="pre-processing" class="section level1">
 <h1>Pre-processing</h1>
 <p>A classic way to have a overview of our fastq sequences is the FASTQC software:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">for</span> <span class="ex">i</span> in *sub.fastq<span class="kw">;</span> <span class="kw">do</span> <span class="co"># Will run in all files in the directory finishing with sub.fastq</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="bu">echo</span> <span class="va">$i</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>    <span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt biocontainers/fastqc:v0.11.9_cv7 fastqc /opt/<span class="va">$i</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">for</span> <span class="ex">i</span> in *sub.fastq<span class="kw">;</span> <span class="kw">do</span> <span class="co"># Will run in all files in the directory finishing with sub.fastq</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="bu">echo</span> <span class="va">$i</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt biocontainers/fastqc:v0.11.9_cv7 fastqc /opt/<span class="va">$i</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">done</span></span></code></pre></div>
 <p>It returns to us an HTML file with several precious pieces of information. Instead of checking separated HTML by sample, we can join them using the very fancy MULTIQC tool.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>  -w <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> ewels/multiqc . --title <span class="st">&quot;Tutorial samples&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>  -w <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> ewels/multiqc . --title <span class="st">&quot;Tutorial samples&quot;</span></span></code></pre></div>
 <p>Results <a href="https://cristianetaniguti.github.io/htmls/htmls_snpcalling/Tutorial-samples_multiqc_report.html">here</a>.</p>
 <p>This profile is typical from RADseq sequences, other types of libraries would return other profiles and could have different problems. Check other examples:</p>
 <ul>
@@ -2576,13 +2584,13 @@ WORKDIR /sratoolkit.2.10.2-ubuntu64/bin</code></pre>
 </ul>
 <p>Back to our example dataset:</p>
 <p>Now that we already check how our sequences are, we can decide which filters to use to clean them. Here, the samples are already demultiplexed, but if it is not, process_radtags from STACKs perform the demultiplexing and some other quality filters, as searching for the enzyme cut site and according to sequence Phred scale. Check its manual <a href="https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php">here</a>. Our samples do not present problems, we will use the process_radtags default parameters. If fastqc identify adapters in your sequence, we suggest you to use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">cutadapt software</a> (<a href="https://hub.docker.com/r/kfdrc/cutadapt">docker image</a>).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">mkdir</span> raw</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">mv</span> *sub.fastq raw</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">mkdir</span> filtered</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks  process_radtags -p /opt/raw/ -o /opt/filtered/ \</span>
-<span id="cb10-6"><a href="#cb10-6"></a>                      -e ecoRI \</span>
-<span id="cb10-7"><a href="#cb10-7"></a>                      -r -c -q </span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">mkdir</span> raw</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">mv</span> *sub.fastq raw</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">mkdir</span> filtered</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks  process_radtags -p /opt/raw/ -o /opt/filtered/ \</span>
+<span id="cb11-6"><a href="#cb11-6"></a>                      -e ecoRI \</span>
+<span id="cb11-7"><a href="#cb11-7"></a>                      -r -c -q </span></code></pre></div>
 <pre><code>No barcodes specified, files will not be demultiplexed.
 Processing single-end data.
 Using Phred+33 encoding for quality scores.
@@ -2612,53 +2620,53 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 <p>There are many of them! The most used is the BWA MEM, the reason is mainly because of a need to standardize the studies. Something to think about: subtle batch effects caused by the usage of different tools in pre-processing. In humans: <a href="https://www.nature.com/articles/s41467-018-06159-4">Functional Equivalence Specification</a></p>
 <p>Did you already download the reference genome? Do it from <a href="https://www.ncbi.nlm.nih.gov/datasets/genomes/?acc=GCA_002762385.1&amp;term=&amp;utm_source=gquery&amp;utm_medium=referral&amp;utm_campaign=KnownItemSensor:org">here</a>.</p>
 <p>We will not make our personal computer soffer, we will use only a subset of it too, only the scaffold NKXS01000002.1:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">grep</span> -n <span class="st">&quot;&gt;&quot;</span> GCA_002762385.1_Himp0.1_genomic.fna <span class="op">&gt;</span> scaffolds.txt</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">head</span> -n 10439 GCA_002762385.1_Himp0.1_genomic.fna <span class="kw">|</span> <span class="fu">tail</span> -n 5904 <span class="op">&gt;</span> subset_genome.fa</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">grep</span> -n <span class="st">&quot;&gt;&quot;</span> GCA_002762385.1_Himp0.1_genomic.fna <span class="op">&gt;</span> scaffolds.txt</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">head</span> -n 10439 GCA_002762385.1_Himp0.1_genomic.fna <span class="kw">|</span> <span class="fu">tail</span> -n 5904 <span class="op">&gt;</span> subset_genome.fa</span></code></pre></div>
 <p>BWA requires some index files before the alignment, you can build them with:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/subset_genome.fa</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Sample SRR9599311</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
-<span id="cb14-3"><a href="#cb14-3"></a>    -R <span class="st">&quot;@RG\tID:Offspring73.SRR9599311\tLB:lib-SRR9599311\tPL:illumina\tSM:Offspring73\tPU:FLOWCELL1.LANE1.SRR9599311&quot;</span> \</span>
-<span id="cb14-4"><a href="#cb14-4"></a>    /opt/subset_genome.fa /opt/raw/SRR9599311_1.sub.fastq <span class="op">&gt;</span> SRR9599311_1.sub.bam</span>
-<span id="cb14-5"><a href="#cb14-5"></a>    </span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
-<span id="cb14-7"><a href="#cb14-7"></a>    I=<span class="st">&quot;/opt/SRR9599311_1.sub.bam&quot;</span> \</span>
-<span id="cb14-8"><a href="#cb14-8"></a>    O=<span class="st">&quot;/opt/Offspring73.SRR9599311.sorted.bam&quot;</span> \</span>
-<span id="cb14-9"><a href="#cb14-9"></a>    TMP_DIR=./tmp \</span>
-<span id="cb14-10"><a href="#cb14-10"></a>    SORT_ORDER=coordinate \</span>
-<span id="cb14-11"><a href="#cb14-11"></a>    CREATE_INDEX=true</span>
-<span id="cb14-12"><a href="#cb14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># Sample SRR9599313</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
-<span id="cb14-15"><a href="#cb14-15"></a>    -R <span class="st">&quot;@RG\tID:Offspring172.SRR9599313\tLB:lib-SRR9599313\tPL:illumina\tSM:Offspring172\tPU:FLOWCELL1.LANE1.SRR9599313&quot;</span> \</span>
-<span id="cb14-16"><a href="#cb14-16"></a>    /opt/subset_genome.fa /opt/raw/SRR9599313_1.sub.fastq <span class="op">&gt;</span> SRR9599313_1.sub.bam</span>
-<span id="cb14-17"><a href="#cb14-17"></a>    </span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
-<span id="cb14-19"><a href="#cb14-19"></a>    I=<span class="st">&quot;/opt/SRR9599313_1.sub.bam&quot;</span> \</span>
-<span id="cb14-20"><a href="#cb14-20"></a>    O=<span class="st">&quot;/opt/Offspring172.SRR9599313.sorted.bam&quot;</span> \</span>
-<span id="cb14-21"><a href="#cb14-21"></a>    TMP_DIR=./tmp \</span>
-<span id="cb14-22"><a href="#cb14-22"></a>    SORT_ORDER=coordinate \</span>
-<span id="cb14-23"><a href="#cb14-23"></a>    CREATE_INDEX=true</span>
-<span id="cb14-24"><a href="#cb14-24"></a></span>
-<span id="cb14-25"><a href="#cb14-25"></a><span class="co"># Sample SRR9599314</span></span>
-<span id="cb14-26"><a href="#cb14-26"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
-<span id="cb14-27"><a href="#cb14-27"></a>    -R <span class="st">&quot;@RG\tID:Offspring241.SRR9599314\tLB:lib-SRR9599314\tPL:illumina\tSM:Offspring241\tPU:FLOWCELL1.LANE1.SRR9599314&quot;</span> \</span>
-<span id="cb14-28"><a href="#cb14-28"></a>    /opt/subset_genome.fa /opt/raw/SRR9599314_1.sub.fastq <span class="op">&gt;</span> SRR9599314_1.sub.bam</span>
-<span id="cb14-29"><a href="#cb14-29"></a>    </span>
-<span id="cb14-30"><a href="#cb14-30"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
-<span id="cb14-31"><a href="#cb14-31"></a>    I=<span class="st">&quot;/opt/SRR9599314_1.sub.bam&quot;</span> \</span>
-<span id="cb14-32"><a href="#cb14-32"></a>    O=<span class="st">&quot;/opt/Offspring241.SRR9599314.sorted.bam&quot;</span> \</span>
-<span id="cb14-33"><a href="#cb14-33"></a>    TMP_DIR=./tmp \</span>
-<span id="cb14-34"><a href="#cb14-34"></a>    SORT_ORDER=coordinate \</span>
-<span id="cb14-35"><a href="#cb14-35"></a>    CREATE_INDEX=true</span>
-<span id="cb14-36"><a href="#cb14-36"></a>    </span>
-<span id="cb14-37"><a href="#cb14-37"></a></span>
-<span id="cb14-38"><a href="#cb14-38"></a><span class="fu">mkdir</span> aligned</span>
-<span id="cb14-39"><a href="#cb14-39"></a><span class="fu">mv</span> *sorted.bam *sorted.bai aligned</span>
-<span id="cb14-40"><a href="#cb14-40"></a></span>
-<span id="cb14-41"><a href="#cb14-41"></a><span class="co"># Use this command to check the alignment profile - Don&#39;t be frustrated with our results, remember that it is a subset</span></span>
-<span id="cb14-42"><a href="#cb14-42"></a><span class="bu">cd</span> aligned</span>
-<span id="cb14-43"><a href="#cb14-43"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt kfdrc/samtools:latest samtools flagstat /opt/Offspring73.SRR9599311.sorted.bam</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/subset_genome.fa</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Sample SRR9599311</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    -R <span class="st">&quot;@RG\tID:Offspring73.SRR9599311\tLB:lib-SRR9599311\tPL:illumina\tSM:Offspring73\tPU:FLOWCELL1.LANE1.SRR9599311&quot;</span> \</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    /opt/subset_genome.fa /opt/raw/SRR9599311_1.sub.fastq <span class="op">&gt;</span> SRR9599311_1.sub.bam</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    </span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    I=<span class="st">&quot;/opt/SRR9599311_1.sub.bam&quot;</span> \</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    O=<span class="st">&quot;/opt/Offspring73.SRR9599311.sorted.bam&quot;</span> \</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    TMP_DIR=./tmp \</span>
+<span id="cb15-10"><a href="#cb15-10"></a>    SORT_ORDER=coordinate \</span>
+<span id="cb15-11"><a href="#cb15-11"></a>    CREATE_INDEX=true</span>
+<span id="cb15-12"><a href="#cb15-12"></a></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="co"># Sample SRR9599313</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
+<span id="cb15-15"><a href="#cb15-15"></a>    -R <span class="st">&quot;@RG\tID:Offspring172.SRR9599313\tLB:lib-SRR9599313\tPL:illumina\tSM:Offspring172\tPU:FLOWCELL1.LANE1.SRR9599313&quot;</span> \</span>
+<span id="cb15-16"><a href="#cb15-16"></a>    /opt/subset_genome.fa /opt/raw/SRR9599313_1.sub.fastq <span class="op">&gt;</span> SRR9599313_1.sub.bam</span>
+<span id="cb15-17"><a href="#cb15-17"></a>    </span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
+<span id="cb15-19"><a href="#cb15-19"></a>    I=<span class="st">&quot;/opt/SRR9599313_1.sub.bam&quot;</span> \</span>
+<span id="cb15-20"><a href="#cb15-20"></a>    O=<span class="st">&quot;/opt/Offspring172.SRR9599313.sorted.bam&quot;</span> \</span>
+<span id="cb15-21"><a href="#cb15-21"></a>    TMP_DIR=./tmp \</span>
+<span id="cb15-22"><a href="#cb15-22"></a>    SORT_ORDER=coordinate \</span>
+<span id="cb15-23"><a href="#cb15-23"></a>    CREATE_INDEX=true</span>
+<span id="cb15-24"><a href="#cb15-24"></a></span>
+<span id="cb15-25"><a href="#cb15-25"></a><span class="co"># Sample SRR9599314</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa mem -t 2 \</span>
+<span id="cb15-27"><a href="#cb15-27"></a>    -R <span class="st">&quot;@RG\tID:Offspring241.SRR9599314\tLB:lib-SRR9599314\tPL:illumina\tSM:Offspring241\tPU:FLOWCELL1.LANE1.SRR9599314&quot;</span> \</span>
+<span id="cb15-28"><a href="#cb15-28"></a>    /opt/subset_genome.fa /opt/raw/SRR9599314_1.sub.fastq <span class="op">&gt;</span> SRR9599314_1.sub.bam</span>
+<span id="cb15-29"><a href="#cb15-29"></a>    </span>
+<span id="cb15-30"><a href="#cb15-30"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar /picard.jar SortSam \</span>
+<span id="cb15-31"><a href="#cb15-31"></a>    I=<span class="st">&quot;/opt/SRR9599314_1.sub.bam&quot;</span> \</span>
+<span id="cb15-32"><a href="#cb15-32"></a>    O=<span class="st">&quot;/opt/Offspring241.SRR9599314.sorted.bam&quot;</span> \</span>
+<span id="cb15-33"><a href="#cb15-33"></a>    TMP_DIR=./tmp \</span>
+<span id="cb15-34"><a href="#cb15-34"></a>    SORT_ORDER=coordinate \</span>
+<span id="cb15-35"><a href="#cb15-35"></a>    CREATE_INDEX=true</span>
+<span id="cb15-36"><a href="#cb15-36"></a>    </span>
+<span id="cb15-37"><a href="#cb15-37"></a></span>
+<span id="cb15-38"><a href="#cb15-38"></a><span class="fu">mkdir</span> aligned</span>
+<span id="cb15-39"><a href="#cb15-39"></a><span class="fu">mv</span> *sorted.bam *sorted.bai aligned</span>
+<span id="cb15-40"><a href="#cb15-40"></a></span>
+<span id="cb15-41"><a href="#cb15-41"></a><span class="co"># Use this command to check the alignment profile - Don&#39;t be frustrated with our results, remember that it is a subset</span></span>
+<span id="cb15-42"><a href="#cb15-42"></a><span class="bu">cd</span> aligned</span>
+<span id="cb15-43"><a href="#cb15-43"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt kfdrc/samtools:latest samtools flagstat /opt/Offspring73.SRR9599311.sorted.bam</span></code></pre></div>
 <p>If you have more than one genome and want to test how much your sample aligns with each one, <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/">FASTQ screen</a> is a good tool for that.</p>
 </div>
 <div id="snp-callers" class="section level1">
@@ -2671,80 +2679,80 @@ Outputing details to log: &#39;/opt/filtered/process_radtags.raw.log&#39;
 <p>Please, check the <a href="https://catchenlab.life.illinois.edu/stacks/">program documentation</a> to adjust the best parameters. Stacks also allows running each one of its steps separately.</p>
 <div id="with-the-reference-genome" class="section level3">
 <h3>With the reference genome</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">mkdir</span> stacks</span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks ref_map.pl -T 2 -o /opt/stacks/ --popmap /opt/popmap.txt --samples ./opt/aligned/ </span>
-<span id="cb15-4"><a href="#cb15-4"></a></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co"># Generate VCF</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks populations --in_path /opt/stacks --popmap /opt/popmap.txt --vcf</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">mkdir</span> stacks</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks ref_map.pl -T 2 -o /opt/stacks/ --popmap /opt/popmap.txt --samples ./opt/aligned/ </span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># Generate VCF</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/stacks populations --in_path /opt/stacks --popmap /opt/popmap.txt --vcf</span></code></pre></div>
 <p>The population map file in this case:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cat</span> popmap.txt</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">Offspring73.SRR9599311.sorted</span>    pop1</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="ex">Offspring172.SRR9599313.sorted</span>    pop1</span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">Offspring241.SRR9599314.sorted</span>    pop1</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">cat</span> popmap.txt</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">Offspring73.SRR9599311.sorted</span>    pop1</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="ex">Offspring172.SRR9599313.sorted</span>    pop1</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="ex">Offspring241.SRR9599314.sorted</span>    pop1</span></code></pre></div>
 </div>
 </div>
 </div>
 <div id="freebayes" class="section level1">
 <h1>FreeBayes</h1>
 <p>Check the program documentation <a href="https://github.com/ekg/freebayes">here</a>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">mkdir</span> freebayes</span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/freebayes freebayes -f /opt/subset_genome.fa \</span>
-<span id="cb17-4"><a href="#cb17-4"></a>                                                  /opt/aligned/Offspring172.SRR9599313.sorted.bam \</span>
-<span id="cb17-5"><a href="#cb17-5"></a>                                                  /opt/aligned/Offspring241.SRR9599314.sorted.bam \</span>
-<span id="cb17-6"><a href="#cb17-6"></a>                                                  /opt/aligned/Offspring73.SRR9599311.sorted.bam <span class="op">&gt;</span> freebayes/freebayes.vcf</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">mkdir</span> freebayes</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/freebayes freebayes -f /opt/subset_genome.fa \</span>
+<span id="cb18-4"><a href="#cb18-4"></a>                                                  /opt/aligned/Offspring172.SRR9599313.sorted.bam \</span>
+<span id="cb18-5"><a href="#cb18-5"></a>                                                  /opt/aligned/Offspring241.SRR9599314.sorted.bam \</span>
+<span id="cb18-6"><a href="#cb18-6"></a>                                                  /opt/aligned/Offspring73.SRR9599311.sorted.bam <span class="op">&gt;</span> freebayes/freebayes.vcf</span></code></pre></div>
 </div>
 <div id="gatk---joint-call" class="section level1">
 <h1>GATK - Joint Call</h1>
 <p>GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their <a href="https://gatk.broadinstitute.org/hc/en-us">website</a>. GATK also has workflows available <a href="https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows">here</a> for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS datasets. GATK workflows need adaptations to analyze these datasets. A good example is the duplicates, you can’t remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you don’t have much previous information, GATK provides several quality measures for each marker called and you can apply what they call “hard filters” in your markers.</p>
 <p>The called Joint Call makes the variant calling by sample and produces the g.vcf files, a VCF which have records for every position in the genome. After a database is created to join this information and we can extract it to the traditional VCF file. The analysis is done separately for several reasons, one is flexibility of processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don’t need to repeat all the analysis if you want to add an extra sample.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># It requires other indexes</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar picard.jar CreateSequenceDictionary R=/opt/subset_genome.fa O=/opt/subset_genome.dict</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/r-samtools samtools faidx /opt/subset_genome.fa</span>
-<span id="cb18-4"><a href="#cb18-4"></a></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
-<span id="cb18-6"><a href="#cb18-6"></a>                                                    -ERC GVCF \</span>
-<span id="cb18-7"><a href="#cb18-7"></a>                                                    -R /opt/subset_genome.fa \</span>
-<span id="cb18-8"><a href="#cb18-8"></a>                                                    -I /opt/aligned/Offspring172.SRR9599313.sorted.bam \</span>
-<span id="cb18-9"><a href="#cb18-9"></a>                                                    -O /opt/Offspring172_rawLikelihoods.g.vcf \</span>
-<span id="cb18-10"><a href="#cb18-10"></a>                                                    --max-reads-per-alignment-start 0</span>
-<span id="cb18-11"><a href="#cb18-11"></a>                                                    </span>
-<span id="cb18-12"><a href="#cb18-12"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
-<span id="cb18-13"><a href="#cb18-13"></a>                                                    -ERC GVCF \</span>
-<span id="cb18-14"><a href="#cb18-14"></a>                                                    -R /opt/subset_genome.fa \</span>
-<span id="cb18-15"><a href="#cb18-15"></a>                                                    -I /opt/aligned/Offspring241.SRR9599314.sorted.bam \</span>
-<span id="cb18-16"><a href="#cb18-16"></a>                                                    -O /opt/Offspring241_rawLikelihoods.g.vcf \</span>
-<span id="cb18-17"><a href="#cb18-17"></a>                                                    --max-reads-per-alignment-start 0</span>
-<span id="cb18-18"><a href="#cb18-18"></a>                                                    </span>
-<span id="cb18-19"><a href="#cb18-19"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
-<span id="cb18-20"><a href="#cb18-20"></a>                                                    -ERC GVCF \</span>
-<span id="cb18-21"><a href="#cb18-21"></a>                                                    -R /opt/subset_genome.fa \</span>
-<span id="cb18-22"><a href="#cb18-22"></a>                                                    -I /opt/aligned/Offspring73.SRR9599311.sorted.bam \</span>
-<span id="cb18-23"><a href="#cb18-23"></a>                                                    -O /opt/Offspring73_rawLikelihoods.g.vcf \</span>
-<span id="cb18-24"><a href="#cb18-24"></a>                                                    --max-reads-per-alignment-start 0</span>
-<span id="cb18-25"><a href="#cb18-25"></a></span>
-<span id="cb18-26"><a href="#cb18-26"></a><span class="fu">grep</span> <span class="st">&quot;&gt;&quot;</span> subset_genome.fa <span class="op">&gt;</span> interval_list_temp <span class="co"># Find scaffold name</span></span>
-<span id="cb18-27"><a href="#cb18-27"></a><span class="fu">sed</span> <span class="st">&#39;s/^.//&#39;</span> interval_list_temp <span class="op">&gt;</span> interval_list_temp2 <span class="co"># remove &gt; at the beginning</span></span>
-<span id="cb18-28"><a href="#cb18-28"></a><span class="fu">awk</span>  <span class="st">&#39;{print $1;}&#39;</span> interval_list_temp2 <span class="op">&gt;</span> interval.list <span class="co"># gets only the first word</span></span>
-<span id="cb18-29"><a href="#cb18-29"></a></span>
-<span id="cb18-30"><a href="#cb18-30"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk GenomicsDBImport \</span>
-<span id="cb18-31"><a href="#cb18-31"></a>                                                  --genomicsdb-workspace-path /opt/my_database \</span>
-<span id="cb18-32"><a href="#cb18-32"></a>                                                  -L /opt/interval.list \</span>
-<span id="cb18-33"><a href="#cb18-33"></a>                                                  -V /opt/Offspring73_rawLikelihoods.g.vcf \</span>
-<span id="cb18-34"><a href="#cb18-34"></a>                                                  -V /opt/Offspring241_rawLikelihoods.g.vcf \</span>
-<span id="cb18-35"><a href="#cb18-35"></a>                                                  -V /opt/Offspring172_rawLikelihoods.g.vcf</span>
-<span id="cb18-36"><a href="#cb18-36"></a></span>
-<span id="cb18-37"><a href="#cb18-37"></a><span class="fu">tar</span> -cf ~<span class="dt">{path_gatkDatabase}</span>.tar ~<span class="dt">{path_gatkDatabase}</span></span>
-<span id="cb18-38"><a href="#cb18-38"></a></span>
-<span id="cb18-39"><a href="#cb18-39"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk GenotypeGVCFs \</span>
-<span id="cb18-40"><a href="#cb18-40"></a>                                                   -R /opt/subset_genome.fa \</span>
-<span id="cb18-41"><a href="#cb18-41"></a>                                                   -O /opt/gatk.vcf.gz \</span>
-<span id="cb18-42"><a href="#cb18-42"></a>                                                   -G StandardAnnotation \</span>
-<span id="cb18-43"><a href="#cb18-43"></a>                                                   -V gendb:///opt/my_database</span>
-<span id="cb18-44"><a href="#cb18-44"></a>                                                   </span>
-<span id="cb18-45"><a href="#cb18-45"></a><span class="fu">mkdir</span> gatk</span>
-<span id="cb18-46"><a href="#cb18-46"></a><span class="fu">mv</span> gatk.vcf* gatk</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># It requires other indexes</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev java -jar picard.jar CreateSequenceDictionary R=/opt/subset_genome.fa O=/opt/subset_genome.dict</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="ex">docker</span> run -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ cristaniguti/r-samtools samtools faidx /opt/subset_genome.fa</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
+<span id="cb19-6"><a href="#cb19-6"></a>                                                    -ERC GVCF \</span>
+<span id="cb19-7"><a href="#cb19-7"></a>                                                    -R /opt/subset_genome.fa \</span>
+<span id="cb19-8"><a href="#cb19-8"></a>                                                    -I /opt/aligned/Offspring172.SRR9599313.sorted.bam \</span>
+<span id="cb19-9"><a href="#cb19-9"></a>                                                    -O /opt/Offspring172_rawLikelihoods.g.vcf \</span>
+<span id="cb19-10"><a href="#cb19-10"></a>                                                    --max-reads-per-alignment-start 0</span>
+<span id="cb19-11"><a href="#cb19-11"></a>                                                    </span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
+<span id="cb19-13"><a href="#cb19-13"></a>                                                    -ERC GVCF \</span>
+<span id="cb19-14"><a href="#cb19-14"></a>                                                    -R /opt/subset_genome.fa \</span>
+<span id="cb19-15"><a href="#cb19-15"></a>                                                    -I /opt/aligned/Offspring241.SRR9599314.sorted.bam \</span>
+<span id="cb19-16"><a href="#cb19-16"></a>                                                    -O /opt/Offspring241_rawLikelihoods.g.vcf \</span>
+<span id="cb19-17"><a href="#cb19-17"></a>                                                    --max-reads-per-alignment-start 0</span>
+<span id="cb19-18"><a href="#cb19-18"></a>                                                    </span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk HaplotypeCaller \</span>
+<span id="cb19-20"><a href="#cb19-20"></a>                                                    -ERC GVCF \</span>
+<span id="cb19-21"><a href="#cb19-21"></a>                                                    -R /opt/subset_genome.fa \</span>
+<span id="cb19-22"><a href="#cb19-22"></a>                                                    -I /opt/aligned/Offspring73.SRR9599311.sorted.bam \</span>
+<span id="cb19-23"><a href="#cb19-23"></a>                                                    -O /opt/Offspring73_rawLikelihoods.g.vcf \</span>
+<span id="cb19-24"><a href="#cb19-24"></a>                                                    --max-reads-per-alignment-start 0</span>
+<span id="cb19-25"><a href="#cb19-25"></a></span>
+<span id="cb19-26"><a href="#cb19-26"></a><span class="fu">grep</span> <span class="st">&quot;&gt;&quot;</span> subset_genome.fa <span class="op">&gt;</span> interval_list_temp <span class="co"># Find scaffold name</span></span>
+<span id="cb19-27"><a href="#cb19-27"></a><span class="fu">sed</span> <span class="st">&#39;s/^.//&#39;</span> interval_list_temp <span class="op">&gt;</span> interval_list_temp2 <span class="co"># remove &gt; at the beginning</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a><span class="fu">awk</span>  <span class="st">&#39;{print $1;}&#39;</span> interval_list_temp2 <span class="op">&gt;</span> interval.list <span class="co"># gets only the first word</span></span>
+<span id="cb19-29"><a href="#cb19-29"></a></span>
+<span id="cb19-30"><a href="#cb19-30"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk GenomicsDBImport \</span>
+<span id="cb19-31"><a href="#cb19-31"></a>                                                  --genomicsdb-workspace-path /opt/my_database \</span>
+<span id="cb19-32"><a href="#cb19-32"></a>                                                  -L /opt/interval.list \</span>
+<span id="cb19-33"><a href="#cb19-33"></a>                                                  -V /opt/Offspring73_rawLikelihoods.g.vcf \</span>
+<span id="cb19-34"><a href="#cb19-34"></a>                                                  -V /opt/Offspring241_rawLikelihoods.g.vcf \</span>
+<span id="cb19-35"><a href="#cb19-35"></a>                                                  -V /opt/Offspring172_rawLikelihoods.g.vcf</span>
+<span id="cb19-36"><a href="#cb19-36"></a></span>
+<span id="cb19-37"><a href="#cb19-37"></a><span class="fu">tar</span> -cf ~<span class="dt">{path_gatkDatabase}</span>.tar ~<span class="dt">{path_gatkDatabase}</span></span>
+<span id="cb19-38"><a href="#cb19-38"></a></span>
+<span id="cb19-39"><a href="#cb19-39"></a><span class="ex">docker</span> run -it -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt taniguti/gatk-picard /gatk/gatk GenotypeGVCFs \</span>
+<span id="cb19-40"><a href="#cb19-40"></a>                                                   -R /opt/subset_genome.fa \</span>
+<span id="cb19-41"><a href="#cb19-41"></a>                                                   -O /opt/gatk.vcf.gz \</span>
+<span id="cb19-42"><a href="#cb19-42"></a>                                                   -G StandardAnnotation \</span>
+<span id="cb19-43"><a href="#cb19-43"></a>                                                   -V gendb:///opt/my_database</span>
+<span id="cb19-44"><a href="#cb19-44"></a>                                                   </span>
+<span id="cb19-45"><a href="#cb19-45"></a><span class="fu">mkdir</span> gatk</span>
+<span id="cb19-46"><a href="#cb19-46"></a><span class="fu">mv</span> gatk.vcf* gatk</span></code></pre></div>
 <p>Now we have VCF files for STACKs, FreeBayes and GATK. We can not make comparisons about its performances because we only run a subset, but we can compare the information format outputted by each one.</p>
 </div>
 <div id="running-bigger-datasets" class="section level1">
