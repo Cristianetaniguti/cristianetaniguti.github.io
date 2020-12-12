@@ -8,7 +8,7 @@ description: Videos explaining didactically genetics, statistics, and plant bree
 
 This video was shown in the 1º Graduation Meeting of the University of São Paulo "Elas fazem ciência"  on November 18, 2020.
 
-Acess [here](https://www.youtube.com/watch?v=ChhAz-_ZrmY]. English subtitles available.
+Acess [here](https://www.youtube.com/watch?v=ChhAz-_ZrmY). English subtitles available.
 
 * Português
 
