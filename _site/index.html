@@ -1,387 +1,669 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Didatic materials about R programming and Statistical Genetics</title>
-	
-	<meta name="author" content="Cris">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Favicon code from realfavicongenerator.net -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#8b51a3">
+<meta name="msapplication-TileColor" content="#563d7c">
+<meta name="theme-color" content="#ffffff">
 
-	<!-- Enable responsive viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--jQuery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+  <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 
-	<!-- Le styles -->
-	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
-	<link href="/assets/css/style.css" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css">
 
-	<!-- Le fav and touch icons -->
-	<!-- Update these with your own images
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-	-->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Portfolio | Cris Taniguti</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Portfolio" />
+<meta name="author" content="Cris Taniguti" />
+<meta property="og:locale" content="en_GB" />
+<meta name="description" content="Personal portfolio" />
+<meta property="og:description" content="Personal portfolio" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="Cris Taniguti" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Portfolio" />
+<meta name="twitter:site" content="@chtaniguti" />
+<meta name="twitter:creator" content="@Cris Taniguti" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Cris Taniguti"},"description":"Personal portfolio","headline":"Portfolio","name":"Cris Taniguti","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/img/smile.png"},"name":"Cris Taniguti"},"sameAs":["https://twitter.com/chtaniguti","https://github.com/Cristianetaniguti"],"url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
 
-	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
 </head>
-
+<!--jQuery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <body>
-	<nav class="navbar navbar-default visible-xs" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			
-			<a type="button" class="navbar-toggle nav-link" href="http://github.com/cristianetaniguti">
-				<i class="fa fa-github"></i>
-			</a>
-			
-			
-			
-			<a class="navbar-brand" href="/">
-				<img src="//www.gravatar.com/avatar/e00ead714ecee104d2b1fea40b7bf167?s=35" class="img-circle" />
-				Cristiane Taniguti
-			</a>
-		</div>
+  <div class="container">
+    
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="/categoris.html">Categories</a></li>
-				<li><a href="/tags.html">Tags</a></li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</nav>
-
-	<!-- nav-menu-dropdown -->
-	<div class="btn-group hidden-xs" id="nav-menu">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			<i class="fa fa-bars"></i>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-			<li><a href="/categoris.html"><i class="fa fa-folder"></i>Categories</a></li>
-			<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
-			<li class="divider"></li>
-			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
-		</ul>
-	</div>
-
-	<div class="col-sm-3 sidebar hidden-xs" style="">
-		<!-- sidebar.html -->
-<header class="sidebar-header" role="banner">
-	<a href="/">
-		<img src="//www.gravatar.com/avatar/e00ead714ecee104d2b1fea40b7bf167?s=150" class="img-circle" />
-	</a>
-	<h3 class="title">
-        <a href="/">Cristiane Taniguti</a>
-    </h3>
-</header>
+<section id="header-nav">
+  <header>
+    <nav>
+      <ul>
+        
+        <li class="current">Home</li>
+        
+          <a href="/publications">
+            <li class="btn-nav">Publications</li>
+          </a>
+        
+        
+          <a href="/presentations">
+            <li class="btn-nav">Presentations</li>
+          </a>
+        
+        
+          <a href="/blog">
+            <li class="btn-nav">Blog</li>
+          </a>
+          <a href="/tags">
+            <li class="btn-nav">Tags</li>
+          </a>
+        
+        <!-- publications -->
+        
+      </ul>
+    </nav>
+  </header>
+</section>
 
 
-<div id="bio" class="text-center">
-	Here are some materials (mostly in Portuguese) that I and other students of ESALQ(USP) produced to use in courses or classes. Access more information <a href="aboutme.html">About me</a>.
+
+
+</div><!-- This Tag means End .container -->
+<div id="portfolio">
+  <section id="about-me">
+    <div class="row">
+      <div class="img-wrap col-12 col-md-4">
+        <div class="img">
+          <img src="/assets/img/profile_pic.jpg" alt="user_image">
+        </div>
+      </div>
+      <div class="text-wrap col-12 col-md-8">
+        <h2 class="username">Cris Taniguti (she/her)</h2>
+        <div class="description"><p>Hello! Welcome to my personal webpage! I´m a Ph.D in Genetics in Plant Breeding. My research has focus in statistical genetics, computational biology and polyploid species. Here, I present my blog and a overview of my profissional profile. Feel free to contact me for more information.</p>
+</div>
+
+        <ul id="icons">
+          
+
+<li>
+  <a href="mailto:%63%68%74%61%6E%69%67%75%74%69@%74%61%6D%75.%65%64%75" target="_blank" title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</li>
+
+
+
+<li>
+  <a href="https://orcid.org/https://orcid.org/0000-0002-2021-6883" target="_blank" title="ORCID">
+    <i class="ai ai-orcid"></i>
+  </a>
+</li>
+
+
+
+<li>
+  <a href="https://scholar.google.com/citations?user=https://scholar.google.com/citations?user=Z4vaXQkAAAAJ&hl=en" target="_blank" title="Google Scholar">
+    <i class="ai ai-google-scholar"></i>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/cristiane-taniguti-530a1743/" target="_blank" title="Linkedin">
+    <i class="fab fa-linkedin"></i>
+  </a>
+</li>
+
+
+
+<li>
+  <a href="https://github.com/https://github.com/Cristianetaniguti" target="_blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://twitter.com/chtaniguti" target="_blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</li>
+
+
+
+<li>
+  <a href="https://www.youtube.com/user/https://www.youtube.com/channel/UCSNcsTSUzav4yHMmar-Lzkg" target="_blank" title="YouTube">
+    <i class="fab fa-youtube"></i>
+  </a>
+</li>
+
+
+
+
+
+        </ul>
+      </div>
+    </div>
+    <div class="bg"></div>
+  </section>
+  <!-- career section -->
+  <section id="career" class="row">
+    <article class="exper col-12 col-md-6">
+      
+  <p class="title">EXPERIENCE</p>
+  <ul class="exper-list">
+    
+    <li class="meta">
+      <p class="date">2021-07 &ndash; current</p>
+      <p class="description">Postdoctoral Research Associate, Texas A&M University - Department of Horticultural Sciences</p>
+    </li>
+    
+    <li class="meta">
+      <p class="date">2014-01 &ndash; 2014-07</p>
+      <p class="description">Intern, Sugarcane Technology Center (CTC)</p>
+    </li>
+    
+    <li class="meta">
+      <p class="date">2012-04 &ndash; 2012-07</p>
+      <p class="description">Summer student, McGill University (McGill)</p>
+    </li>
+    
+    <li class="meta">
+      <p class="date">2009-07 &ndash; 2010-02</p>
+      <p class="description">Technical training, Accert! Chemistry and Biotechnology</p>
+    </li>
+    
+  </ul>
+
+      
+  <p class="title">Education</p>
+  <ul class="exper-list">
+    
+    <li class="meta">
+      <p class="date">2017-03 &ndash; 2021-04</p>
+      <p class="description">Ph.D in Genetics and Plant Breeding, University of São Paulo - ESALQ/USP</p>
+    </li>
+    
+    <li class="meta">
+      <p class="date">2015-03 &ndash; 2017-01</p>
+      <p class="description">Master Degree in Genetics and Plant Breeding, University of São Paulo - ESALQ/USP</p>
+    </li>
+    
+    <li class="meta">
+      <p class="date">2009-02 &ndash; 2017-01</p>
+      <p class="description">Bachelor´s Degree in Genetics and Plant Breeding, Federal University of São Carlos - UFSCar</p>
+    </li>
+    
+  </ul>
+
+
+      
+  <p class="title">AWARDS</p>
+  <ul class="awards-list">
+    
+    <li class="award">Market Ready Prize - Cornell Institute Digital Agriculture Hackathon 2021</li>
+    
+    <li class="award">WikiProject Computational Biology/ISCB award 2018 - International Society for Computational Biology (ISCB) and WikiProject Computational Biology</li>
+    
+    <li class="award">Best Poster Award - Brazilian Association for Bioinformatics and Computational Biology</li>
+    
+  </ul>
+
+      <br>
+      <br>
+      <ul>
+      <li><a style="color:purple" href="https://cristianetaniguti.github.io/CV/short_public.pdf"> Download CV (short version) </a></li>
+      <li><a style="color:purple" href="https://cristianetaniguti.github.io/CV/cv_full_public.pdf"> Download CV (full version) </a></li>
+      </ul>
+    </article>
+    <article class="skills col-12 col-md-6">
+      
+  <p class="title">RESEARCH INTERESTS</p>
+  <ul class="interests-list">
+    
+    <li class="interest">Statistical Genetics</li>
+    
+    <li class="interest">Computational biology</li>
+    
+    <li class="interest">High-throughput sequencing</li>
+    
+    <li class="interest">Haplotyping</li>
+    
+    <li class="interest">Phenotype and genotype association studies (QTL, GWAS, GS)</li>
+    
+    <li class="interest">Data visualization</li>
+    
+    <li class="interest">Polyploid species</li>
+    
+  </ul>
+
+      
+  <p class="title">SKILLS</p>
+  <ul class="skill-list">
+    
+    <li class="skill">
+      <p class="name">R</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 95%">
+          <div class="progress-value">95%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Git</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 95%">
+          <div class="progress-value">95%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Shiny</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 90%">
+          <div class="progress-value">90%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Unix|Linux</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 90%">
+          <div class="progress-value">90%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Latex</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 90%">
+          <div class="progress-value">90%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Bash</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 85%">
+          <div class="progress-value">85%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Workflow Description Language (WDL)</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 85%">
+          <div class="progress-value">85%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Docker</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%">
+          <div class="progress-value">80%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Emacs</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%">
+          <div class="progress-value">80%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Inkscape</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%">
+          <div class="progress-value">80%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">HTML & CSS</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 65%">
+          <div class="progress-value">65%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Rcpp</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 40%">
+          <div class="progress-value">40%</div>
+        </div>
+      </div>
+    </li>
+    
+    <li class="skill">
+      <p class="name">Python</p>
+      <div class="progress">
+        <div class="progress-bar" style="width: 40%">
+          <div class="progress-value">40%</div>
+        </div>
+      </div>
+    </li>
+    
+  </ul>
+
+    </article>
+  </section>
+
+  <section id="project">
+  <div class="project-wrap">
+    <p class="title">R PACKAGES</p>
+    <div class="card-container">
+      
+      
+      
+      <div class="card-wrapper">
+        <div class="card">
+          
+          <div class="img-wrap">
+            <img src="/assets/project/onemap_logo.png" alt="OneMap logo">
+          </div>
+          
+          <div class="text-wrap ">
+            <div class="title-wrap">
+              <p class="date">2017 &ndash; Developing</p>
+              <div class="title">OneMap</div>
+            </div>
+            <div class="meta">
+              
+            </div>
+            <div class="description">Analysis of molecular marker data from model (backcrosses, F2 and recombinant inbred lines) and non-model systems (i. e. outcrossing species)</div>
+          </div>
+          <div class="icons">
+            
+            
+            <a href="https://github.com/Cristianetaniguti/onemap"><i class="far fa-eye"></i></a>
+            
+            
+            <a title="1" onClick="open_modal(this.title)" class="modal-btn"><i class="fas fa-plus"></i></a>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Modal Box -->
+      
+      <div id="1" class="modal">
+  <div class="modal-background" onClick="close_modal()"></div>
+  <div class="modal-content">
+    <div class="close-modal" onClick="close_modal()">
+      <p>&times;</p>
+    </div>
+    <div class="header">
+      <p class="date">2017 &ndash; Developing</p>
+      <p class="title">OneMap</p>
+      <p class="summary">Linkage maps in diploid outcrossing species</p>
+    </div>
+    <div class="content">
+      
+        <img src="/assets/project/onemap_logo.png" alt="OneMap logo">
+      
+      <div class="description">Analysis of molecular marker data from model (backcrosses, F2 and recombinant inbred lines) and non-model systems (i. e. outcrossing species)</div>
+      
+      <div class="sub-content">
+        <div class="title">1. Didactic vignettes</div>
+        
+          <img src="/assets/project/onemap_vignette.png" alt="A screenshot of the vignette page">
+        
+        <div class="description"><li><a style="color:blue" href="https://statgen-esalq.github.io/tutorials/onemap/Outcrossing_Populations.html">How to build a linkage map for outcrossing populations</a></li> <li><a style="color:blue" href="https://statgen-esalq.github.io/tutorials/onemap/Inbred_Based_Populations.html">How to build a linkage map for inbred-bases populations (F2, RIL and BC)</a></li></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">2. Input data</div>
+        
+        <div class="description"><li>MAPMAKER format</li> <li>OneMap format</li> <li>VCF format</li></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">3. Map quality diagnostic graphics</div>
+        
+          <img src="/assets/project/onemap_heatmap.png" alt="A screenshot of the vignette page">
+        
+        <div class="description"></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">4. Parents and progeny haplotyping</div>
+        
+          <img src="/assets/project/onemap_haplotype.png" alt="A screenshot of the vignette page">
+        
+        <div class="description"></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+      
+      <!-- Modal Box -->
+      
+      
+      
+      <div class="card-wrapper">
+        <div class="card">
+          
+          <div class="img-wrap">
+            <img src="/assets/project/viewpoly_logo.png" alt="VIEWpoly logo">
+          </div>
+          
+          <div class="text-wrap ">
+            <div class="title-wrap">
+              <p class="date">2022 &ndash; Developing</p>
+              <div class="title">VIEWpoly</div>
+            </div>
+            <div class="meta">
+              
+            </div>
+            <div class="description">Provides a graphical user interface to integrate, visualize and explore results from linkage and quantitative trait loci analysis, together with genomic information for autopolyploid species.</div>
+          </div>
+          <div class="icons">
+            
+            
+            <a href="https://github.com/mmollina/viewpoly"><i class="far fa-eye"></i></a>
+            
+            
+            <a title="2" onClick="open_modal(this.title)" class="modal-btn"><i class="fas fa-plus"></i></a>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Modal Box -->
+      
+      <div id="2" class="modal">
+  <div class="modal-background" onClick="close_modal()"></div>
+  <div class="modal-content">
+    <div class="close-modal" onClick="close_modal()">
+      <p>&times;</p>
+    </div>
+    <div class="header">
+      <p class="date">2022 &ndash; Developing</p>
+      <p class="title">VIEWpoly</p>
+      <p class="summary">A Shiny App to Visualize Genetic Maps and QTL Analysis in Polyploid Species</p>
+    </div>
+    <div class="content">
+      
+        <img src="/assets/project/viewpoly_logo.png" alt="VIEWpoly logo">
+      
+      <div class="description">Provides a graphical user interface to integrate, visualize and explore results from linkage and quantitative trait loci analysis, together with genomic information for autopolyploid species.</div>
+      
+      <div class="sub-content">
+        <div class="title">1. Didactic tutorials</div>
+        
+          <img src="/assets/project/viewpoly_video.png" alt="A screenshot of the viewpoly video">
+        
+        <div class="description"><li><a style="color:blue" href="https://www.youtube.com/watch?v=OBt_jebhfeY">Tutorial video</a></li> <li><a style="color:blue" href="https://cristianetaniguti.github.io/viewpoly_vignettes/VIEWpoly_tutorial.html">Tutorial</a></li> <li><a style="color:blue" href="https://cristianetaniguti.github.io/viewpoly_vignettes/Contributing_guidelines.html">Contributing Guidelines</a></li></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">2. Input data</div>
+        
+          <img src="/assets/project/viewpoly_inputs.png" alt="A screenshot of the viewpoly app">
+        
+        <div class="description"><li>MAPpoly output</li> <li>polymapR output</li> <li>polyqtlR output</li> <li>QTLpoly output</li> <li>diaQTL output</li> <li>CSV and TSV standard formats</li> <li>GFF3 annonation file</li> <li>FASTA reference genome</li></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">3. QTL analysis graphics</div>
+        
+          <img src="/assets/project/viewpoly_qtl.png" alt="A screenshot of the app page">
+        
+        <div class="description"></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">4. Haplotype selection</div>
+        
+          <img src="/assets/project/viewpoly_haplo.png" alt="A screenshot of the app pag">
+        
+        <div class="description"></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">5. Integrate QTL and genomic information</div>
+        
+          <img src="/assets/project/viewpoly_geno.png" alt="A screenshot of the app page">
+        
+        <div class="description"></div>
+      </div>
+      
+      <div class="sub-content">
+        <div class="title">6. Linkage map graphics and tabs</div>
+        
+          <img src="/assets/project/viewpoly_map.png" alt="A screenshot of the app page">
+        
+        <div class="description"></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+      
+      <!-- Modal Box -->
+      
+    </div>
+  </div>
+  <div class="bg"></div>
+</section>
+
+<!-- modal -->
+<script type="text/javascript" src="/assets/js/modal.js"></script>
+
+
+  <section id="recentpubs">
+  <div class="recentpubs-wrap">
+    <p class="title">RECENT PUBLICATIONS</p>
+    [<a class="btn" href="/publications" title="Publications">All Publications</a>]
+    <ol class="bibliography"><li><!-- Entry bib key -->
+<div id="Taniguti2022">
+  
+  <!-- Title -->
+  <div class="title">VIEWpoly - a visualization tool to integrate and explore results of polyploid genetic analysis</div>
+  <!-- Author -->
+  <div class="author">Taniguti, Cristiane Hayumi,&nbsp;Siqueira Gesteira, Gabriel,&nbsp;Lau, Jeekin,&nbsp;Silva Pereira, Guilherme,&nbsp;Zeng, Zhao-Bang,&nbsp;Byrne, David,&nbsp;Riera-Lizarazu, Oscar,&nbsp;and Mollinari, Marcelo
+  </div>
+
+  <!-- Journal/Book title and date -->
+  
+  <div class="third-line">
+    Journal of Open Source Software, vol. 7, pp. 4242, Jun, 2022
+  </div>
+</div></li>
+<li><!-- Entry bib key -->
+<div id="Raverdy2022">
+  
+  <!-- Title -->
+  <div class="title">Linkage Mapping of Biomass Production and Composition Traits in a Miscanthus sinensis Population</div>
+  <!-- Author -->
+  <div class="author">Raverdy, Raphaël,&nbsp;Lourgant, Kristelle,&nbsp;Mignot, Emilie,&nbsp;Arnoult, Stéphanie,&nbsp;Bodineau, Guillaume,&nbsp;Griveau, Yves,&nbsp;Taniguti, Cristiane H.,&nbsp;and Brancourt-Hulmel, Maryse
+  </div>
+
+  <!-- Journal/Book title and date -->
+  
+  <div class="third-line">
+    Bioenergy Research, vol. 15, pp. 755-776, Jun, 2022
+  </div>
+</div></li>
+<li><!-- Entry bib key -->
+<div id="Almeida2021">
+  
+  <!-- Title -->
+  <div class="title">Angular Leaf Spot Resistance Loci Associated With Different Plant Growth Stages in Common Bean</div>
+  <!-- Author -->
+  <div class="author">Almeida, Caléo Panhoca,&nbsp;Carvalho Paulino, Jean Fausto,&nbsp;Bonfante, Gabriel Francesco Janini,&nbsp;Perseguini, Juliana Morini Kupper Cardoso,&nbsp;Santos, Isabella Laporte,&nbsp;Gonçalves, João Guilherme Ribeiro,&nbsp;Patrício, Flávia Rodrigues Alves,&nbsp;Taniguti, Cristiane Hayumi,&nbsp;Siqueira Gesteira, Gabriel,&nbsp;Garcia, Antônio Augusto Franco,&nbsp;Song, Qijian,&nbsp;Carbonell, Sérgio Augusto Morais,&nbsp;Chiorato, Alisson Fernando,&nbsp;and Benchimol-Reis, Luciana Lasry
+  </div>
+
+  <!-- Journal/Book title and date -->
+  
+  <div class="third-line">
+    Frontiers in Plant Science, vol. 12, Apr, 2021
+  </div>
+</div></li></ol>
+  </div>
+</section>
 </div>
 
 
-<div id="contact-list" class="text-center">
-	<ul class="list-unstyled list-inline">
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="https://github.com/cristianetaniguti">
-				<i class="fa fa-github-alt fa-lg"></i>
-			</a>
-		</li>
-		
-		
-		
-	</ul>
-	<ul id="contact-list-secondary" class="list-unstyled list-inline">
-		
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="https://linkedin.com/in/https://www.linkedin.com/in/cristiane-taniguti-530a1743/">
-				<i class="fa fa-linkedin fa-lg"></i>
-			</a>
-		</li>
-		
-		<li>
-			<a class="btn btn-default btn-sm" href="/feed.xml">
-				<i class="fa fa-rss fa-lg"></i>
-			</a>
-		</li>
-	</ul>
-</div>
-<!-- sidebar.html end -->
-
-	</div>
-
-	<div class="col-sm-9 col-sm-offset-3">
-		<div class="page-header">
-  <h1>Didatic materials about R programming and Statistical Genetics </h1>
-</div>
-
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    June
-    7th,
-    
-    2019
-  </span>
-
-  <h2>
-    <a href="/2019/06/07/Vignettes-atualizadas-do-OneMap.html">Vignettes atualizadas do OneMap</a>
-  </h2>
-
-  <div>
-    
-    
-    Versão chique do tutorial do OneMap contida no meu repositório do github
-    
-    
+<!-- Footer -->
+<footer>
+  <div class="footer">
+    Copyright © 2022
+    <a href=""></a>.
+    Powered by Jekyll with
+    <a href="https://github.com/chrjabs/Grape-Academic-Theme">Grape Academic Theme</a>.
   </div>
+</footer>
 
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    June
-    6th,
-    
-    2019
-  </span>
-
-  <h2>
-    <a href="/2019/06/06/OneMap-updated-vignettes.html">OneMap updated vignettes</a>
-  </h2>
-
-  <div>
-    
-    
-    Fancy version of OneMap tutorials from my github repository
-    
-    
   </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    December
-    15th,
-    
-    2018
-  </span>
-
-  <h2>
-    <a href="/2018/12/15/Grupo-GENt.html">Grupo GENt - Transportando Conhecimentos em Genética e Melhoramento de Plantas</a>
-  </h2>
-
-  <div>
-    
-    
-    Grupo de divulgação científica composto por alunos de pós-graduação do Programa de Genética e Melhoramento de Plantas
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    August
-    10th,
-    
-    2018
-  </span>
-
-  <h2>
-    <a href="/2018/08/10/V%C3%ADdeos-no-YouTube.html">Vídeos tutoriais no YouTube</a>
-  </h2>
-
-  <div>
-    
-    
-    Vídeos explicando didaticamente alguns temas de genética, estatística e melhoramento de plantas.
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    July
-    26th,
-    
-    2018
-  </span>
-
-  <h2>
-    <a href="/2018/07/26/Aula-Constru%C3%A7%C3%A3o-de-Mapas-Gen%C3%A9ticos,-Mapeamento-de-QTLs-e-Aplica%C3%A7%C3%B5es-no-Melhoramento-de-Plantas.html">Aula "Construção de Mapas Genéticos, Mapeamento de QTLs e Aplicações no Melhoramento de Plantas"</a>
-  </h2>
-
-  <div>
-    
-    
-    Material utilizado para aula no Instituto Agronômico de Campinas no dia 27 de julho de 2018.
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    March
-    8th,
-    
-    2018
-  </span>
-
-  <h2>
-    <a href="/2018/03/08/Algoritmos-Nossos-de-Cada-Dia.html">Algoritmos Nossos de Cada Dia</a>
-  </h2>
-
-  <div>
-    
-    
-    Texto de divulgação científica publicado no blog Ciência Informativa
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    November
-    20th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/2017/11/20/Informatica-na-Gen%C3%A9tica-LGN0215.html">Aula "Informática na Genética"</a>
-  </h2>
-
-  <div>
-    
-    
-    Material utilizado na aula prática do dia 23 de novembro de 2017 da disciplina de Genética (LGN0215) da graduação da ESALQ.
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    July
-    17th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/2017/07/17/Minicurso.html">Minicursos de Introdução ao R</a>
-  </h2>
-
-  <div>
-    
-    
-    Material utilizado nos minicursos de Introdução ao R do Workshop de Férias de Genética e Melhoramento de Plantas
-    
-    
-  </div>
-
-</article>
-
-<hr/>
-
-<ul class="pager"> 
-
-  
-  <li class="previous disabled">
-    <a>&larr; Newer</a>
-  </li>
-  
-  
-  <li>
-    <span class="page_number">Page: 1 of 1</span>
-  </li>
-
-  
-  <li class="next disabled">
-    <a>Older &rarr;</a>        
-  </li>
-  
-
-</ul>
-
-
-
-
-		<footer>
-			<hr/>
-			<p>
-				&copy; 2019 Cris with <a href="http://jekyllrb.com/">Jekyll</a>. Theme: <a href="https://github.com/dbtek/dbyll">dbyll</a> by dbtek.
-			</p>
-		</footer>
-	</div>
-
-	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/assets/js/app.js"></script>
 </body>
+
 </html>
-
-
-
-<!-- Asynchronous Google Analytics snippet -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-129436760-1', 'auto');
-  ga('send', 'pageview');
-</script>
-

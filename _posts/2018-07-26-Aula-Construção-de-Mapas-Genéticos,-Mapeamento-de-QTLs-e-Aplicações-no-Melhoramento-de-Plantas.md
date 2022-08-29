@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Aula "Construção de Mapas Genéticos, Mapeamento de QTLs e Aplicações no Melhoramento de Plantas"
-description: Material utilizado para aula no Instituto Agronômico de Campinas no dia 27 de julho de 2018.
+title: Talk "Genetic maps building, QTL mapping and applications in Genetics and Plant Breeding"
+subtitle: Slides of a talk in the discipline "Molecular Biology Applied to Plant Breeding" for graduate students of Agronomic Institute of Campinas (IAC)" in July 2018 (in Portuguese).
+tags: [graduate class, QTL, linkage map]
 ---
 
 O material é baseado em aulas da disciplina [Biometria de marcadores genéticos](http://augustogarcia.me/Biometria-de-Marcadores/), ministrada pelo professor Antonio Augusto Franco Garcia.

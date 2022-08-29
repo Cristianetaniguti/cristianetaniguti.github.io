@@ -1,0 +1,498 @@
+---
+title: "F2 adaptations to dominant markers"
+date: "`r Sys.Date()`"
+author: "[Statistical Genetics Lab](http://statgen.esalq.usp.br) <br/> Department of Genetics <br/> Luiz de Queiroz College of Agriculture <br/> University of São Paulo"
+output:
+    rmdformats::readthedown:
+      css: ../readthedownstatgen.css
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+
+opts_knit$set(width=75)
+```
+
+One big update needed to be done to OneMap proper deal with dominant markers in F2 population. The modification was apply phase estimation also to F2 populations using the same background algorithms used for outcrossing species. This modification was needed to estimate the correct phase between dominant and codominant markers and also to distinguish phase between the heterozygotes progeny in codominant markers. In this new version, we want to provide to users progeny haplotypes, and for that, it's important to distinguish phase also in heterozygotes. 
+
+**Warning**: Because all the modifications, users can find differences in estimations for this type of populations between this and older versions of OneMap.
+
+Here we perform some simulations to show this differences and the need for updates. Two scenarios will be simulated, one with only codominant markers and other with codominant and dominant markers. The maps are composed by three metacentric chromosomes with 100 cM and a population size of 200 individuals. And:
+
+* Scenario 1: 150 codominant (A.H.B) markers, 50 per chromosome and no missing data
+* Scenario 2: 50 codominant (A.H.B), 50 D.B markers and 50 C.A markers, 50 markers per chromosome and no missing data
+
+Both scenarios will be evaluated by old and new approach.
+
+# Scenario 1
+
+## Simulation
+
+```{r, eval=FALSE}
+run_pedsim(chromosome = c("Chr1", "Chr02", "Chr03"), n.marker = c(50,50,50), 
+           tot.size.cm = c(100,100,100), centromere = c(50, 50, 50),
+           n.ind = 200, mk.types = c("A.H.B"), 
+           n.types = c(150), pop = "F2", path.pedsim = "~/onemap/",
+           name.mapfile = "mapfile.map", name.founderfile="founderfile.gen",
+           name.chromfile="sim.chrom", name.parfile="sim.par",
+           name.out="sim_cod_F2")
+```
+
+```{r, eval=FALSE}
+pedsim2raw(cross="f2 intercross", genofile = "sim_cod_F2_genotypes.dat", 
+           parent1 = "P1", parent2 = "P2", f1 = "F1", 
+           out.file = "sim_cod_F2.raw", miss.perc = 0)
+```
+
+## New approach
+
+```{r, eval=FALSE}
+dataset <- read_onemap("sim_cod_F2.raw")
+
+twopts <- rf_2pts(dataset)
+seq1 <- make_seq(twopts, "all")
+lod_sug <- suggest_lod(dataset)
+lgs <- group(seq1, LOD= lod_sug) # Groups is correct
+
+lg1 <- make_seq(lgs,1)
+# Distance estimation
+time <- system.time(map1 <- map(lg1)) # time spent 25.781 sec
+```
+
+```
+Printing map:
+
+Markers           Position           Parent 1       Parent 2
+
+ 1 M001               0.00           a |  | b       a |  | b 
+ 2 M002               2.54           a |  | b       a |  | b 
+ 3 M003               4.82           a |  | b       a |  | b 
+ 4 M004               7.61           a |  | b       a |  | b 
+ 5 M005               8.11           a |  | b       a |  | b 
+ 6 M006              10.39           a |  | b       a |  | b 
+ 7 M007              11.65           a |  | b       a |  | b 
+ 8 M008              12.91           a |  | b       a |  | b 
+ 9 M009              13.66           a |  | b       a |  | b 
+10 M010              16.20           a |  | b       a |  | b 
+11 M011              17.96           a |  | b       a |  | b 
+12 M012              19.73           a |  | b       a |  | b 
+13 M013              21.75           a |  | b       a |  | b 
+14 M014              23.00           a |  | b       a |  | b 
+15 M015              24.01           a |  | b       a |  | b 
+16 M016              26.03           a |  | b       a |  | b 
+17 M017              27.29           a |  | b       a |  | b 
+18 M018              29.31           a |  | b       a |  | b 
+19 M019              31.59           a |  | b       a |  | b 
+20 M020              33.36           a |  | b       a |  | b 
+21 M021              34.36           a |  | b       a |  | b 
+22 M022              35.12           a |  | b       a |  | b 
+23 M023              37.39           a |  | b       a |  | b 
+24 M024              39.42           a |  | b       a |  | b 
+25 M025              42.46           a |  | b       a |  | b 
+26 M026              43.72           a |  | b       a |  | b 
+27 M027              46.26           a |  | b       a |  | b 
+28 M028              47.51           a |  | b       a |  | b 
+29 M029              48.77           a |  | b       a |  | b 
+30 M030              49.78           a |  | b       a |  | b 
+31 M031              52.05           a |  | b       a |  | b 
+32 M032              54.33           a |  | b       a |  | b 
+33 M033              56.35           a |  | b       a |  | b 
+34 M034              57.35           a |  | b       a |  | b 
+35 M035              59.37           a |  | b       a |  | b 
+36 M036              60.88           a |  | b       a |  | b 
+37 M037              62.90           a |  | b       a |  | b 
+38 M038              65.18           a |  | b       a |  | b 
+39 M039              66.70           a |  | b       a |  | b 
+40 M040              69.75           a |  | b       a |  | b 
+41 M041              71.01           a |  | b       a |  | b 
+42 M042              73.54           a |  | b       a |  | b 
+43 M043              74.30           a |  | b       a |  | b 
+44 M044              76.57           a |  | b       a |  | b 
+45 M045              78.34           a |  | b       a |  | b 
+46 M046              80.61           a |  | b       a |  | b 
+47 M047              82.13           a |  | b       a |  | b 
+48 M048              84.66           a |  | b       a |  | b 
+49 M049              87.20           a |  | b       a |  | b 
+50 M050              89.48           a |  | b       a |  | b 
+
+50 markers            log-likelihood: -1829.113 
+```
+
+```{r, eval=FALSE}
+# Ordering
+ug1 <- ug(lg1)
+rcd1 <- rcd(lg1)
+seriation1 <- seriation(lg1)
+record1 <- record(lg1)
+mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
+
+p_ug_cod1 <- rf_graph_table(ug1)
+p_rcd_cod1 <- rf_graph_table(rcd1)
+p_ser_cod1 <- rf_graph_table(seriation1)
+p_rec_cod1 <- rf_graph_table(record1)
+p_mds_cod1 <- rf_graph_table(mds1)
+p_map_cod1 <- rf_graph_table(map1)
+p_order_cod1 <- rf_graph_table(order1)
+
+save.image(file = "sim_cod_new2.RData")
+```
+
+## Old approach
+
+```{r, eval=FALSE}
+dataset <- read_onemap(inputfile = "sim_cod_F2.raw")
+
+twopts <- rf_2pts(dataset)
+seq1 <- make_seq(twopts, "all")
+lod_sug <- suggest_lod(dataset)
+lgs <- group(seq1, LOD= lod_sug) # Group is correct
+
+lg1 <- make_seq(lgs,1)
+# Distance estimation
+time <- system.time(map1 <- map(lg1)) # time 0.015 sec
+```
+
+```
+Printing map:
+
+Markers           Position           
+
+ 1 M001               0.00           
+ 2 M002               2.54           
+ 3 M003               4.82           
+ 4 M004               7.61           
+ 5 M005               8.11           
+ 6 M006              10.39           
+ 7 M007              11.65           
+ 8 M008              12.91           
+ 9 M009              13.66           
+10 M010              16.20           
+11 M011              17.96           
+12 M012              19.73           
+13 M013              21.75           
+14 M014              23.00           
+15 M015              24.01           
+16 M016              26.03           
+17 M017              27.29           
+18 M018              29.31           
+19 M019              31.59           
+20 M020              33.36           
+21 M021              34.36           
+22 M022              35.12           
+23 M023              37.39           
+24 M024              39.42           
+25 M025              42.46           
+26 M026              43.72           
+27 M027              46.26           
+28 M028              47.51           
+29 M029              48.77           
+30 M030              49.78           
+31 M031              52.05           
+32 M032              54.33           
+33 M033              56.35           
+34 M034              57.35           
+35 M035              59.37           
+36 M036              60.88           
+37 M037              62.90           
+38 M038              65.18           
+39 M039              66.70           
+40 M040              69.75           
+41 M041              71.01           
+42 M042              73.54           
+43 M043              74.30           
+44 M044              76.57           
+45 M045              78.34           
+46 M046              80.61           
+47 M047              82.13           
+48 M048              84.66           
+49 M049              87.20           
+50 M050              89.48           
+
+ 50 markers            log-likelihood: -1829.113 
+```
+
+```{r, eval=FALSE}
+# Ordering
+ug1 <- ug(lg1)
+rcd1 <- rcd(lg1)
+seriation1 <- seriation(lg1)
+record1 <- record(lg1)
+mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
+
+p_ug_cod_old1 <- rf_graph_table(ug1)
+p_rcd_cod_old1 <- rf_graph_table(rcd1)
+p_ser_cod_old1 <- rf_graph_table(seriation1)
+p_rec_cod_old1 <- rf_graph_table(record1)
+p_mds_cod_old1 <- rf_graph_table(mds1)
+p_map_cod_old1 <- rf_graph_table(map1)
+p_order_cod_old1 <- rf_graph_table(order1)
+
+save.image(file = "sim_cod_old.RData")
+```
+
+# Scenario 2
+
+## Simulation
+
+```{r, eval=FALSE}
+run_pedsim(chromosome = c("Chr1", "Chr02", "Chr03"), n.marker = c(50,50,50), 
+           tot.size.cm = c(100,100,100), centromere = c(50, 50, 50),
+           n.ind = 200, mk.types = c("A.H.B", "C.A", "D.B"), 
+           n.types = c(50, 50, 50), pop = "F2", path.pedsim = "~/onemap/",
+           name.mapfile = "mapfile.map", name.founderfile="founderfile.gen",
+           name.chromfile="sim.chrom", name.parfile="sim.par",
+           name.out="sim_F2")
+```
+
+```{r, eval=FALSE}
+pedsim2raw(cross="f2 intercross", genofile = "sim_F2_genotypes.dat", 
+           parent1 = "P1", parent2 = "P2", f1 = "F1", 
+           out.file = "sim_F2.raw", miss.perc = 0)
+```
+
+## New approach
+
+```{r, eval=FALSE}
+dataset <- read_onemap(inputfile = "sim_F2.raw")
+
+twopts <- rf_2pts(dataset)
+seq1 <- make_seq(twopts, "all")
+lod_sug <- suggest_lod(dataset)
+lgs <- group(seq1, LOD= lod_sug) # Do not group correctly
+
+lg1 <- make_seq(twopts,1:50)
+# Distance estimation
+time <- system.time(map1 <- map(lg1)) # Time spent 125.072 sec or 2.08 min
+```
+
+```
+Printing map:
+
+Markers           Position           Parent 1       Parent 2
+
+ 1 M001               0.00           a |  | b       a |  | b 
+ 2 M002               4.09           o |  | o       a |  | o 
+ 3 M003               4.09           o |  | a       o |  | o 
+ 4 M004               8.60           a |  | b       a |  | b 
+ 5 M005              11.11           a |  | b       a |  | b 
+ 6 M006              12.42           a |  | o       o |  | o 
+ 7 M007              13.85           o |  | o       a |  | o 
+ 8 M008              15.95           o |  | a       o |  | o 
+ 9 M009              17.43           o |  | a       o |  | o 
+10 M010              21.26           o |  | o       a |  | o 
+11 M011              21.95           o |  | a       o |  | o 
+12 M012              23.44           o |  | a       o |  | o 
+13 M013              26.99           o |  | o       a |  | o 
+14 M014              28.51           a |  | b       a |  | b 
+15 M015              29.98           a |  | o       o |  | o 
+16 M016              31.62           o |  | o       a |  | o 
+17 M017              33.82           a |  | b       a |  | b 
+18 M018              35.40           a |  | o       o |  | o 
+19 M019              35.78           o |  | o       a |  | o 
+20 M020              39.70           o |  | a       o |  | o 
+21 M021              41.19           o |  | o       a |  | o 
+22 M022              44.06           o |  | a       o |  | o 
+23 M023              46.63           o |  | o       a |  | o 
+24 M024              48.74           o |  | o       a |  | o 
+25 M025              51.46           a |  | b       a |  | b 
+26 M026              53.47           a |  | b       a |  | b 
+27 M027              54.44           o |  | o       a |  | o 
+28 M028              55.65           o |  | a       o |  | o 
+29 M029              56.77           o |  | a       o |  | o 
+30 M030              59.01           o |  | a       o |  | o 
+31 M031              59.57           a |  | b       a |  | b 
+32 M032              60.32           o |  | o       a |  | o 
+33 M033              61.46           o |  | a       o |  | o 
+34 M034              63.36           a |  | b       a |  | b 
+35 M035              63.86           o |  | o       a |  | o 
+36 M036              64.34           o |  | o       a |  | o 
+37 M037              69.16           o |  | a       o |  | o 
+38 M038              69.18           o |  | o       o |  | a 
+39 M039              71.56           o |  | o       a |  | o 
+40 M040              73.47           a |  | b       a |  | b 
+41 M041              73.93           o |  | o       a |  | o 
+42 M042              76.23           a |  | b       a |  | b 
+43 M043              77.77           o |  | o       a |  | o 
+44 M044              82.34           o |  | a       o |  | o 
+45 M045              83.98           o |  | a       o |  | o 
+46 M046              85.23           o |  | o       a |  | o 
+47 M047              88.44           o |  | o       a |  | o 
+48 M048              90.38           a |  | b       a |  | b 
+49 M049              91.63           a |  | b       a |  | b 
+50 M050              93.68           a |  | o       o |  | o 
+
+50 markers            log-likelihood: -1837.146
+```
+
+```{r, eval=FALSE}
+# Ordering
+ug1 <- ug(lg1)
+rcd1 <- rcd(lg1)
+seriation1 <- seriation(lg1)
+record1 <- record(lg1)
+mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
+
+p_ug1 <- rf_graph_table(ug1)
+p_rcd1 <- rf_graph_table(rcd1)
+p_ser1 <- rf_graph_table(seriation1)
+p_rec1 <- rf_graph_table(record1)
+p_mds1 <- rf_graph_table(mds1)
+p_map1 <- rf_graph_table(map1)
+p_order1 <- rf_graph_table(order1)
+
+
+save.image(file = "sim_new.RData")
+```
+
+## Old approach
+
+```{r, eval=FALSE}
+dataset <- read_onemap(inputfile = "sim_F2.raw")
+
+twopts <- rf_2pts(dataset)
+seq1 <- make_seq(twopts, "all")
+lod_sug <- suggest_lod(dataset)
+lgs <- group(seq1, LOD= lod_sug) # Do not group correctly
+
+lg1 <- make_seq(twopts,1:50)
+# Distance estimation
+time <- system.time(map1 <- map(lg1)) # Time spent 2.150 sec
+```
+
+```
+Printing map:
+
+Markers           Position           
+
+ 1 M001               0.00           
+ 2 M002             402.95           
+ 3 M003             403.30           
+ 4 M004             806.25           
+ 5 M005             808.78           
+ 6 M006            1211.74           
+ 7 M007            1214.40           
+ 8 M008            1215.20           
+ 9 M009            1216.73           
+10 M010            1221.64           
+11 M011            1221.64           
+12 M012            1223.08           
+13 M013            1227.83           
+14 M014            1630.78           
+15 M015            2033.73           
+16 M016            2034.11           
+17 M017            2437.06           
+18 M018            2840.01           
+19 M019            2840.01           
+20 M020            2844.59           
+21 M021            2845.24           
+22 M022            2849.22           
+23 M023            2850.51           
+24 M024            2852.57           
+25 M025            3255.52           
+26 M026            3257.54           
+27 M027            3660.49           
+28 M028            3660.49           
+29 M029            3661.46           
+30 M030            3663.41           
+31 M031            4066.37           
+32 M032            4469.32           
+33 M033            4469.68           
+34 M034            4872.64           
+35 M035            5275.59           
+36 M036            5276.08           
+37 M037            5279.67           
+38 M038            5281.22           
+39 M039            5283.72           
+40 M040            5686.67           
+41 M041            6089.62           
+42 M042            6492.57           
+43 M043            6895.53           
+44 M044            6898.50           
+45 M045            6900.43           
+46 M046            6901.74           
+47 M047            6904.45           
+48 M048            7307.40           
+49 M049            7308.66           
+50 M050            7711.61           
+
+ 50 markers            log-likelihood: -4622.786 
+```
+
+```{r, eval=FALSE}
+# Ordering
+ug1 <- ug(lg1)
+rcd1 <- rcd(lg1)
+seriation1 <- seriation(lg1)
+record1 <- record(lg1)
+mds1 <- mds_onemap(lg1)
+order1 <- order_seq(lg1)
+order1 <- make_seq(order1, "force")
+
+p_ug_old1 <- rf_graph_table(ug1)
+p_rcd_old1 <- rf_graph_table(rcd1)
+p_ser_old1 <- rf_graph_table(seriation1)
+p_rec_old1 <- rf_graph_table(record1)
+p_mds_old1 <- rf_graph_table(mds1)
+p_map_old1 <- rf_graph_table(map1)
+p_order_old1 <- rf_graph_table(order1)
+
+save.image(file = "sim_old.RData")
+```
+
+# Ordering comparision
+
+
+```{r, message=FALSE, warning=FALSE}
+library(ggpubr)
+load("sim_cod_new.RData")
+load("sim_cod_old.RData")
+load("sim_new.RData")
+load("sim_old.RData")
+
+p <- ggarrange(p_ug_cod1, p_ug_cod_old1, p_ug1, p_ug_old1 , common.legend = TRUE,
+          labels = c("ug sce1 new", "ug sce1 old", "ug sce2 new", "ug sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+p <- ggarrange(p_rcd_cod1, p_rcd_cod_old1, p_rcd1, p_rcd_old1 , common.legend = TRUE,
+          labels = c("rcd sce1 new", "rcd sce1 old", "rcd sce2 new", "rcd sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+p <- ggarrange(p_rec_cod1, p_rec_cod_old1, p_rec1, p_rec_old1 , common.legend = TRUE,
+          labels = c("rec sce1 new", "rec sce1 old", "rec sce2 new", "rec sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+p <- ggarrange(p_order_cod1, p_order_cod_old1, p_order1, p_order_old1 , common.legend = TRUE,
+          labels = c("order sce1 new", "order sce1 old", "order sce2 new", "order sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+p <- ggarrange(p_mds_cod1, p_mds_cod_old1, p_mds1, p_mds_old1 , common.legend = TRUE,
+          labels = c("mds sce1 new", "mds sce1 old", "mds sce2 new", "mds sce2 old"), 
+          vjust = 0.3,
+          hjust= -1.5,
+          ncol=2, nrow=2)
+p
+
+```
+

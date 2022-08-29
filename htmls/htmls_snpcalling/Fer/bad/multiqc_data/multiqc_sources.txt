@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	18_S1_L001_R1_001	/home/cristiane/Bitbucket/zucchi_seminar/tutorial/htmls/Fer/bad/18_S1_L001_R1_001_fastqc.zip
+FastQC	all_sections	18_S1_L002_R2_001	/home/cristiane/Bitbucket/zucchi_seminar/tutorial/htmls/Fer/bad/18_S1_L002_R2_001_fastqc.zip
+FastQC	all_sections	18_S1_L001_R2_001	/home/cristiane/Bitbucket/zucchi_seminar/tutorial/htmls/Fer/bad/18_S1_L001_R2_001_fastqc.zip
+FastQC	all_sections	18_S1_L002_R1_001	/home/cristiane/Bitbucket/zucchi_seminar/tutorial/htmls/Fer/bad/18_S1_L002_R1_001_fastqc.zip

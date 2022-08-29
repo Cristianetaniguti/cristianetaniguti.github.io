@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Algoritmos Nossos de Cada Dia
-description: Texto de divulgação científica publicado no blog Ciência Informativa
+title: Blog text "Our Every Day Algorithms"
+subtitle: Scientific dissemination text published on the blog "Ciência Informativa" (in Portuguese).
+tags: [scientific dissemination]
 ---
 
 
