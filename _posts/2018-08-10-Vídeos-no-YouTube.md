@@ -1,7 +1,8 @@
 ---
 layout: post
 title: YouTube videos
-description: Videos explaining didactically genetics, statistics, and plant breeding subjects (in Portuguese). 
+subtitle: Videos explaining didactically genetics, statistics, and plant breeding subjects (in Portuguese).
+tags: [scientific dissemination, QTL, linkage map, GBS, data visualization, R]
 ---
 
 * English

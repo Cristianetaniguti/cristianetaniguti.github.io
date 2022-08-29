@@ -1,40 +1,71 @@
-# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+# Site Settings
 
-paginate: 10 # pagination based on number of posts
-paginate_path: "page:num"
-exclude: ["README.md"] # files to exclude
-highlighter: rouge
-markdown: kramdown
-disqus: 
-google_analytics: UA-129436760-1
-title: Cristiane Taniguti
+# Features Setting
+# Turn subpages on or off
+publications: True
+presentations: True
+blog: True
 
-defaults:
-  -
-    scope: 
-      path: "" # empty string for all files
-    values:
-      title: Didatic materials about R programming and Statistical Genetics 
+# Language of the website
+lang: en
 
-description: Some works made during my graduate in Genetics and Plant Breeding (ESALQ-USP).
-author:
-  name: Cris
-  email: chtaniguti@usp.br
-  github: cristianetaniguti
-  twitter: 
-  pinterest: 
-  linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
-  bio: Here are some materials (mostly in Portuguese) that I and other students of ESALQ(USP) produced to use in courses or classes. Access more information <a href="aboutme.html">About me</a>.
-  email_md5: e00ead714ecee104d2b1fea40b7bf167
+# Search engine optimization settings
+title: Cris Taniguti
+tagline: My personal website
+description: PhD in Genetics and Plant Breeding
+author: Cris Taniguti
+twitter:
+  username: chtaniguti
+logo: /assets/img/smile.png
+social:
+  name: Cris Taniguti
+  links:
+    - https://twitter.com/chtaniguti
+    - https://github.com/Cristianetaniguti
+locale: en_GB
 
-rss_path: feed.xml
-categories_path: categoris.html
-tags_path: tags.html
+# Page Settings
+theme_settings:
+  title: Grape Academic Theme
 
-# set it as url of an image
-# sidebar_background_image: profile1.jpeg
+  experience_title: EXPERIENCE
+  interests_title: RESEARCH INTERESTS
+  skills_title: SKILLS
+  awards_title: AWARDS
+  projects_title: R PACKAGES
+  recentpubs_title: RECENT PUBLICATIONS
 
-BASE_PATH:
+# Pagination
+paginate: 5
+paginate_path: "blog/page:num"
 
-gems:
-  - jekyll-paginate
+# Build Settings
+sass:
+  sass_dir: _sass
+  style: :compressed
+plugins: ['jekyll-paginate', 'jekyll/scholar', 'jekyll-seo-tag']
+bootstrap:
+  assets: true
+
+# Bibliography settings
+scholar:
+  bibliography: publications.bib
+  bibliography_template: pubstemplate
+  style: apa
+  locale: en
+  last_name: Me
+  first_name: [Myself, M.]
+  sort_by: year,month
+  order: descending,ascending
+
+filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, pdf, selected, supp, blog, code, poster, slides, website] # Filter out certain bibtex entry keywords used internally from the bib output
+
+academicons:
+  version: "1.9.1"
+  integrity: "sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg="
+fontawesome:
+  version: "5.15.4"
+  integrity: "sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4="
+jquery:
+  version: "3.6.0"
+  integrity: "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="

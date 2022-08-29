@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Courses - Introduction to R 
-description: Material used in Introduction to R courses taught in several events (in Portuguese)
+sutitle: Material used in Introduction to R courses taught in several events (in Portuguese)
+tags: [R]
 ---
 
 # English

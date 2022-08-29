@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Multiple Interval QTL Mapping
-description: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
+subtitle: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
+tags: [QTL]
 ---
 
 Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolador e Ms Jhonathan Pedroso.

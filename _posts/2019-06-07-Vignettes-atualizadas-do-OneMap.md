@@ -1,7 +1,8 @@
 ---
 layout: post
 title: OneMap updated vignettes
-description: Versão chique do tutorial do OneMap contida no meu repositório do github
+sutitle: Versão chique do tutorial do OneMap contida no meu repositório do github
+tags: [linkage map, OneMap]
 ---
 
 ## Português

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Blog text "Our Every Day Algorithms"
-description: Scientific dissemination text published on the blog "Ciência Informativa" (in Portuguese).
+subtitle: Scientific dissemination text published on the blog "Ciência Informativa" (in Portuguese).
+tags: [scientific dissemination]
 ---
 
 

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: SNP and genotype calling - A practical guide 
-description: (Under development) - This tutorial shows how to perform SNP calling in GBS data using Docker containers 
+sutitle: (Under development) - This tutorial shows how to perform SNP calling in GBS data using Docker containers
+tags: [bash, Docker, molecular markers, GBS]
 ---
 
 Here we use Docker containers to perform SNP calling with STACKs, Freebayes and GATK.

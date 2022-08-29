@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Genetic map build in OneMap
-description: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
+subtitle: Material developt during Genetic Markers Biometry discipline in ESALQ-USP (in Portuguese)
+tags: [linkage map, OneMap]
 ---
 
 Atividade desenvolvida por: Msa Cristiane Taniguti, Ms Fernando Correr, Ms Fernando Espolados e Ms Jhonathan Pedroso.
