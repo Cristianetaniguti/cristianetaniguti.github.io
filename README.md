@@ -1,6 +1,3 @@
-My github webpage
-=====
-
 # Cris Taniguti (she/her) personal website
 
 Hello! Welcome to my [personal webpage](https://cristianetaniguti.github.io/)! I´m a Ph.D in Genetics in Plant Breeding. My research has focus in statistical genetics, computational biology and polyploid species. Here, I present my blog and a overview of my profissional profile. Feel free to contact me for more information.
