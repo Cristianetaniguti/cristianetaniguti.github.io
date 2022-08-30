@@ -1,6 +1,6 @@
 image: assets/img/profile_pic.jpg
 username: Cris Taniguti (she/her)
-description: Hello! Welcome to my personal webpage! I´m a Ph.D in Genetics in Plant Breeding. My research has focus in statistical genetics, computational biology and polyploid species. Here, I present my blog and a overview of my profissional profile. Feel free to contact me for more information.
+description: Hello! Welcome to my personal webpage! I´m a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. Here, I present my blog and an overview of my professional profile. Feel free to contact me for more information.
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
   - start: 2021-07
