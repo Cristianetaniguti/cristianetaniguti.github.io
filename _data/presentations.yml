@@ -2,7 +2,7 @@
     title: SNP and Dosage calling
     event: GVENK workshop - Genetic data analysis in polyploids. From allelic dosage to QTL mapping
     date: 2022
-    slides: https:cristianetaniguti.github.io/presentations/snp_dosage_calling_gvenck08-2022.pdf # potential link to slides
+    slides: presentations/snp_dosage_calling_gvenck08-2022.pdf # potential link to slides
 - presentation:
     title: Reads2map - Practical and Reproducible Workflows to Build Linkage Maps from Sequencing Data at Tools for Polyploids Workshop
     event: Tools for Polyploids Workshop
@@ -12,7 +12,7 @@
     title: VIEWpoly - An Interactive Tool to Visualize, Explore and Integrate Genetic Maps and QTL analysis with Genomic Information 
     event: XXIX Plant & Animal Genome Conference
     date: 2022
-    slides: cristianetaniguti.github.io/presentations/VIEWpoly_PAG2022.pdf
+    slides: presentations/VIEWpoly_PAG2022.pdf
 - presentation:
     title: Poster presentation - Comparing genotype calling software performance in Genotyping-by-Sequencing data of outcrossing population based on genetic maps quality
     event: 30th Conference on Intelligent Systems for Molecular Biology
@@ -55,12 +55,12 @@
     title: Building genetic maps, QTL mapping and applications in Plant Breeding
     event: Discipline of Molecular Biology Applied to Plant Breeding
     date: 2018
-    slides: hthttps://cristianetaniguti.github.io/presentations/IAC2018.pdf
+    slides: presentations/IAC2018.pdf
 - presentation:
     title: Informatics in Genetics
     event: ESALQ Genetics discipline for undergrad students 
     date: 2018
-    slides: hthttps://cristianetaniguti.github.io/presentations/ESALQ_Genetics_undergrad_2018/Aula_genetica.html
+    slides: ESALQ_Genetics_undergrad_2018/Aula_genetica.html
 - presentation:
     title: Poster presentation -   Development of an integrated genetic map for an Eucalyptus full-sib population considering high error probabilities for low-depth GBS markers
     event: EUCARPIA Section Biometrics in Plant Breeding
