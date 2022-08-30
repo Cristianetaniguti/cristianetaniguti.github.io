@@ -35,32 +35,32 @@ interests: # Remove for hiding the interests section
   - Data visualization
   - Polyploid species
 skills: # Remove for hiding the skills section
-  - skill: R
-    value: 95
-  - skill: Git
-    value: 95
-  - skill: Shiny
-    value: 90
-  - skill: Unix|Linux
-    value: 90
-  - skill: Latex
-    value: 90
-  - skill: Bash
-    value: 85
-  - skill: Workflow Description Language (WDL)
-    value: 85
-  - skill: Docker
-    value: 80
-  - skill: Emacs
-    value: 80
-  - skill: Inkscape
-    value: 80
-  - skill: HTML & CSS
-    value: 65
-  - skill: Rcpp
-    value: 40
-  - skill: Python
-    value: 40 
+  - skill: R - advanced
+    value: 100
+  - skill: Git - advanced
+    value: 100
+  - skill: Shiny - advanced
+    value: 100
+  - skill: Unix|Linux - advanced
+    value: 100
+  - skill: Latex - advanced
+    value: 100
+  - skill: Bash - advanced
+    value: 100
+  - skill: Workflow Description Language (WDL) - advanced
+    value: 100
+  - skill: Docker - Intermediate
+    value: 66
+  - skill: Emacs - Intermediate
+    value: 66
+  - skill: Inkscape - Intermediate
+    value: 66
+  - skill: HTML & CSS - Intermediate
+    value: 66
+  - skill: Rcpp - Beginner
+    value: 33
+  - skill: Python - Beginner
+    value: 33
 social:
   email:  chtaniguti@tamu.edu
   orcid: https://orcid.org/0000-0002-2021-6883
