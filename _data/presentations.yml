@@ -1,4 +1,9 @@
 - presentation:
+    title: Building highly saturated genetic maps with OneMap 3.0: New approaches using workflows
+    event: Genetics Departiment Seminars - ESALQ/USP
+    date: 2022
+    slides: presentations/seminario_genetica_2022_public.pdf
+- presentation:
     title: SNP and Dosage calling
     event: GVENK workshop - Genetic data analysis in polyploids. From allelic dosage to QTL mapping
     date: 2022
