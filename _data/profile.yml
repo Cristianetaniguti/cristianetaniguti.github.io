@@ -1,6 +1,6 @@
-image: assets/img/profile_pic.jpg
+﻿image: assets/img/profile_pic.jpg
 username: Cris Taniguti (she/her)
-description: Hello! Welcome to my personal webpage! I´m a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. Here, I present my blog and an overview of my professional profile. Feel free to contact me for more information.
+description: Hello! Welcome to my personal webpage! I m a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. Here, I present my blog and an overview of my professional profile. Feel free to contact me for more information.
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
   - start: 2021-07
@@ -18,13 +18,13 @@ experience: # Remove for hiding the experience section
 education: # Remove for hiding the experience section
   - start: 2017-03
     end: 2021-04
-    education : Ph.D in Genetics and Plant Breeding, University of São Paulo - ESALQ/USP
+    education : Ph.D in Genetics and Plant Breeding, University of S o Paulo - ESALQ/USP
   - start: 2015-03
-    end: 2017-01
-    education: Master Degree in Genetics and Plant Breeding, University of São Paulo - ESALQ/USP
+    end: 2017-01 
+    education: Master Degree in Genetics and Plant Breeding, University of S o Paulo - ESALQ/USP
   - start: 2009-02
     end: 2017-01
-    education: Bachelor�s Degree in Genetics and Plant Breeding, Federal University of São Carlos - UFSCar
+    education: Bachelor s Degree in Genetics and Plant Breeding, Federal University of S o Carlos - UFSCar
 
 interests: # Remove for hiding the interests section
   - Statistical Genetics
