@@ -24,7 +24,7 @@ education: # Remove for hiding the experience section
     education: Master Degree in Genetics and Plant Breeding, University of São Paulo - ESALQ/USP
   - start: 2009-02
     end: 2017-01
-    education: Bachelor´s Degree in Genetics and Plant Breeding, Federal University of São Carlos - UFSCar
+    education: Bachelor�s Degree in Genetics and Plant Breeding, Federal University of São Carlos - UFSCar
 
 interests: # Remove for hiding the interests section
   - Statistical Genetics
@@ -63,19 +63,19 @@ skills: # Remove for hiding the skills section
     value: 33
 social:
   email:  chtaniguti@tamu.edu
-  orcid: https://orcid.org/0000-0002-2021-6883
+  orcid: 0000-0002-2021-6883
   scholar: https://scholar.google.com/citations?user=Z4vaXQkAAAAJ&hl=en
   publons: 
   research_gate: 
   dblp:  # Full URL
   semantic_scholar:  # Full URL
   linkedin: https://www.linkedin.com/in/cristiane-taniguti-530a1743/
-  github: https://github.com/Cristianetaniguti
+  github: Cristianetaniguti
   gitlab: 
   bitbucket: 
   google_plus:
   twitter: chtaniguti
-  youtube: https://www.youtube.com/channel/UCSNcsTSUzav4yHMmar-Lzkg
+  youtube: TheCristiane90
   facebook:
   instagram:
 awards: # Remove for hiding the awards section
