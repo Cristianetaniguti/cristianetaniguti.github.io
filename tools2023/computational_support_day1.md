@@ -1,7 +1,7 @@
 ---
 title: "Genotyping-by-Sequencing data SNP and dosage calling - A practical guide for polyploid species"
 author: "Cristiane Taniguti"
-date: "`r Sys.Date()`"
+date: "2022-12-06"
 output:
   html_document:
     highlight: pygments
@@ -23,15 +23,7 @@ linestretch: 1.2
 ---
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE,
-                      comment = "#>",
-                      fig.width = 16,
-                      fig.height = 16,
-                      fig.align = "center",
-                      dev = "png",
-                      cache = TRUE)
-```
+
 
 # SNP calling
 
@@ -55,7 +47,8 @@ To save time during the tutorial, pull now all the required images:
 
 * Docker
 
-```{bash, eval=FALSE}
+
+```bash
 docker pull biocontainers/fastqc:v0.11.9_cv7
 docker pull ewels/multiqc:latest
 docker pull kfdrc/bwa-picard:latest-dev
@@ -68,7 +61,8 @@ docker pull cristaniguti/reads2map:0.0.3
 
 * Singularity
 
-```{bash, eval=FALSE}
+
+```bash
 mkdir .singularity
 cd .singularity
 
@@ -88,7 +82,8 @@ Run this command and go take a coffee, it can take some time. If you are using D
 
 # Getting the example data set
 
-```{bash, eval=FALSE}
+
+```bash
 mkdir Tools2023
 cd Tools2023
 
@@ -105,7 +100,8 @@ wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyp
 
 A classic way to have a overview of our FASTQ sequences is the FASTQC software:
 
-```{bash, eval=FALSE}
+
+```bash
 for i in *.fastq.gz; do # Will run in all files in the directory finishing with fastq
     echo $i
     docker run -v $(pwd):/opt biocontainers/fastqc:v0.11.9_cv7 fastqc /opt/$i
@@ -114,7 +110,8 @@ done
 
 or
 
-```{bash, eval=FALSE}
+
+```bash
 for i in *.fastq.gz; do # Will run in all files in the directory finishing with fastq
     echo $i
     singularity exec --bind $(pwd):/opt $SCRATCH/.singularity/biocontainers_fastqc_v0.11.9_cv7.sif fastqc /opt/$i
@@ -126,13 +123,15 @@ See [here](https://cristianetaniguti.github.io/tools2023/1_fastqc.html) the resu
 It returns to us an HTML file with several precious pieces of information. 
 Instead of checking separated HTML by sample, we can join them using the very fancy MULTIQC tool. 
 
-```{bash, eval=FALSE}
+
+```bash
 docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc .  --title "Tutorial samples"
 ```
 
 or 
 
-```{bash, eval=FALSE}
+
+```bash
 singularity run $SCRATCH/.singularity/ewels_multiqc.sif . --title "Tutorial samples"
 ```
 
@@ -148,7 +147,8 @@ There are many software to perform the alignment. The suggested by GATK team is 
 
 BWA requires some index files before the alignment, you can build them with:
 
-```{bash, eval=FALSE}
+
+```bash
 docker run -v $(pwd):/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/Chr04_sub.fasta
 
 docker run -v $(pwd):/opt/ kfdrc/bwa-picard:latest-dev  java -jar /picard.jar CreateSequenceDictionary \
@@ -158,7 +158,8 @@ docker run -v $(pwd):/opt/ kfdrc/bwa-picard:latest-dev  java -jar /picard.jar Cr
 
 or
 
-```{bash, eval=FALSE}
+
+```bash
 singularity run --bind $(pwd):/opt/ $SCRATCH/.singularity/kfdrc_bwa-picard_latest-dev.sif bwa index /opt/Chr04_sub.fasta
 
 singularity run --bind $(pwd):/opt/ $SCRATCH/.singularity/kfdrc_bwa-picard_latest-dev.sif  java -jar /picard.jar  CreateSequenceDictionary \
@@ -169,7 +170,8 @@ singularity run --bind $(pwd):/opt/ $SCRATCH/.singularity/kfdrc_bwa-picard_lates
 
 Run BWA-MEM for each sample file:
 
-```{bash, eval=FALSE}
+
+```bash
 for i in *.fastq.gz; do
   echo $i
   filename="${i%%.*}"
@@ -191,7 +193,8 @@ done
 
 or
 
-```{bash, eval=FALSE}
+
+```bash
 for i in *fastq.gz; do
   echo $i
   filename="${i%%.*}"
@@ -220,7 +223,8 @@ GATK is a toolkit with more than 200 available tools. You can imagine a practica
 
 The called Joint Call makes the variant calling by sample and produces the g.vcf files, a VCF which have records for every position in the genome. After a database is created to join this information and we can extract it to the traditional VCF file. The analysis is done separately for several reasons, one is flexibility of processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don't need to repeat all the analysis if you want to add an extra sample. 
 
-```{bash, eval=FALSE}
+
+```bash
 # It requires other indexes
 docker run -v $(pwd):/opt/ cristaniguti/r-samtools:latest samtools faidx /opt/Chr04_sub.fasta
 
@@ -258,7 +262,8 @@ docker run -v $(pwd):/opt taniguti/gatk-picard:latest /gatk/gatk GenotypeGVCFs \
 
 or 
 
-```{bash, eval=FALSE}
+
+```bash
 # It requires other indexes
 singularity exec --bind $(pwd):/opt/ $SCRATCH/.singularity/cristaniguti_r-samtools_latest.sif samtools faidx /opt/Chr04_sub.fasta
 
@@ -323,7 +328,8 @@ What we will need:
 * [Download cromwell](https://github.com/broadinstitute/cromwell/releases)
 * Java
 
-```{bash, eval=FALSE}
+
+```bash
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.wdl
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.zip
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
@@ -368,7 +374,8 @@ Set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`.
 
 Run:
 
-```{bash, eval=FALSE}
+
+```bash
 export SINGULARITY_CACHEDIR=$SCRATCH/.singularity
 
 java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell.jar run EmpiricalSNPCalling_develop.wdl \
@@ -380,7 +387,8 @@ java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell.jar run EmpiricalSN
 
 Install the R packages:
 
-```{r, eval=FALSE}
+
+```r
 install.packages("polyRAD")
 install.packages("updog")
 install.packages("fitPoly") 
@@ -403,11 +411,13 @@ Example considering a $F_1$ outcrossing population:
 
 Get the example data. It is the same data set as before, but now with 122 samples and a subset of chromosome 10.
 
-```{bash, eval=FALSE}
+
+```bash
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/vcf_poly_filt.vcf.gz
 ```
 
-```{r, eval=FALSE}
+
+```r
 library(vcfR)
 
 vcf <- read.vcfR("vcf_poly_filt.vcf.gz")
