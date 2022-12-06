@@ -1,3 +1,28 @@
+---
+title: "Genotyping-by-Sequencing data SNP and dosage calling - A practical guide for polyploid species"
+author: "Cristiane Taniguti"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    highlight: pygments
+    keep_md: yes
+    toc: yes
+    toc_depth: '3'
+    toc_float:
+      collapsed: no
+  md_document:
+    variant: markdown_github
+  pdf_document:
+    highlight: pygments
+    toc: yes
+    toc_depth: '2'
+  word_document:
+    toc: yes
+    toc_depth: '2'
+linestretch: 1.2
+---
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE,
                       comment = "#>",
@@ -8,13 +33,8 @@ knitr::opts_chunk$set(collapse = TRUE,
                       cache = TRUE)
 ```
 
-# SNP calling
 
-Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
-
-![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](log10_efficiency_rose.png)
-
-## What you will need to run this tutorial
+# What you will need to run this tutorial
 
 * Linux system (or WSL)
 * At least 4G RAM
@@ -75,8 +95,13 @@ wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyp
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/RchinensisV1.0/Chr04_sub.fasta
 ```
 
+# Step-by-step
 
-# Quality Control
+Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
+
+![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](log10_efficiency_rose.png)
+
+## Quality Control
 
 A classic way to have a overview of our FASTQ sequences is the FASTQC software:
 
@@ -117,7 +142,7 @@ This profile is typical from GBS sequences, other types of libraries would retur
 
 Now, that we already checked how our sequences are, we can decide which filters to use to clean them. Here, the samples are already filtered and demultiplexed, but if it is not, process_radtags from STACKs perform the demultiplexing and some other quality filters, as searching for the enzyme cut site and according to sequence Phred scale. Check its manual [here](https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php). 
 
-# Alignment
+## Alignment
 
 There are many software to perform the alignment. The suggested by GATK team is the BWA-MEM.
 
@@ -189,7 +214,7 @@ done
 
 If you have more than one genome and want to test how much your sample aligns with each one, [FASTQ screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) is a good tool for that.
 
-# GATK - Joint Call
+## GATK - Joint Call
 
 GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their [website](https://gatk.broadinstitute.org/hc/en-us). GATK also has workflows available [here](https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows) for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS data sets. GATK workflows need adaptations to analyze these data sets. A good example is the duplicates, you can't remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you don't have much previous information, GATK provides several quality measures for each marker called and you can apply what they call "hard filters" in your markers.
 
@@ -351,7 +376,7 @@ java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell.jar run EmpiricalSN
                       -p EmpiricalSNPCalling_develop.zip
 ```
 
-## Dosage calling
+# Dosage calling
 
 Install the R packages:
 
@@ -374,7 +399,7 @@ Check this tutorial if you have array data:
 
 Example considering a $F_1$ outcrossing population:
 
-### Example with updog
+## Example with updog
 
 Get the example data. It is the same data set as before, but now with 122 samples and a subset of chromosome 10.
 
