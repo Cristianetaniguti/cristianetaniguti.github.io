@@ -99,7 +99,7 @@ wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyp
 
 Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
 
-![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](log10_efficiency_rose.png)
+![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](images/log10_efficiency_rose.png)
 
 ## Quality Control
 
@@ -316,6 +316,35 @@ Chr04   68619   .       C       T       1512.17 .       AC=3;AF=0.250;AN=12;Base
 * [GATK hard filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)
 * SNP calling with freebayes (parallelize the genomic regions in cores and nodes)
 
+<center>
+
+**Workflow**
+
+![EmpiricalSNPCalling](images/EmpiricalSNPCalling.svg)
+
+</center>
+
+<br/><br/>
+
+<center>
+
+**Subworkflows**
+
+![create_alignment_from_gamilies_files](images/create_alignment_from_families_files.svg)
+
+<br/><br/>
+
+![gatk_genotyping](images/gatk_genotyping.svg)
+
+<br/><br/>
+
+![freebayes_genotyping](images/freebayes_genotyping.svg)
+
+<br/><br/>
+</center>
+
+
+
 What we will need:
 
 * [EmpiricalSNPCalling workflow - Reads2Map](https://github.com/Cristianetaniguti/Reads2Map/releases/tag/EmpiricalSNPCalling_develop)
@@ -327,6 +356,7 @@ What we will need:
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.wdl
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.zip
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
+wget https://github.com/broadinstitute/cromwell/releases/download/84/cromwell-84.jar
 ```
 
 Prepare input file `EmpiricalSNPCalling_develop.json`:
@@ -364,17 +394,22 @@ P1.fastq.gz   P1    P1
 P2.fastq.gz   P2    P2
 ```
 
-Set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`.
-
-Run:
+If you are running using singularity, set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`, and run:
 
 ```{bash, eval=FALSE}
-export SINGULARITY_CACHEDIR=$SCRATCH/.singularity
-
 java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell.jar run EmpiricalSNPCalling_develop.wdl \
                       -i EmpiricalSNPCalling_develop.json \
                       -p EmpiricalSNPCalling_develop.zip
 ```
+
+If you are using docker
+
+```{bash, eval=FALSE}
+java -jar cromwell.jar run EmpiricalSNPCalling_develop.wdl \
+                      -i EmpiricalSNPCalling_develop.json \
+                      -p EmpiricalSNPCalling_develop.zip
+```
+
 
 # Dosage calling
 
