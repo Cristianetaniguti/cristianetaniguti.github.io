@@ -33,13 +33,8 @@ knitr::opts_chunk$set(collapse = TRUE,
                       cache = TRUE)
 ```
 
-# SNP calling
 
-Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
-
-![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](log10_efficiency_rose.png)
-
-## What you will need to run this tutorial
+# What you will need to run this tutorial
 
 * Linux system (or WSL)
 * At least 4G RAM
@@ -100,8 +95,13 @@ wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyp
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/RchinensisV1.0/Chr04_sub.fasta
 ```
 
+# Step-by-step
 
-# Quality Control
+Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
+
+![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](images/log10_efficiency_rose.png)
+
+## Quality Control
 
 A classic way to have a overview of our FASTQ sequences is the FASTQC software:
 
@@ -142,7 +142,7 @@ This profile is typical from GBS sequences, other types of libraries would retur
 
 Now, that we already checked how our sequences are, we can decide which filters to use to clean them. Here, the samples are already filtered and demultiplexed, but if it is not, process_radtags from STACKs perform the demultiplexing and some other quality filters, as searching for the enzyme cut site and according to sequence Phred scale. Check its manual [here](https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php). 
 
-# Alignment
+## Alignment
 
 There are many software to perform the alignment. The suggested by GATK team is the BWA-MEM.
 
@@ -214,7 +214,7 @@ done
 
 If you have more than one genome and want to test how much your sample aligns with each one, [FASTQ screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) is a good tool for that.
 
-# GATK - Joint Call
+## GATK - Joint Call
 
 GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their [website](https://gatk.broadinstitute.org/hc/en-us). GATK also has workflows available [here](https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows) for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS data sets. GATK workflows need adaptations to analyze these data sets. A good example is the duplicates, you can't remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you don't have much previous information, GATK provides several quality measures for each marker called and you can apply what they call "hard filters" in your markers.
 
@@ -316,6 +316,35 @@ Chr04   68619   .       C       T       1512.17 .       AC=3;AF=0.250;AN=12;Base
 * [GATK hard filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)
 * SNP calling with freebayes (parallelize the genomic regions in cores and nodes)
 
+<center>
+
+**Workflow**
+
+![EmpiricalSNPCalling](images/EmpiricalSNPCalling.svg)
+
+</center>
+
+<br/><br/>
+
+<center>
+
+**Subworkflows**
+
+![create_alignment_from_gamilies_files](images/create_alignment_from_families_files.svg)
+
+<br/><br/>
+
+![gatk_genotyping](images/gatk_genotyping.svg)
+
+<br/><br/>
+
+![freebayes_genotyping](images/freebayes_genotyping.svg)
+
+<br/><br/>
+</center>
+
+
+
 What we will need:
 
 * [EmpiricalSNPCalling workflow - Reads2Map](https://github.com/Cristianetaniguti/Reads2Map/releases/tag/EmpiricalSNPCalling_develop)
@@ -327,6 +356,7 @@ What we will need:
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.wdl
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_develop/EmpiricalSNPCalling_develop.zip
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
+wget https://github.com/broadinstitute/cromwell/releases/download/84/cromwell-84.jar
 ```
 
 Prepare input file `EmpiricalSNPCalling_develop.json`:
@@ -364,19 +394,24 @@ P1.fastq.gz   P1    P1
 P2.fastq.gz   P2    P2
 ```
 
-Set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`.
-
-Run:
+If you are running using singularity, set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`, and run:
 
 ```{bash, eval=FALSE}
-export SINGULARITY_CACHEDIR=$SCRATCH/.singularity
-
 java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell.jar run EmpiricalSNPCalling_develop.wdl \
                       -i EmpiricalSNPCalling_develop.json \
                       -p EmpiricalSNPCalling_develop.zip
 ```
 
-## Dosage calling
+If you are using docker
+
+```{bash, eval=FALSE}
+java -jar cromwell.jar run EmpiricalSNPCalling_develop.wdl \
+                      -i EmpiricalSNPCalling_develop.json \
+                      -p EmpiricalSNPCalling_develop.zip
+```
+
+
+# Dosage calling
 
 Install the R packages:
 
@@ -399,7 +434,7 @@ Check this tutorial if you have array data:
 
 Example considering a $F_1$ outcrossing population:
 
-### Example with updog
+## Example with updog
 
 Get the example data. It is the same data set as before, but now with 122 samples and a subset of chromosome 10.
 
