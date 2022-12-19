@@ -236,7 +236,7 @@ for i in *sorted.bam; do
                                                     --max-reads-per-alignment-start 0
 done
 
-zcat Chr04_sub.fasta | grep ">"  > interval_list_temp # Find scaffold name
+grep ">" Chr04_sub.fasta > interval_list_temp # Find scaffold name
 sed 's/^.//' interval_list_temp > interval_list_temp2 # remove > at the beginning
 awk  '{print $1;}' interval_list_temp2 > interval.list # gets only the first word
 
