@@ -11,7 +11,7 @@
 
 <meta name="author" content="Cristiane Taniguti" />
 
-<meta name="date" content="2022-12-06" />
+<meta name="date" content="2022-12-19" />
 
 <title>Genotyping-by-Sequencing data SNP and dosage calling - A practical guide for polyploid species</title>
 
@@ -1585,7 +1585,7 @@ div.tocify {
 <h1 class="title toc-ignore">Genotyping-by-Sequencing data SNP and
 dosage calling - A practical guide for polyploid species</h1>
 <h4 class="author">Cristiane Taniguti</h4>
-<h4 class="date">2022-12-06</h4>
+<h4 class="date">2022-12-19</h4>
 
 </div>
 
@@ -1794,7 +1794,7 @@ analysis if you want to add an extra sample.</p>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">--max-reads-per-alignment-start</span> 0</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> Chr04_sub.fasta <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;&gt;&quot;</span>  <span class="op">&gt;</span> interval_list_temp <span class="co"># Find scaffold name</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;&gt;&quot;</span> Chr04_sub.fasta <span class="op">&gt;</span> interval_list_temp <span class="co"># Find scaffold name</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^.//&#39;</span> interval_list_temp <span class="op">&gt;</span> interval_list_temp2 <span class="co"># remove &gt; at the beginning</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span>  <span class="st">&#39;{print $1;}&#39;</span> interval_list_temp2 <span class="op">&gt;</span> interval.list <span class="co"># gets only the first word</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
