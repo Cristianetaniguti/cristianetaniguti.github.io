@@ -3,11 +3,13 @@
     event: Tools for Polyploids Workshop
     date: 2023
     slides: presentations/Reads2Map_tools2023.pdf
+    recording: https://www.youtube.com/watch?v=4r6uQ-YzIMg
 - presentation:
     title: Computational Support - SNP and Dosage Calling
     event: Tools for Polyploids Workshop
     date: 2022
     slides: presentations/Computational_Support_Day1.pdf
+    recording: https://www.youtube.com/watch?v=k83h1MHQBBQ
 - presentation:
     title: Building highly saturated genetic maps with OneMap 3.0 - New approaches using workflows
     event: Genetics Department Seminars - ESALQ/USP
@@ -22,7 +24,12 @@
     title: Reads2map - Practical and Reproducible Workflows to Build Linkage Maps from Sequencing Data at Tools for Polyploids Workshop
     event: Tools for Polyploids Workshop
     date: 2022
-    slides: https://www.youtube.com/watch?v=cf1UPWADlrY
+    recording: https://www.youtube.com/watch?v=cf1UPWADlrY
+- presentation:
+    title: Training Workshop - MAPpoly and QTLpoly updates (I talked about VIEWpoly at the end)
+    event: Tools for Polyploids Workshop
+    date: 2022
+    recording: https://www.youtube.com/watch?v=EjqAYzSktl0
 - presentation:
     title: VIEWpoly - An Interactive Tool to Visualize, Explore and Integrate Genetic Maps and QTL analysis with Genomic Information 
     event: XXIX Plant & Animal Genome Conference

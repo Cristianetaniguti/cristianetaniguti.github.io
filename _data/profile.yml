@@ -1,6 +1,6 @@
 ﻿image: assets/img/profile_pic.jpg
 username: Cris Taniguti (she/her)
-description: Hello! Welcome to my personal webpage! I m a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. Here, I present my blog and an overview of my professional profile. Feel free to contact me for more information.
+description: Hello! Welcome to my personal webpage! Here, I present my blog and an overview of my professional profile. I am a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. I am from Brazil, but I currently live in College Station (Texas, US) where I am a postdoctoral research associate at Texas A&M University. Outside of work, I love art performances and I have already performed aerial silk and other circus activities on streets, in theaters, and in open TV events. 
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
   - start: 2021-07
@@ -79,6 +79,7 @@ social:
   facebook:
   instagram:
 awards: # Remove for hiding the awards section
+  - Postdoctoral Scholar Travel Award 2023 - Texas A&M University
   - Market Ready Prize - Cornell Institute Digital Agriculture Hackathon 2021
   - WikiProject Computational Biology/ISCB award 2018 - International Society for Computational Biology (ISCB) and WikiProject Computational Biology
   - Best Poster Award - Brazilian Association for Bioinformatics and Computational Biology
