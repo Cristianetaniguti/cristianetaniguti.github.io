@@ -1,0 +1,87 @@
+---
+title: "The challenges while building linkage maps for diploid and polyploid
+ species with genotyping-by-sequencing markers"
+author: Cristiane Hayumi Taniguti, Jeekin Lau,  Antonio Augusto Franco Garcia, Marcelo Mollinari, David Byrne, Oscar Riera-Lizarazu
+date: "`r Sys.Date()`"
+output:
+  rmdformats::html_clean:
+    highlight: kate
+---
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+**Poster presented in the 11th Rosaceae Genomics Conference (Nelson, New Zealand - March 2023)**
+
+<object data="RGC11_Taniguti_poster.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="RGC11_Taniguti_poster.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="RGC11_Taniguti_poster.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+# References
+
+Taniguti, C. H., Taniguti, L. M., Amadeu, R. R., Lau, J., de Siqueira Gesteira, G., De, T., Oliveira, P., Ferreira, G. C., Da, G., Pereira, S., Byrne, D., Mollinari, M., Riera-Lizarazu, O., &#38; Franco Garcia, A. A. (n.d.). Developing best practices for genotyping-by-sequencing analysis using linkage maps as benchmarks. bioRxiv. https://doi.org/10.1101/2022.11.24.517847
+
+Taniguti, C. H., de Siqueira Gesteira, G., Lau, J., da Silva Pereira, G., Zeng, Z.-B., Byrne, D., Riera-Lizarazu, O., &#38; Mollinari, M. (2022). VIEWpoly: a visualization tool to integrate and explore results of polyploid genetic analysis. Journal of Open Source Software, 7(74), 4242. https://doi.org/10.21105/joss.04242
+
+Margarido, G. R. A., Souza, A. P., & Garcia, A. A. F. (2007). OneMap: software for 
+genetic mapping in outcrossing species. Hereditas, 144(3), 78–79. 
+https://doi.org/10.1111/j.2007.0018-0661.02000.x
+
+Mollinari, M., & Garcia, A. A. F. (2019). Linkage Analysis and Haplotype Phasing in 
+Experimental Autopolyploid Populations with High Ploidy Level Using Hidden Markov 
+Models. G3: Genes|Genomes|Genetics, 9(10), 3297–3314. 
+https://doi.org/10.1534/g3.119.400378
+
+Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., &#38; Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PLoS ONE, 6(5), e19379. https://doi.org/10.1371/journal.pone.0019379
+
+Glaubitz, J. C., Casstevens, T. M., Lu, F., Harriman, J., Elshire, R. J., Sun, Q., &#38; Buckler, E. S. (2014). TASSEL-GBS: a high capacity genotyping by sequencing analysis pipeline. PLoS ONE, 9(2), 1–11. https://doi.org/10.1371/journal.pone.0090346
+
+Voss, K., Gentry, J., & Auwera, G. van der. (2017). Full-stack genomics pipelining with 
+GATK4+ WDL+ Cromwell [version 1; not peer reviewed]. F1000Research, 4. 
+https://doi.org/10.7490/f1000research.1114631.1
+
+Yu, Z., Du, F., Ban, R., & Zhang, Y. (2020). SimuSCoP: Reliably simulate Illumina 
+sequencing data based on position and context dependent profiles. BMC Bioinformatics, 
+21(1), 1–18. https://doi.org/10.1186/s12859-020-03665-5
+
+Rivera-Colón, A. G., Rochette, N. C., & Catchen, J. M. (2020). Simulation with 
+RADinitio improves RADseq experimental design and sheds light on sources of missing 
+data. Molecular Ecology Resources, March, 1–16. https://doi.org/10.1111/1755-
+0998.13163
+
+Li, H., & Durbin, R. (2009). Fast and accurate short read alignment with Burrows--
+Wheeler transform. Bioinformatics, 25(14), 1754–1760. 
+https://doi.org/10.1093/bioinformatics/btp324
+
+van der Auwera, G., & O’Connor, B. (2020). Genomics in the Cloud: Using Docker, 
+GATK, and WDL in Terra. O’Reilly Media, Incorporated. 
+https://books.google.com.br/books?id=wwiCswEACAAJ
+
+Garrison, E., & Marth, G. (2012). Haplotype-based variant detection from short-read 
+sequencing. ArXiv E-Prints, 9. https://doi.org/1207.3907
+
+Gerard, D., Ferrão, L. F. V., Garcia, A. A. F., & Stephens, M. (2018). Genotyping 
+Polyploids from Messy Sequencing Data. Genetics, 210(3), 789–807. 
+https://doi.org/10.1534/genetics.118.301468
+
+Clark, L. v., Lipka, A. E., & Sacks, E. J. (2019). polyRAD: Genotype Calling with 
+Uncertainty from Sequencing Data in Polyploids and Diploids. G3: 
+Genes|Genomes|Genetics, 9(March), g3.200913.2018. 
+https://doi.org/10.1534/g3.118.200913
+
+Serang, O., Mollinari, M., & Garcia, A. A. F. (2012). Efficient exact maximum a 
+posteriori computation for bayesian SNP genotyping in polyploids. PLoS ONE, 7(2), 1–
+13. https://doi.org/10.1371/journal.pone.0030906
+
+Merkel, D. (2014). Docker : Lightweight Linux Containers for Consistent Development 
+and Deployment Docker : a Little Background Under the Hood. Linux Journal, 
+2014(239), 2–7. 
+
+Kurtzer, G. M., Sochat, V., & Bauer, M. W. (2017). Singularity: Scientific containers for 
+mobility of compute. PLOS ONE, 12(5), e0177459. 
+https://doi.org/10.1371/journal.pone.0177459
+
+
