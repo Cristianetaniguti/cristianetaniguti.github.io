@@ -1,5 +1,5 @@
 ---
-title: "A practical guide for Genotyping-by-Sequencing (GBS) data SNP and dosage calling  in polyploid species"
+title: "Using Reads2Map workflows for SNP and dosage calling in polyploid GBS data"
 author: "Cristiane Taniguti"
 date: "`r Sys.Date()`"
 output:
@@ -42,7 +42,7 @@ This tutorial is part of the Tools for Polyploid Training Workshop being held on
 
 **warning**: Before start, it is important to highlight that all software here presented have several parameters that can be adjusted for each given scenario. Here, we will use the default settings, but for the best usage of each one of them, it is important to explore their specificity. So... use it carefully with other data sets!
 
-# Useful Linux commands
+## Useful Linux commands
 
 ```{bash, eval=FALSE}
 getwd  # returns current directory path
@@ -71,27 +71,21 @@ docker push                               # send the built image to a repository
 docker system prune                       # remove all unused containers, networks, images
 ```
 
-# Getting the example data set for SNP calling
+## Getting the example data set for SNP calling
 
 ```{bash, eval=FALSE}
 mkdir Tools2023
 cd Tools2023
 
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/fastq/1.fastq.gz
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/fastq/98.fastq.gz
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/fastq/P1.fastq.gz
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/fastq/P2.fastq.gz
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/fastq/1.fastq.gz
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/fastq/98.fastq.gz
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/fastq/P1.fastq.gz
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/fastq/P2.fastq.gz
 
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/RchinensisV1.0/Chr04_sub.fasta
 ```
 
-# Step-by-step
-
-Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
-
-![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](../tools2023/images/log10_efficiency_rose.png)
-
-## Quality Control
+# Sequences Quality Control
 
 A classic way to have a overview of our FASTQ sequences is the FASTQC software:
 
@@ -115,22 +109,176 @@ See [here](https://cristianetaniguti.github.io/tools2023/1_fastqc.html) the resu
 
 It returns to us an HTML file with several precious pieces of information. 
 Instead of checking separated HTML by sample, we can join them using the very fancy MULTIQC tool. 
-
-```{bash, eval=FALSE}
-docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc .  --title "Tutorial samples"
-```
-
-or 
-
-```{bash, eval=FALSE}
-singularity run $SCRATCH/.singularity/ewels_multiqc.sif . --title "Tutorial samples"
-```
-
-Results [here](https://cristianetaniguti.github.io/tools2023/Tutorial-samples_multiqc_report.html).
-
 This profile is typical from GBS sequences, other types of libraries would return other profiles and could have different problems. 
 
 Now, that we already checked how our sequences are, we can decide which filters to use to clean them. Here, the samples are already filtered and demultiplexed, but if they are not, process_radtags from STACKs perform the demultiplexing, removal of adaptor sequences, and some other quality filters, as searching for the enzyme cut site and according to sequence Phred scale. Check its manual [here](https://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php). 
+
+# Reads2Map workflows
+
+[Reads2Map](https://github.com/Cristianetaniguti/Reads2Map) is a collection of WDL workflows to build linkage maps from sequencing data. It was first developed to diploids ([preprint](https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2)) and is being expanded to polyploids. 
+
+## SNP calling with GATK (EmpiricalSNPCalling.wdl)
+
+We will use the EmpiricalSNPCalling.wdl to perform:
+
+* Alignment with BWA (parallelize the samples in cores and nodes)
+* SNP calling with GATK (parallelize the samples in cores and nodes)
+* [GATK hard filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)
+
+What we will need:
+
+* [EmpiricalSNPCalling workflow - Reads2Map](https://github.com/Cristianetaniguti/Reads2Map/releases/tag/EmpiricalSNPCalling_v1.2.1)
+* [Configuration files](https://github.com/Cristianetaniguti/Reads2Map/tree/main/.configurations)
+* [Download cromwell](https://github.com/broadinstitute/cromwell/releases)
+* Java
+
+```{bash, eval=FALSE}
+wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.wdl
+wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.zip
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
+wget https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/EmpiricalSNPCalling_inputs.json
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/samples_info.txt
+```
+
+Genome index files
+
+```{bash, eval=FALSE}
+docker run -v $(pwd):/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/Chr04_sub.fasta
+
+docker run -v $(pwd):/opt/ kfdrc/bwa-picard:latest-dev  java -jar /picard.jar CreateSequenceDictionary \
+    R=/opt/Chr04_sub.fasta \
+    O=/opt/Chr04_sub.dict
+
+docker run -v $(pwd):/opt/ cristaniguti/r-samtools:latest samtools faidx /opt/Chr04_sub.fasta
+```
+
+
+Input file `EmpiricalSNPCalling_inputs.json`:
+
+```
+{
+  "SNPCalling.max_cores": 2,
+  "SNPCalling.ploidy": 4,
+  "SNPCalling.rm_dupli": false,
+  "SNPCalling.run_gatk": true,
+  "SNPCalling.run_freebayes": false,
+  "SNPCalling.hardfilters": true,
+  "SNPCalling.n_chrom": 1,
+  "SNPCalling.chunk_size": 1,
+  "SNPCalling.samples_info": "samples_info.txt",
+  "SNPCalling.references": {
+    "ref_fasta": "Chr04_sub.fasta",
+    "ref_dict": "Chr04_sub.dict",
+    "ref_ann": "Chr04_sub.fasta.ann",
+    "ref_sa": "Chr04_sub.fasta.sa",
+    "ref_amb": "Chr04_sub.fasta.amb",
+    "ref_pac": "Chr04_sub.fasta.pac",
+    "ref_bwt": "Chr04_sub.fasta.bwt",
+    "ref_fasta_index": "Chr04_sub.fasta.fai"
+  }
+}
+```
+
+samples_info.txt:
+
+```
+1.fastq.gz   1   1
+98.fastq.gz   98    98
+P1.fastq.gz   P1    P1
+P2.fastq.gz   P2    P2
+```
+
+If you are running using singularity combined with SLURM, set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`, and run:
+
+```{bash, eval=FALSE}
+java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalSNPCalling_v1.2.1.wdl \
+                      -i EmpiricalSNPCalling_inputs.json \
+                      -p EmpiricalSNPCalling_v1.2.1.zip
+```
+
+If you are using docker, set the default in `cromwell_no_mysql.conf` to `Local`, and run:
+
+```{bash, eval=FALSE}
+java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalSNPCalling_v1.2.1.wdl \
+                      -i EmpiricalSNPCalling_inputs.json \
+                      -p EmpiricalSNPCalling_v1.2.1.zip
+```
+
+Check the results in the outputted path printed in the workflow log. 
+
+```
+  "outputs":
+{
+  "SNPCalling.vcfs_software": ["gatk"],
+  "SNPCalling.gatk_multi_vcf": null,
+  "SNPCalling.vcfs_counts_source": ["vcf"],
+  "SNPCalling.Plots": "/home/chtaniguti/Tools2023/cromwell-executions/SNPCalling/417e96d2-d154-466e-9a50-0ee319c10c5e/call-GatkGenotyping/GatkGenotyping/1773aa18-7b48-4e3e-9aa4-4405b1a8276a/call-HardFilteringEmp/HardFilteringEmp/4e26f024-8d38-454e-b8c4-04054cedb9bd/call-QualPlots/execution/QualPlots.tar.gz",
+  "SNPCalling.merged_bam": "/home/chtaniguti/Tools2023/cromwell-executions/SNPCalling/417e96d2-d154-466e-9a50-0ee319c10c5e/call-CreateAlignmentFromFamilies/CreateAlignmentFromFamilies/f6b9df2d-4007-4a2e-8db5-978429dcf390/call-MergeBams/execution/merged.bam",
+  "SNPCalling.freebayes_vcfEval": null,
+  "SNPCalling.gatk_vcfEval": "/home/chtaniguti/Tools2023/cromwell-executions/SNPCalling/417e96d2-d154-466e-9a50-0ee319c10c5e/call-GatkGenotyping/GatkGenotyping/1773aa18-7b48-4e3e-9aa4-4405b1a8276a/call-Normalization/Normalization/811b36f9-bc8f-451a-8556-21213fdc46cf/call-VariantEval/execution/vcfEval.txt",
+  "SNPCalling.vcfs": ["/home/chtaniguti/Tools2023/cromwell-executions/SNPCalling/417e96d2-d154-466e-9a50-0ee319c10c5e/call-GatkGenotyping/GatkGenotyping/1773aa18-7b48-4e3e-9aa4-4405b1a8276a/call-Normalization/Normalization/811b36f9-bc8f-451a-8556-21213fdc46cf/call-BiallelicNormalization/execution/vcf_norm.vcf.gz"]
+}
+```
+
+## Dosage calling and recombination fraction matrix (EmpiricalMaps.wdl)
+
+Download the workflow and the example data set:
+
+```{bash, eval=FALSE}
+# Workflow
+wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalMaps_v1.2.3/EmpiricalMaps_v1.2.3.wdl
+wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalMaps_v1.2.3/EmpiricalMaps_v1.2.3.zip
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalMaps/polyploid/EmpiricalMaps_inputs.json
+
+# Data set (62 rose individuals Chr04)
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/vcfs_norm/gatk_Chr04_filt_example.vcf.gz
+```
+
+Prepare EmpiricalMaps_inputs.json:
+
+```
+{
+  "Maps.ploidy": "4",
+  "Maps.dataset": {
+    "parent2": "P1",
+    "name": "roses",
+    "parent1": "P2",
+    "chromosome": "Chr04",
+    "cross": "F1",
+    "multiallelics": "false"
+  },
+  "Maps.max_cores": "2",
+  "Maps.gatk_mchap": "false",
+  "Maps.vcfs_counts_source": ["vcf"],
+  "Maps.vcfs_software": ["gatk"],
+  "Maps.filter_noninfo": "true",
+  "Maps.vcfs": ["gatk_Chr04_filt_example.vcf.gz"],
+  "Maps.replaceADbyMissing": "TRUE",
+  "Maps.prob_thres": 0.8
+}
+```
+
+```{bash, eval=FALSE}
+java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalMaps_v1.2.3.wdl \
+                        -i EmpiricalMaps_inputs.json \
+                        -p EmpiricalMaps_v1.2.3.zip
+```
+
+Check the results in the outputted path printed in the workflow log.
+
+```
+  "outputs": {
+    "Maps.EmpiricalReads_results": "/home/chtaniguti/Tools2023/cromwell-executions/Maps/865ad8bc-8158-4cff-8a98-874e2df75b20/call-JointReportsPoly/execution/EmpiricalReads_results_poly.tar.gz"
+  },
+```
+
+# Step-by-step (not using workflows)
+
+Here we run the SNP and dosage calling using [BWA](http://bio-bwa.sourceforge.net/bwa.shtml) and [GATK](https://gatk.broadinstitute.org/hc/en-us) just for a subset of a tetraploid rose GBS data set. This subset contains only four individuals and sequences that aligned to the half of *Rosa chinensis* chromosome 4. Check the RAM and CPU that was used to run the same pipeline for the full data set below:
+
+![Computational resources required to run this pipeline in the rose complete data (mean depth ~83 and population size of 114 progeny)](../tools2023/images/log10_efficiency_rose.png)
+
 
 ## Alignment
 
@@ -206,9 +354,9 @@ If you have more than one genome and want to test how much your sample aligns wi
 
 ## GATK - Joint Call
 
-GATK is a toolkit with more than 200 available tools. You can imagine a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made really good work with tutorials on their [website](https://gatk.broadinstitute.org/hc/en-us). GATK also has workflows available [here](https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows) for the most common scenarios. The bad news is that these scenarios did not evolve RADseq or GBS data sets. GATK workflows need adaptations to analyze these data sets. A good example is the duplicates, you can't remove GBS duplicates and for WGS or exome, this is an important step. If you have lots of previous information about your species, as a good reference genome or a marker database, this information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you don't have much previous information, GATK provides several quality measures for each marker called and you can apply what they call "hard filters" in your markers.
+GATK is a toolkit with more than 200 available tools. You can imagine that a practical guide is not a place to explain all its features. Anyway, the Broad Institute team made a really good work with tutorials on their [website](https://gatk.broadinstitute.org/hc/en-us). GATK also has workflows available [here](https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows) for the most common scenarios. The bad news is that RADseq or GBS data sets are not included in these scenarios. Therefore, some adaptations are required. For example, the duplicates are commonly removed from data sets such as WGS and exome, but must be kept in GBS data. Other example is the type of filtering applied to the identified markers. If you have lots of previous information about your species, such as a good reference genome or a marker database, these information can be used to increase SNP and genotype calling in GATK with tools such as BQSR and Variant recalibrator. If you do not have much previous information (what is common in plant research), GATK provides several quality measures for each marker called and you can apply what they call ["hard filters"](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants) in your markers.
 
-The called Joint Call makes the variant calling by sample and produces the g.vcf files, a VCF which have records for every position in the genome. After a database is created to join this information and we can extract it to the traditional VCF file. The analysis is done separately for several reasons, one is flexibility of processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don't need to repeat all the analysis if you want to add an extra sample. 
+The called Joint Call method run the variant calling on each sample and produces the g.vcf files (one by sample). The g.vcfs have records for every position in the genome. After, a database is created to join the individual samples information. The traditional VCF file (containing all samples) can be extracted from the database. The analysis is done separately by sample for several reasons, one is flexibility of processing, we can parallelize the way we want. Another is the called N+1 problem, which means that with the database created, you don't need to repeat all the analysis if you want to add an extra sample. 
 
 ```{bash, eval=FALSE}
 # It requires other indexes
@@ -296,155 +444,7 @@ Chr04   68612   .       C       T       1512.17 .       AC=3;AF=0.250;AN=12;Base
 Chr04   68619   .       C       T       1512.17 .       AC=3;AF=0.250;AN=12;BaseQRankSum=0.554;DP=100;FS=0.000;MLEAC=4;MLEAF=0.333;MQ=60.00;MQRankSum=0.00;QD=15.27;ReadPosRankSum=7.39;SOR=0.358       GT:AD:DP:GQ:PL  ./././.:0,0:0:.:0,0,0,0,0       0/0/0/1:38,3:41:58:69,0,58,167,1644     0/0/0/0:1,0:1:1:0,1,3,6,30      0/0/1/1:22,36:58:3:1445,70,0,3,815
 ```
 
-# Reads2Map workflows
-
-[Reads2Map](https://github.com/Cristianetaniguti/Reads2Map) is a collection of WDL workflows to build linkage maps from sequencing data. It was first developed to diploids ([preprint](https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2)) and is being expanded to polyploids. 
-
-## SNP calling with GATK and freebayes (EmpiricalSNPCalling.wdl)
-
-We will use the EmpiricalSNPCalling.wdl to perform:
-
-* Alignment with BWA (parallelize the samples in cores and nodes)
-* SNP calling with GATK (parallelize the samples in cores and nodes)
-* [GATK hard filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)
-* SNP calling with freebayes (parallelize the genomic regions in cores and nodes)
-
-<center>
-
-**Workflow**
-
-![EmpiricalSNPCalling](../tools2023/images/EmpiricalSNPCalling.svg)
-
-</center>
-
-<br/><br/>
-
-<center>
-
-**Subworkflows**
-
-![create_alignment_from_gamilies_files](../tools2023/images/create_alignment_from_families_files.svg)
-
-<br/><br/>
-
-![gatk_genotyping](../tools2023/images/gatk_genotyping.svg)
-
-<br/><br/>
-
-![freebayes_genotyping](../tools2023/images/freebayes_genotyping.svg)
-
-<br/><br/>
-</center>
-
-What we will need:
-
-* [EmpiricalSNPCalling workflow - Reads2Map](https://github.com/Cristianetaniguti/Reads2Map/releases/tag/EmpiricalSNPCalling_v1.2.0)
-* [Configuration files](https://github.com/Cristianetaniguti/Reads2Map/tree/main/.configurations)
-* [Download cromwell](https://github.com/broadinstitute/cromwell/releases)
-* Java
-
-```{bash, eval=FALSE}
-wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.wdl
-wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.zip
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
-wget https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar
-```
-
-Prepare input file `EmpiricalSNPCalling_input.json`:
-
-```
-{
-  "SNPCalling.max_cores": 2,
-  "SNPCalling.ploidy": 4,
-  "SNPCalling.rm_dupli": false,
-  "SNPCalling.run_gatk": true,
-  "SNPCalling.run_freebayes": true,
-  "SNPCalling.hardfilters": true,
-  "SNPCalling.n_chrom": 1,
-  "SNPCalling.chunk_size": 1,
-  "SNPCalling.samples_info": "samples_info.txt",
-  "SNPCalling.references": {
-    "ref_fasta": "Chr04_sub.fasta",
-    "ref_dict": "Chr04_sub.dict",
-    "ref_ann": "Chr04_sub.fasta.ann",
-    "ref_sa": "Chr04_sub.fasta.sa",
-    "ref_amb": "Chr04_sub.fasta.amb",
-    "ref_pac": "Chr04_sub.fasta.pac",
-    "ref_bwt": "Chr04_sub.fasta.bwt",
-    "ref_fasta_index": "Chr04_sub.fasta.fai"
-  }
-}
-```
-
-samples_info.txt:
-
-```
-1.fastq.gz   1   1
-98.fastq.gz   98    98
-P1.fastq.gz   P1    P1
-P2.fastq.gz   P2    P2
-```
-
-If you are running using singularity combined with SLURM, set the default in `cromwell_no_mysql.conf` to `SlurmSingularity`, and run:
-
-```{bash, eval=FALSE}
-java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalSNPCalling_v1.2.0.wdl \
-                      -i EmpiricalSNPCalling_input.json \
-                      -p EmpiricalSNPCalling_v1.2.0.zip
-```
-
-If you are using docker, set the default in `cromwell_no_mysql.conf` to `Local`, and run:
-
-```{bash, eval=FALSE}
-java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalSNPCalling_v1.2.0.wdl \
-                      -i EmpiricalSNPCalling_input.json \
-                      -p EmpiricalSNPCalling_v1.2.0.zip
-```
-
-## Dosage calling and recombination fraction matrix (EmpiricalMaps.wdl)
-
-Download the workflow and the example data set:
-
-```{bash, eval=FALSE}
-# Workflow
-wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalMaps_v1.2.3/EmpiricalMaps_v1.2.3.wdl
-wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalMaps_v1.2.3/EmpiricalMaps_v1.2.3.zip
-
-# Data set (122 rose individuals Chr04)
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/vcfs_norm/gatk_Chr04_filt_example.vcf.gz
-```
-
-Prepare EmpiricalMaps_inputs.json:
-
-```
-{
-  "Maps.ploidy": "4",
-  "Maps.dataset": {
-    "parent2": "P1",
-    "name": "roses",
-    "parent1": "P2",
-    "chromosome": "Chr04",
-    "cross": "F1",
-    "multiallelics": "false"
-  },
-  "Maps.max_cores": "2",
-  "Maps.gatk_mchap": "false",
-  "Maps.vcfs_counts_source": ["vcf"],
-  "Maps.vcfs_software": ["gatk"],
-  "Maps.filter_noninfo": "true",
-  "Maps.vcfs": ["gatk_Chr04_filt_example.vcf.gz"],
-  "Maps.replaceADbyMissing": "TRUE",
-  "Maps.prob_thres": 0.8
-}
-```
-
-```{bash, eval=FALSE}
-  java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalMaps_v1.2.3.wdl \
-                        -i EmpiricalMaps_inputs.json \
-                        -p EmpiricalMaps_v1.2.3.zip
-```
-
-# Dosage calling
+## Dosage calling
 
 Install the R packages:
 
@@ -467,18 +467,18 @@ Check this tutorial if you have array data:
 
 Example considering a $F_1$ outcrossing population:
 
-## Example with updog
+### Example with updog
 
-Get the example data. It is the same data set as before, but now with 122 samples and a subset of chromosome 10.
+Get the example data. It is the same data set as before, but now with 62 samples and a subset of chromosome 04.
 
 ```{bash, eval=FALSE}
-wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/tests/data/polyploid/vcf_poly_filt.vcf.gz
+wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/data/polyploid/vcfs_norm/gatk_Chr04_filt_example.vcf.gz
 ```
 
 ```{r, eval=FALSE}
 library(vcfR)
 
-vcf <- read.vcfR("vcf_poly_filt.vcf.gz")
+vcf <- read.vcfR("gatk_Chr04_filt_example.vcf.gz")
 vcf
 
 sizemat <- extract.gt(vcf, "DP")
