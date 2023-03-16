@@ -90,7 +90,9 @@ Now, that we already checked how our sequences are, we can decide which filters 
 
 # Reads2Map workflows
 
-[Reads2Map](https://github.com/Cristianetaniguti/Reads2Map) is a collection of WDL workflows to build linkage maps from sequencing data. It was first developed to diploids ([preprint](https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2)) and is being expanded to polyploids. 
+[Reads2Map](https://github.com/Cristianetaniguti/Reads2Map) is a collection of WDL workflows to build linkage maps from sequencing data. It was first developed for diploids ([preprint](https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2)) and is being expanded for polyploids. 
+
+You can get more information about each subworkflow, input files and parameters in the [EmpiricalReads2Map vignette](https://cristianetaniguti.github.io/Tutorials/Reads2Map/EmpiricalReads.html).
 
 ## SNP calling with GATK (EmpiricalSNPCalling.wdl)
 
@@ -108,10 +110,12 @@ What we will need:
 * Java
 
 ```{bash, eval=FALSE}
+# cromwell (already available in the local server, use $CROMWELL_JAR)
+# wget https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar
+
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.wdl
 wget https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.zip
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf
-wget https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/EmpiricalSNPCalling_inputs.json
 wget https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/samples_info.txt
 ```
@@ -175,7 +179,7 @@ java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run Empirica
 If you are using docker, set the default in `cromwell_no_mysql.conf` to `Local`, and run:
 
 ```{bash, eval=FALSE}
-java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalSNPCalling_v1.2.1.wdl \
+java -jar -Dconfig.file=cromwell_no_mysql.conf -jar $CROMWELL_JAR run EmpiricalSNPCalling_v1.2.1.wdl \
                       -i EmpiricalSNPCalling_inputs.json \
                       -p EmpiricalSNPCalling_v1.2.1.zip
 ```
@@ -197,6 +201,14 @@ Check the results in the outputted path printed in the workflow log.
 ```
 
 ## Dosage calling and recombination fraction matrix (EmpiricalMaps.wdl)
+
+We will use the EmpiricalMaps.wdl to perform:
+
+* Dosage calling with updog, SuperMASSA and polyRAD
+* Filtering markers by genotype probabilities, missing data, segregation distortion and redundancy using MAPpoly
+* Estimate recombination fraction using MAPpoly
+* Plot recombination fraction heatmaps using MAPpoly
+
 
 Download the workflow and the example data set:
 
@@ -235,7 +247,7 @@ Prepare EmpiricalMaps_inputs.json:
 ```
 
 ```{bash, eval=FALSE}
-java -jar -Dconfig.file=cromwell_no_mysql.conf -jar cromwell-85.jar run EmpiricalMaps_v1.2.3.wdl \
+java -jar -Dconfig.file=cromwell_no_mysql.conf -jar $CROMWELL_JAR run EmpiricalMaps_v1.2.3.wdl \
                         -i EmpiricalMaps_inputs.json \
                         -p EmpiricalMaps_v1.2.3.zip
 ```
