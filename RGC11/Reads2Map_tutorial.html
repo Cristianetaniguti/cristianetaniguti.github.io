@@ -11,9 +11,9 @@
 
 <meta name="author" content="Cristiane Taniguti" />
 
-<meta name="date" content="2023-03-15" />
+<meta name="date" content="2023-03-16" />
 
-<title>Using Reads2Map workflows for SNP and dosage calling in polyploid GBS data</title>
+<title>Using Reads2Map workflows for SNP and dosage calling in polyploid sequencing data</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1583,9 +1583,9 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Using Reads2Map workflows for SNP and
-dosage calling in polyploid GBS data</h1>
+dosage calling in polyploid sequencing data</h1>
 <h4 class="author">Cristiane Taniguti</h4>
-<h4 class="date">2023-03-15</h4>
+<h4 class="date">2023-03-16</h4>
 
 </div>
 
@@ -1676,8 +1676,11 @@ according to sequence Phred scale. Check its manual <a href="https://catchenlab.
 <h1>Reads2Map workflows</h1>
 <p><a href="https://github.com/Cristianetaniguti/Reads2Map">Reads2Map</a> is a
 collection of WDL workflows to build linkage maps from sequencing data.
-It was first developed to diploids (<a href="https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2">preprint</a>)
-and is being expanded to polyploids.</p>
+It was first developed for diploids (<a href="https://www.biorxiv.org/content/10.1101/2022.11.24.517847v2">preprint</a>)
+and is being expanded for polyploids.</p>
+<p>You can get more information about each subworkflow, input files and
+parameters in the <a href="https://cristianetaniguti.github.io/Tutorials/Reads2Map/EmpiricalReads.html">EmpiricalReads2Map
+vignette</a>.</p>
 <div id="snp-calling-with-gatk-empiricalsnpcalling.wdl" class="section level2">
 <h2>SNP calling with GATK (EmpiricalSNPCalling.wdl)</h2>
 <p>We will use the EmpiricalSNPCalling.wdl to perform:</p>
@@ -1698,12 +1701,14 @@ files</a></li>
 cromwell</a></li>
 <li>Java</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.wdl</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.zip</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/EmpiricalSNPCalling_inputs.json</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/samples_info.txt</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cromwell (already available in the local server, use $CROMWELL_JAR)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># wget https://github.com/broadinstitute/cromwell/releases/download/85/cromwell-85.jar</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.wdl</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalSNPCalling_v1.2.1/EmpiricalSNPCalling_v1.2.1.zip</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/develop/.configurations/cromwell_no_mysql.conf</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/EmpiricalSNPCalling_inputs.json</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/raw/main/tests/pipelines/EmpiricalSNPCalling/samples_info.txt</span></code></pre></div>
 <p>Genome index files</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/opt/ kfdrc/bwa-picard:latest-dev bwa index /opt/Chr04_sub.fasta</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1747,7 +1752,7 @@ default in <code>cromwell_no_mysql.conf</code> to
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">-p</span> EmpiricalSNPCalling_v1.2.1.zip</span></code></pre></div>
 <p>If you are using docker, set the default in
 <code>cromwell_no_mysql.conf</code> to <code>Local</code>, and run:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> <span class="at">-Dconfig.file</span><span class="op">=</span>cromwell_no_mysql.conf <span class="at">-jar</span> cromwell-85.jar run EmpiricalSNPCalling_v1.2.1.wdl <span class="dt">\</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> <span class="at">-Dconfig.file</span><span class="op">=</span>cromwell_no_mysql.conf <span class="at">-jar</span> <span class="va">$CROMWELL_JAR</span> run EmpiricalSNPCalling_v1.2.1.wdl <span class="dt">\</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">-i</span> EmpiricalSNPCalling_inputs.json <span class="dt">\</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">-p</span> EmpiricalSNPCalling_v1.2.1.zip</span></code></pre></div>
 <p>Check the results in the outputted path printed in the workflow
@@ -1767,6 +1772,14 @@ log.</p>
 <div id="dosage-calling-and-recombination-fraction-matrix-empiricalmaps.wdl" class="section level2">
 <h2>Dosage calling and recombination fraction matrix
 (EmpiricalMaps.wdl)</h2>
+<p>We will use the EmpiricalMaps.wdl to perform:</p>
+<ul>
+<li>Dosage calling with updog, SuperMASSA and polyRAD</li>
+<li>Filtering markers by genotype probabilities, missing data,
+segregation distortion and redundancy using MAPpoly</li>
+<li>Estimate recombination fraction using MAPpoly</li>
+<li>Plot recombination fraction heatmaps using MAPpoly</li>
+</ul>
 <p>Download the workflow and the example data set:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Workflow</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/Cristianetaniguti/Reads2Map/releases/download/EmpiricalMaps_v1.2.3/EmpiricalMaps_v1.2.3.wdl</span>
@@ -1795,7 +1808,7 @@ log.</p>
   &quot;Maps.replaceADbyMissing&quot;: &quot;TRUE&quot;,
   &quot;Maps.prob_thres&quot;: 0.8
 }</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> <span class="at">-Dconfig.file</span><span class="op">=</span>cromwell_no_mysql.conf <span class="at">-jar</span> cromwell-85.jar run EmpiricalMaps_v1.2.3.wdl <span class="dt">\</span></span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> <span class="at">-Dconfig.file</span><span class="op">=</span>cromwell_no_mysql.conf <span class="at">-jar</span> <span class="va">$CROMWELL_JAR</span> run EmpiricalMaps_v1.2.3.wdl <span class="dt">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">-i</span> EmpiricalMaps_inputs.json <span class="dt">\</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">-p</span> EmpiricalMaps_v1.2.3.zip</span></code></pre></div>
 <p>Check the results in the outputted path printed in the workflow

@@ -1,6 +1,11 @@
 - presentation:
+    title: Reads2Map - Developing best practices for genotyping-by-sequencing analysis using linkage maps as benchmarks
+    event: Tools for Polyploids Workshop (Nelson - New Zealand)
+    date: 2023
+    slides: presentations/Reads2Map.pdf
+- presentation:
     title: Reads2Map - Practical and reproducible workflows to build polyploid linkage maps from sequencing data
-    event: Tools for Polyploids Workshop
+    event: Tools for Polyploids Workshop (San Diego - CA/USA)
     date: 2023
     slides: presentations/Reads2Map_tools2023.pdf
     recording: https://www.youtube.com/watch?v=4r6uQ-YzIMg
