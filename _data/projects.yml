@@ -74,10 +74,10 @@
     modal: True # If 'True' is selected, modal can open in 'portfolio.html'. 
     url: https://github.com/Cristianetaniguti/Reads2Map
     image:
-      path: "reads2map_sub.png" # path: assets/project/
+      path: "reads2map_logo.png" # path: assets/project/
       alt: "Reads2Map WF"
     date: 2019 &ndash; Developing
     title: Reads2Map
     summary: A collection of bioinformatic pipelines to build linkage map from sequencing data
-    description: The pipelines are written with Workflow Description Language (WDL) and perform sequence quality control, alignment (BWA), SNP calling (GATK and freebayes), dosage calling (updog, SuperMASSA and polyRAD), and build linkage maps and haplotypes (OneMap and MAPpoly). 
+    description: The pipelines are written with Workflow Description Language (WDL) and perform sequence quality control, alignment (BWA), SNP calling (GATK, freebayes, TASSEL, and Stacks), dosage calling (updog, SuperMASSA and polyRAD), and build linkage maps and haplotypes (OneMap and MAPpoly). 
  

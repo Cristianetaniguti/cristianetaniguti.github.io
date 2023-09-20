@@ -1,4 +1,9 @@
 - presentation:
+    title: Building Linkage Map for Inbred Diploid Populations with OneMap
+    event: Part of the course "Theoretical and Practical Aspects of Linkage Analysis in Diploids and Polyploids" presented to USDA/Breeding Insight group. Remove, hosted in Ithaca (NY), United States
+    date: 2023
+    slides: https://cristianetaniguti.github.io/Tutorials/Cornell_course/OneMap_Inbred.html
+- presentation:
     title: Reads2Map - Developing best practices for genotyping-by-sequencing analysis using linkage maps as benchmarks
     event: Tools for Polyploids Workshop (Nelson - New Zealand)
     date: 2023
