@@ -1,0 +1,9 @@
+* Voorrips, R.E., Gort, G. & Vosman, B. Genotype calling in tetraploid species from bi-allelic marker data using mixture models. BMC Bioinformatics 12, 172 (2011). https://doi.org/10.1186/1471-2105-12-172
+
+* Wang K, Li M, Hadley D, Liu R, Glessner J, Grant SF, Hakonarson H, Bucan M. PennCNV: an integrated hidden Markov model designed for high-resolution copy number variation detection in whole-genome SNP genotyping data. Genome Res. 2007 Nov;17(11):1665-74. doi: 10.1101/gr.6861907. Epub 2007 Oct 5. PMID: 17921354; PMCID: PMC2045149.
+
+* Stefano Colella, Christopher Yau, Jennifer M. Taylor, Ghazala Mirza, Helen Butler, Penny Clouston, Anne S. Bassett, Anneke Seller, Christopher C. Holmes, Jiannis Ragoussis, QuantiSNP: an Objective Bayes Hidden-Markov Model to detect and accurately map copy number variation using SNP genotyping data, Nucleic Acids Research, Volume 35, Issue 6, 15 March 2007, Pages 2013–2025, https://doi.org/10.1093/nar/gkm076
+
+* Korn, J., Kuruvilla, F., McCarroll, S. et al. Integrated genotype calling and association analysis of SNPs, common copy number polymorphisms and rare CNVs. Nat Genet 40, 1253–1260 (2008). https://doi.org/10.1038/ng.237
+
+* Laura Balagué-Dobón, Alejandro Cáceres, Juan R González, Fully exploiting SNP arrays: a systematic review on the tools to extract underlying genomic structure, Briefings in Bioinformatics, Volume 23, Issue 2, March 2022, bbac043, https://doi.org/10.1093/bib/bbac043
