@@ -1,4 +1,24 @@
 - presentation:
+    title: Benchmarking GBS Bioinformatic Pipelines for Polyploids Using Linkage Maps
+    event: XXXI Plant & Animal Genome Conference, Linkage and Deletion Mapping Workshop (San Diego, CA)
+    date: 2024
+- presentation:
+    title: A Survey of Ploidy and Aneuploidy Patterns Among Rosa Spp. Accessions and the Impact of Aneuploidy on Linkage Maps
+    event: XXXI Plant & Animal Genome Conference, Landscape Trees and Shurbs Workshop (San Diego, CA)
+    date: 2024
+- presentation:
+    title: Ploidy and Aneuploidy Determination in a Collection of Rosa spp. Accession and the Impact of Aneuploidy in Linkage Analysis.
+    event: Tools for Polyploids Workshop (San Diego, CA)
+    date: 2024
+- presentation:
+    title: VIEWpoly Updates, An interactive visualization Tool for Linkage Analysis Results of Diploid and Polyploid Species
+    event: Tools for Polyploids Workshop (San Diego, CA)
+    date: 2024
+- presentation:
+    title: Reads2Map Updates, Benchmarking GBS Bioinformatic Pipelines for Polyploids Using Linkage Maps
+    event: Tools for Polyploids Workshop (San Diego, CA)
+    date: 2024    
+- presentation:
     title: Building Linkage Map for Inbred Diploid Populations with OneMap
     event: Part of the course "Theoretical and Practical Aspects of Linkage Analysis in Diploids and Polyploids" presented to USDA/Breeding Insight group. Remove, hosted in Ithaca (NY), United States
     date: 2023
