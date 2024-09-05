@@ -3,8 +3,11 @@ username: Cris Taniguti (she/her)
 description: Hello! Welcome to my personal webpage! Here, I present my blog and an overview of my professional profile. I am a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. I am from Brazil, but I currently live in College Station (Texas, US) where I am a postdoctoral research associate at Texas A&M University. Outside of work, I love art performances and I have already performed aerial silk and other circus activities on streets, in theaters, and in open TV events. 
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
-  - start: 2021-07
+  - start: 2024-06
     end: current
+    experience : Genomics Coordinator, Cornell Universiry - Breeding Insight
+  - start: 2021-07
+    end: 2024-6
     experience : Postdoctoral Research Associate, Texas A&M University - Department of Horticultural Sciences
   - start: 2014-01
     end: 2014-07
