@@ -5,7 +5,7 @@
     image:
       path: "onemap_logo.png" # path: assets/project/
       alt: "OneMap logo"
-    date: 2017 &ndash; Developing
+    date: 2017 &ndash; Maintaining
     title: OneMap
     summary: Linkage maps in diploid outcrossing species
     description: Analysis of molecular marker data from model (backcrosses, F2 and recombinant inbred lines) and non-model systems (i. e. outcrossing species)
@@ -36,7 +36,7 @@
     image:
       path: "viewpoly_logo.png" # path: assets/project/
       alt: "VIEWpoly logo"
-    date: 2022 &ndash; Developing
+    date: 2022 &ndash; Maintaining
     title: VIEWpoly
     summary: A Shiny App to Visualize Genetic Maps and QTL Analysis in Polyploid Species
     description: Provides a graphical user interface to integrate, visualize and explore results from linkage and quantitative trait loci analysis, together with genomic information for autopolyploid species.
@@ -76,8 +76,31 @@
     image:
       path: "reads2map_logo.png" # path: assets/project/
       alt: "Reads2Map WF"
-    date: 2019 &ndash; Developing
+    date: 2019 &ndash; Maintaining
     title: Reads2Map
     summary: A collection of bioinformatic pipelines to build linkage map from sequencing data
-    description: The pipelines are written with Workflow Description Language (WDL) and perform sequence quality control, alignment (BWA), SNP calling (GATK, freebayes, TASSEL, and Stacks), dosage calling (updog, SuperMASSA and polyRAD), and build linkage maps and haplotypes (OneMap and MAPpoly). 
+    description: The pipelines are written with Workflow Description Language (WDL) and perform sequence quality control, alignment (BWA), SNP calling (GATK, freebayes, TASSEL, and Stacks), dosage calling (updog, SuperMASSA and polyRAD), and build linkage maps and haplotypes (OneMap and MAPpoly).
+
+- project :
+    print: True # If 'False' is selected, it will not be displayed in 'home.html > aside > .proj-content'. 
+    modal: True # If 'True' is selected, modal can open in 'portfolio.html'. 
+    url: https://github.com/Cristianetaniguti/Qploidy
+    image:
+      path: "qploidy_logo.png" # path: assets/project/
+      alt: "Qploidy logo"
+    date: 2024 &ndash; Developing
+    title: Qploidy
+    summary: Ploidy and Aneuploidy Estimation Using Genotyping Data
+    description: Analysis of molecular marker data from Array and Target Sequencing technologies to determine ploidy and aneuploidy.
+    contents:
+        - title: 1. Didactic vignette
+          image:
+            path: qploidy_tutorial.png
+            alt: "A screenshot of the vignette page"
+          description: <li><a style="color:blue" href="https://cristianetaniguti.github.io/Qploidy/Qploidy.html">How to use Qploidy</a></li>
+        - title: 2. Input data
+          description: <li>Axiom Array summary file</li>
+            <li>Illumina Array summary file</li> 
+            <li>VCF format</li>
+
  

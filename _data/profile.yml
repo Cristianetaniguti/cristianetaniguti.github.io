@@ -1,6 +1,6 @@
 ﻿image: assets/img/profile_pic.jpg
 username: Cris Taniguti (she/her)
-description: Hello! Welcome to my personal webpage! Here, I present my blog and an overview of my professional profile. I am a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. I am from Brazil, but I currently live in Ithaca (NY - US) where I am the Genomics Coordinator at Breeding Insight. Outside of work, I love art performances and I have already performed aerial silk and other circus activities on streets, in theaters, and in open TV events. 
+description: Hello! Welcome to my personal webpage! Here, I present my blog and an overview of my professional profile. I am a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. I am from Brazil, but I currently live in Ithaca (NY - US) where I am the Genomics Coordinator at Breeding Insight - Cornell University. Outside of work, I love art performances and I have already performed aerial silk and other circus activities on streets, in theaters, and in open TV events. 
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
   - start: 2024-06
