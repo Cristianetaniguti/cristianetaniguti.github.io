@@ -1,0 +1,73 @@
+<img src="logos/BI.png" align="left" width="230" />
+<img src="logos/Cornell.png" width="230" hspace="80"/>
+<img src="logos/USDA.png" align="right" width="150"/>
+
+<br>
+<br>
+
+# Introduction to R Programming
+
+## About the training
+
+This training is part of a collaborative initiative between Breeding Insight - Cornell University and INTA Costa Rica. The remote sessions will begin on March 21st 2025 and continue on consecutive Fridays through April 11th. Each session consists of a 2-hour hands-on training workshop. The only prerequisite is having R and RStudio installed on your computer. To help you with the setup process, please refer to the following installation tutorial.
+
+---
+
+## Materials
+
+* R and RStudio Installation tutorial - [Español](Tutorial_Instalacion-Espanol.html) - [Português](Tutorial_Instalacao-Portugues.html) - [English](Installation_tutorial-English.html)
+* Theoretical presentation - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
+* **Main tutorial** - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
+* Homework - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
+
+---
+
+# Course Schedule
+
+## Day 1
+### 1. Theoretical Presentation (20 min)
+
+### 2. Hands-on Session 1 (1h 40min)
+* RStudio interface familiarization
+* Basic operations
+* Creating objects
+    + Indexing
+
+**Homework Session 1** *(estimated time: 2h)*
+
+---
+
+## Day 2
+### Session 2 (2h)
+* Creating objects (continued)
+    + Matrix
+    + Data frames
+    + Lists
+    + Arrays
+* Importing and exporting data
+
+**Homework Session 2** *(estimated time: 2h)*
+
+---
+
+## Day 3
+### Session 3 (2h)
+* Conditional structures
+* Repetition structures
+* Generating graphics
+
+**Homework Session 3** *(estimated time: 2h)*
+
+---
+
+## Day 4
+### Session 4 (2h)
+* Examples and challenges including:
+    + tidyverse
+    + ggplot2
+* Generating reports (R markdown)
+* A didactic example of application in genetics
+
+
+
+
