@@ -18,7 +18,7 @@ opts_knit$set(width=75)
 
 
 <img src="logos/BI.png" align="left" width="230" />
-<img src="logos/Cornell.pdf" width="230" hspace="80"/>
+<img src="logos/Cornell.png" width="230" hspace="80"/>
 <img src="logos/USDA.png" align="right" width="150"/>
 
 <br>
