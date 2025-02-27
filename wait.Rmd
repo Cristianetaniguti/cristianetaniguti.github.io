@@ -1,0 +1,10 @@
+---
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+# Work in progress...
+
+![](assets/img/wait.png)

@@ -1,4 +1,9 @@
 - presentation:
+    title: Enhancing Genetic Insights with Polyploid Tools and User-friendly Interfaces
+    event: Plant Science Symposium - University of Florida
+    date: 2025
+    slides: presentations/Polyploid_Interface_Tools.pdf
+- presentation:
     title: Computational Tools for Genetic Analysis of Polyploid Crops
     event: Texas A&M Plant Pathology and Microbiology Department Seminar
     date: 2024
