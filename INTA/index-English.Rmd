@@ -22,7 +22,7 @@ This training is part of a collaborative initiative between Breeding Insight - C
 
 ## Materials
 
-* R and RStudio Installation tutorial - [Español](https://cristianetaniguti.github.io/INTA/Tutorial_Instalacion-Espanol.html) - [Português](https://cristianetaniguti.github.io/INTA/Tutorial_Instalacao-Portugues.html) - [English](https://cristianetaniguti.github.io/INTA/Installation_tutorial-English.html)
+* R and RStudio Installation tutorial - [Español](Tutorial_Instalacion-Espanol.html) - [Português](Tutorial_Instalacao-Portugues.html) - [English](Installation_tutorial-English.html)
 * Theoretical presentation - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * **Main tutorial** - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * Homework - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
