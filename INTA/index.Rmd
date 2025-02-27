@@ -1,5 +1,3 @@
-Here's the Spanish translation while maintaining the Rmd format:
-
 ---
 output:
   prettydoc::html_pretty:
