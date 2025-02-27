@@ -1,7 +1,7 @@
 ---
-title: "Introdução ao R e aplicações em Genética"
+title: "Introduction to R Programming"
 date: "`r Sys.Date()`"
-author: "Universidade de São Paulo - Texas A&M University - Montana State University"
+author: "Breeding Insight - Cornell University"
 output:
     rmdformats::readthedown:
       css: readthedownstatgen.css

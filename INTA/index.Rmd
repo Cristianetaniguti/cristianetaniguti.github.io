@@ -22,7 +22,7 @@ Este entrenamiento es parte de una iniciativa colaborativa entre Breeding Insigh
 
 ## Materiales
 
-* Tutorial de instalación de R y RStudio - [Español](Tutorial_Instalacion-Espanol.html) - [Português](Tutorial_Instalacao-Portugues.html) - [English](Installation_tutorial-English.html)
+* Tutorial de instalación de R y RStudio - [Español](Installation_Tutorial-Espanol.html) - [Português](Installation_Tutorial-Portugues.html) - [English](Installation_Tutorial-English.html)
 * Presentación teórica - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * **Tutorial principal** - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * Tareas - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
