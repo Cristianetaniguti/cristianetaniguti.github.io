@@ -1,0 +1,757 @@
+---
+title: "Next days"
+output: html_document
+date: "2025-03-13"
+---
+
+# Elaboração de gráficos simples
+
+Para outros dados coletados, vamos gerar alguns gráficos simples utilizando as funções básicas do R. Existem pacotes como o `ggplot2`, `plotly` e `shiny` que possuem ferramentas muito poderosas para construção de gráficos, mas exigem um pouco mais de tempo para aprendizagem de sua sintaxe.
+
+Os tipos mais comuns já possuem funções próprias, mas outros gráficos podem ser customizados de acordo com a necessidade do usuário. Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `latitude`.
+
+```{r}
+hist(dados$Latitude)
+```
+
+Vamos adicionar alguns argumentos para dar uma personalizada:
+
+* `breaks` para definir os intervalos para cada barra; 
+
+```{r, echo=FALSE}
+#### Histograma ####
+#Utiliza um vetor de valores para obter as frequências
+hist(dados$Latitude)
+hist(dados$Latitude, breaks = 2)
+hist(dados$Latitude, breaks = 15) 
+
+```
+
+Agora tente fazer o **histograma para a Longitude**, aproveite para tentar alterar alguns parâmetros. Em seguida, serão apresentados outros gráficos que poderão ser utilizados.
+
+## Salvar gráficos
+
+Os gráficos podem ser salvos através dos menus disponíveis no RStudio, ou através de funções que permitem salvar em formatos específicos. Algumas delas são: pdf(); png(); jpeg(); bitmap(). De maneira geral, o parâmetro primordial é fornecer o nome do arquivo que será gerado (contendo sua extensão). Após abrir a função gráfica, deve-se gerar o gráfico de interesse. Por fim, utiliza-se o comando dev.off() para que saída gráfica volte para o console.
+
+```{r eval=FALSE}
+png(filename = "hist_rbase.png")
+hist(dados$Latitude)
+dev.off()
+
+png(filename = "hist_rbase.png", width = 1500, height = 1500, res= 300)
+hist(dados$Latitude)
+dev.off()
+```
+
+Agora, gere um gráfico e salve-o no formato de seu interesse. Em seguida, crie diversos gráficos dentro de uma mesma função gráfica e estude a saída. 
+
+# Um exemplo didático de aplicação em genética
+
+Aqui vamos exercitar um pouco do que aprendemos de R e já introduzir uma das muitas aplicações em genética.
+
+Para melhor didática, este é um exemplo hipotético, a partir de dados simulados para uma população de retrocruzamento.
+
+Mas vamos imaginar que se trata de um experimento de avaliação da resistência de diferentes cultivares de batata contra um fungo patógeno.
+
+Aqui temos a média ajustadas das medida do tamanho da lesão nas folhas de cada cultivar inoculadas.
+
+```{r}
+fenotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/fenotipos.csv", 
+                      stringsAsFactors = F)
+str(fenotipos)
+```
+
+Ajuste os dados deixando apenas um coluna referente ao tamanho da lesão e o nome das cultivares como nome das linhas.
+
+```{r}
+rownames(fenotipos) <- fenotipos$cultivar
+fenotipos <- fenotipos[,-c(1,2)]
+```
+
+E aqui temos os genótipos de cada uma das cultivares. Podemos obtê-los via marcadores moleculares, como os SNPs.
+
+```
+Aa = 1
+aa = 0
+```
+
+```{r}
+genotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/genotipos.csv", 
+                      stringsAsFactors = F)
+head(genotipos)
+```
+
+Observe que a primeira coluna da matrix é o nome da cultivar. Vamos fazer com que ela vire o nome das linhas.
+
+```{r}
+rownames(genotipos) <- genotipos[,1]
+genotipos <- genotipos[,-1]
+head(genotipos)
+```
+
+Como já vimos, gráficos são ferramentas interessantes para melhor visualização dos dados. Aqui vamos construir um heatmap, cada genótipo receberá uma cor diferente. Assim poderemos visualizar melhor a distribuição deles na população estudada.
+
+```{r, eval=FALSE}
+heatmap(genotipos, Colv = NA, Rowv = NA)
+```
+
+Opa! Aconteceu algo errado, né? É importante prestar atenção no que o erro diz, essas dicas são valiosas. O problema aqui é que a função só recebe objetos matriz e fornecemos para ela um data.frame.
+
+```{r}
+genotipos <- as.matrix(genotipos)
+heatmap(genotipos, Colv = NA, Rowv = NA)
+```
+
+Para que o gráfico fique intuitivo, precisamos fazer algumas alterações. Repare que embora a gente tenha somente genótipos, existem mais cores no gráfico. Vamos corrigir isso.
+
+```{r}
+geno.cores <- heat.colors(2)
+heatmap(genotipos, Colv = NA, Rowv = NA,  col=geno.cores)
+head(genotipos)
+```
+
+Agora eu quero visualizar a relação desses genótipos com os fenótipos. Para isso, vou acrescentar uma coluna ao lado com cores conforme os valores dos fenótipos. Ou seja, farei outro gradiente com cores frias para valores baixos do tamanho da lesão e cores fortes para valores altos.
+
+```{r}
+fenotipos_ordenado <- sort(fenotipos)
+
+desordem <- match(fenotipos, fenotipos_ordenado)
+fenotipos
+fenotipos_ordenado
+desordem
+
+colfunc <- colorRampPalette(c("royalblue", "red"))
+cores <- colfunc(20)[desordem]
+
+heatmap(genotipos, Colv = NA, Rowv = NA, col=heat.colors(2), RowSideColors = cores)
+```
+
+Uma bagunça! Não consigo tirar nenhuma conclusão. Mas.. e se eu ordenar conforme o valor do fenótipos?
+
+```{r}
+ordem <- match(fenotipos_ordenado, fenotipos)
+
+heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+Quase conseguimos ver uma tendência.
+
+Como são dados simulados, sabemos que os marcadores de 6 a 10 e de 18 a 20 estão relacionados com a característica. Vamos veer o que acontece se separamos eles.
+
+```{r}
+heatmap(genotipos[ordem,c(6:10,18:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+Não é interessante?!? E ai? Qual genótipo é vantajoso ter nesses locos para o plantio de batata?
+
+E os marcadores não ligados?
+
+```{r}
+heatmap(genotipos[ordem,-c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
+```
+
+A bagunça continua! Indicando uma aleatoriedade, ou seja, não existe uma correlação entre o genótipo e o fenótipo.
+
+Mas uma análise visual apenas instiga nossa intuição, precisamos de uma análise estatística para realmente verificarmos. Existem muitos métodos estatísticos desenvolvidos para isso, muito robustos que levam em conta vários fatores importante como o desequilibrio de ligação entre os marcadores e a influência da existência de efeitos próximos. Mas por agora faremos a mais simples das análises, já muito obsoleta para esse propósito, mas servirá para o nosso aprendizado. Faremos uma análise de variância para cada marcador individualmente.
+
+```{r}
+mk <- genotipos[,11]
+mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+
+mk <- as.factor(mk)
+
+modelo <- lm(fenotipos ~ mk)
+summary(modelo)
+```
+
+```{r}
+mk <- genotipos[,10]
+mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+
+mk <- as.factor(mk)
+
+modelo <- lm(fenotipos ~ mk)
+summary(modelo)
+```
+
+Não queremos ficar digitando este código 25 vezes, né? Vamos aplicar nossos conhecimentos de estruturas de repetição (loops)
+
+```{r}
+p <- vector()
+for(i in 1:dim(genotipos)[2]){
+  mk <- genotipos[,i]
+  mk <- gsub(pattern = 0, replacement = "aa", x = mk)
+  mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
+  mk <- gsub(pattern = 2, replacement = "AA", x = mk)
+  
+  mk <- as.factor(mk)
+  
+  modelo <- lm(fenotipos ~ mk)
+  f <- summary(modelo)$fstatistic
+  p[i] <- pf(f[1],f[2],f[3],lower.tail=F)
+}
+
+which(p < 0.05)
+```
+
+
+# Aplicações de pacotes
+
+Existem diversos pacotes disponíveis para variadas aplicações. Utilizaremos o *ggplot2*, que está disponível no repositório oficial do R, o CRAN. Portanto para instalá-lo:
+
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+
+Depois disso é necessário recrutá-lo toda vez que iniciar um sessão no R:
+
+```{r}
+library("ggplot2")
+```
+
+O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, suas funcionalidades vão muito além do que está disponível nos gráficos básicos do R. Saiba mais sobre ele neste [link](https://ggplot2.tidyverse.org/). Encontre [aqui](https://www.r-graph-gallery.com/) vários exemplos de como ele pode ser usado.
+
+
+# Pratique gerando relatórios no RStudio
+ 
+ Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
+ 
+Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+```{r}
+library(rmarkdown)
+```
+ 
+Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
+
+```
+---
+title: "Teste"
+author: "Eu"
+date: "June 5, 2018"
+output: html_document
+---
+
+```
+
+Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
+
+O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
+
+Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
+
+O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
+
+Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
+
+```{r, eval=FALSE}
+install.packages("rmdformats")
+```
+
+Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
+
+```
+# Teste1
+
+Isso aqui é um teste só para dar uma olhada no template
+
+## Testinho
+
+Subsessão
+
+* Item
+
+**negrito**
+
+*itálico*
+
+fiz um [link](https://GENt-esalq.github.io/)!
+
+```
+
+
+Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
+
+# Extra
+
+## Algumas ferramentas básicas de análise de dados
+
+Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses, aqui apenas exemplificaremos o uso de algumas funções do R em duas situações específicas.
+
+### Avaliando o clima de Londrina
+
+Vamos utilizar outro conjunto de dados para realizarmos mais avaliações utilizando a função `lm`. Acesse o conjunto [clima_lond](clima_lond.RData):
+
+```{r}
+load("clima_lond.RData")
+```
+
+Para obter os dados de precipitação da cidade de Londrina no primeiro semestre de 2017. Vamos utilizar as funções `tapply` e
+`lm` para avaliar os dados.
+
+Algumas avaliações descritivas podem ser feitas pelo uso do `tapply` e de gráficos. A função `summary` também fornece informações gerais do conjunto. É possível usá-la em conjunto com o `tapply`.
+
+```{r}
+# Verificando se as variáveis categórias estão como fatores
+str(clima_lond)
+
+clima_lond$dia <- as.factor(clima_lond$dia)
+
+# A precipitação nesse caso é uma variável contínua, nao categórica, para transformá-la use:
+
+clima_lond$prec.mm <- as.numeric(as.character(clima_lond$prec.mm))
+
+# Já com o tapply podemos ver as diferenças
+
+tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
+```
+
+Repare que os níveis aparecem em ordem alfabética e não conforme o tempo, alteramos isso com:
+
+```{r}
+levels(clima_lond$Mes)
+
+# A função match vai indicar a posição dos elementos do primeiro vetor no segundo vetor
+pos <- match(c("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"), levels(clima_lond$Mes))
+pos
+
+# Aqui utilizamos as posições obtidas para reordenar os meses nos níveis do fator
+clima_lond$Mes = factor(clima_lond$Mes,
+                       levels(clima_lond$Mes)[pos])
+
+# Refazendo
+tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
+
+```
+
+Podemos também avaliar visualmente através de gráficos:
+
+```{r}
+ggplot(clima_lond) + 
+  geom_point(aes(x = Mes, y = prec.mm)) +
+  labs(title = "Precipitação x Mês", x = "Meses do ano de 2017", y = "Precipitação em mm")
+```
+
+```{r}
+barplot(tapply(clima_lond$prec.mm, clima_lond$Mes, sum), 
+        main="Total Mensal",
+        xlab = "Meses do ano de 2017",
+        ylab = "Precipitação em mm")
+
+# Vamos fazer um gráfico de barras que mostre a soma de precipitação em cada mês
+stat_lond <- tapply(clima_lond$prec.mm, clima_lond$Mes, sum)
+str(stat_lond)
+
+# Repare que o resultado do tapply é um vetor com seus elementos nomeados com cada mês
+# Para usar o ggplot nesse caso, precisamos elaborar um data.frame cujas colunas sejam as variáveis que utilizaremos
+stat_lond_edit <- data.frame("mes" = factor(names(stat_lond), 
+                                            levels = c("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho")), "soma" = stat_lond)
+str(stat_lond_edit)
+
+ggplot(stat_lond_edit) +
+  geom_bar(aes(x = mes, y = soma), stat="identity") +
+  labs(title= "Soma da precipitação por mês", x = "Meses do ano de 2017", y = "Soma da precipitação")
+
+```
+
+Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses. As funções `lm` e `summary` diferem apenas na forma de apresentar os resultados. O p-valor nos indica se podemos considerar diferenças do peso conforme o gênero.
+
+```{r}
+mod <- lm(prec.mm ~ Mes, data = clima_lond)
+summary(mod)
+
+modaov <- aov(prec.mm ~ Mes, data = clima_lond)
+summary(modaov)
+```
+
+Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
+
+```{r}
+tukey.test <- TukeyHSD(x=modaov, 'Mes', conf.level=0.95)
+tukey.test
+```
+
+### Avaliando experimento de café
+
+Agora, trabalharemos com dados de um experimento de café. Acesse aqui:
+
+* Arquivo [cafe.txt](https://GENt-esalq.github.io/cursoR2/cafe.txt)
+
+O experimento trata-se de dados em blocos completos casualizados de 10 progênies de café. Nele a coluna `rep` refere-se à repetição, `prog` indica o indivíduo da progênie (prog) e `colheita` indica a colheita.
+
+```{r}
+data <- read.table("cafe.txt", h = TRUE, sep = "\t", dec = ",")
+str(data)
+```
+
+**Não esqueça que é necessário que o arquivo esteja no seu ambiente de trabalho ou que você especifique o caminho completo para que o R o encontre!**
+
+Para essa análise de dados, nossa variável resposta é a produção (`prod`) e a repetição (`rep`), a progênie (`prog`) e a colheita (`colheita`) serão fatores no nosso modelo, identificados por seus níveis.
+
+```{r}
+# Transformar em fator
+data$rep <- as.factor(data$rep)
+data$prog <- as.factor(data$prog)
+data$colheita <- as.factor(data$colheita)
+str(data)
+
+# Outra opção
+data <- transform(data, rep = factor(rep), prog = factor(prog), colheita = factor(colheita))
+str(data)
+```
+
+Vamos analisar somente os dados referentes à primeira colheita. Para isso, podemos obter o subconjunto referente a ela:
+
+```{r}
+# Indexar primeita colheita
+Colheita_1 <- subset(data, colheita == 1)
+str(Colheita_1)
+```
+
+Repare que, ao fazer o subconjunto, os três níveis do fator colheita ainda são mantidos, embora agora tenhamos apenas um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
+
+```{r}
+# Droplevels
+Colheita_1 <- droplevels(subset(data, colheita == 1))
+str(Colheita_1)
+```
+
+Em seguida, podemos rodar nosso modelo de análise de variância.
+
+```{r}
+# Modelo
+Modelo1 <- aov(prod ~ rep + prog,
+               contrasts = list(prog = "contr.sum"), 
+               data = Colheita_1)
+anova(Modelo1)
+```
+
+Essa análise variância exige alguns pressupostos, podemos verificar eles nos nossos dados usando:
+
+```{r}
+####################################################
+###verificar Pressupostos da análise de variância###
+####################################################
+names(Modelo1)
+Modelo1_residuals <- Modelo1$residuals #armazenando os erros ou resíduos
+
+# teste de Normalidade DOS ERROS##
+#---------------------------------#
+shapiro.test (Modelo1_residuals) # Hipótese de Nulidade
+# a hipótese de que os erros são normais, nesse caso, como o p-value = 0.24
+# ou seja, é maior que >0.05 ou 0.01 (alfa adotado), não se rejeita a hipotese de normalidade 
+```
+
+Vamos trabalhar um poquinho com as informações da ANOVA? Primeiro, guardaremos o valor do quadrado médio:
+
+```{r, eval=TRUE}
+QME <- anova(Modelo1)["Residuals", "Mean Sq"]
+QME
+```
+
+E a média da primeira colheita da nossa variável resposta (produção):
+
+```{r, eval=TRUE}
+med <- mean(Colheita_1$prod, na.rm = TRUE)
+med
+```
+
+Com eles podemos calcular o coeficiente de variação (CV):
+
+```{r, eval=TRUE}
+CVe <- (sqrt(QME)/med)*100
+CVe
+```
+
+> Calcule o CVe e QME para a colheita 2
+
+> Crie uma função calcular o CVe
+
+Possibilidade de respostas:
+
+```{r, eval=TRUE}
+CV_E <- function(anova, med){
+  QME <- anova(anova)["Residuals", "Mean Sq"]
+  CVe <- (sqrt(QME)/med)*100
+  
+  return(CVe)
+}
+
+## 
+CV_E(anova = Modelo1, med = med)
+```
+
+Podemos também calcular a herdabilidade da característica produção:
+
+```{r, eval=TRUE}
+n_rep <- nlevels(Colheita_1$rep)
+VG <- (anova(Modelo1)["prog", "Mean Sq"]- QME)/n_rep
+VE <- QME
+H_2 <- VG/ (VG + VE)
+H_2
+```
+
+> Crie uma função para estimar a herdabilidade 
+
+## Criando mapas com ggplot
+
+Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
+
+```{r}
+### Instalar pacotes ###
+# devtools::install_github("rpradosiqueira/brazilmaps")
+# Need to install 'sf' 
+# install.packages("sf")
+#  and also the dependencies:
+# - 'units' (libudunits2-dev - Linux)
+# - 'gdal' (libgdal-dev - Linux)
+#
+#######################
+
+# Carregar pacote
+library(tidyverse)
+library(sf)
+library(brazilmaps)
+
+# Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
+dados = read.csv("dados_alunos2021.csv", stringsAsFactors = FALSE, dec = ",")
+
+# ou
+load("dados_alunos2021.RData")
+
+colnames(dados) = c("Ocupacao", "Graduacao", "Conhecimentos_Genetica", "Conhecimentos_Estatistica", "Conhecimento_Gen_Est", 
+                   "Latitude", "Longitude")
+
+# Coletando os dados da base por estado
+estados = brazilmaps::get_brmap("State")
+
+# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
+estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
+
+## Aqui buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
+## dos estados
+inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(estados))
+
+## Mapear coordenadas das cidades nos estados
+map_data = st_join(inter_sf, estados %>% 
+                     select(sigla, geometry) %>% 
+                     mutate(geom_state=geometry)) %>%
+  as.data.frame() %>% 
+  select(sigla, geom_state)
+  
+# Verificar quantas pessoas por estado 
+# Juntar com poligonos dos estados
+to_plot = map_data %>%
+  group_by(sigla) %>%
+  summarise(n = n()) %>%
+  right_join(., estados, by=c("sigla"))
+
+# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
+# coordenadas geométricas para construir os mapas. O resto envolve apenas
+# funções e argumentos do ggplot!
+ggplot(to_plot) +
+  geom_sf(aes(geometry = geometry, fill = n)) + 
+  theme_minimal() + scale_fill_continuous(low = "#C6FFDD", high = "#f64f59", na.value="white") +
+  labs(fill = "Número \nde pessoas")
+```
+
+Que tal tentarmos fazer com o mapa mundi?
+
+```{r, eval =F}
+# Pacotes
+
+# install.packages("rnaturalearth")
+# install.packages("rnaturalearthdata")
+# install.packages("rgeos")
+
+library("rnaturalearth")
+library("rnaturalearthdata")
+library("rgeos")
+
+# Mapa mundial
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+## Buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
+## dos paises
+inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(world))
+
+map_data = st_join(world, inter_sf) %>%
+  filter(!is.na(Graduacao)) %>% 
+  select(name, geometry) %>% 
+  as.data.frame()
+
+
+# Verificar quantas pessoas por país 
+# Juntar com poligonos dos países
+to_plot = map_data %>%
+  group_by(name) %>%
+  summarise(n = n()) %>%
+  right_join(., world, by=c("name"))
+
+# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
+# coordenadas geométricas para construir os mapas. O resto envolve apenas
+# funções e argumentos do ggplot!
+ggplot(to_plot) +
+  geom_sf(aes(geometry = geometry, fill = n)) + 
+  theme_minimal() + scale_fill_continuous(low = "#C6FFDD", high = "#f64f59", na.value="white") +
+  labs(fill = "Número \nde pessoas")
+```
+
+## Família de funções `apply`
+
+A família de funções `apply` também podem funcionar como um estrutura de repetição. Sua sintaxe é mais enxuta quando comparada com `for` ou `while` e pode facilitar a elaboração do código. 
+
+Aqui vamos exemplificar o uso de algumas dessas funções.
+
+### apply
+
+A função `apply` é a base de todas as outras funções da família, portanto a compreensão do funcionamento desta é essencial para entender as demais. Se buscar no help da função, ele indicará que os argumentos da função consistem em: apply(X, MARGIN, FUN, ...). Sendo X o conjunto de dados em formato de array (incluindo matrix, que consiste num array de dimensão 2), MARGIN será 1 se a ação deverá ser aplicada à linhas, 2 se for aplicada a colunas e c(1,2) se for aplicada a ambas; FUN é a função que indica ação.
+
+Num simples exemplo temos a matrix:
+
+```{r}
+ex_mat <- matrix(seq(0,21,3), nrow = 2)
+```
+
+Se quisermos somar os elementos das colunas usamos:
+
+```{r}
+apply(ex_mat, 2, sum)
+```
+
+Se quisermos somar os elementos das linhas:
+
+```{r}
+apply(ex_mat, 1, sum)
+```
+
+Se fossemos utilizar o `for` para realizar essa tarefa:
+
+```{r}
+
+# Soma das colunas
+for(i in 1:dim(ex_mat)[2]){
+  print(sum(ex_mat[,i]))
+}
+
+# Soma das linhas
+for(i in 1:dim(ex_mat)[1]){
+  print(sum(ex_mat[i,]))
+}
+```
+
+### lapply
+
+Se diferencia do `apply` por poder receber outros tipos de objetos (mais utilizado com listas) e devolver o resultado  em uma lista.
+
+
+```{r}
+ex_list <- list(A=matrix(seq(0,21,3), nrow = 2), 
+                B=matrix(seq(0,14,2), nrow = 2), 
+                C= matrix(seq(0,39,5), nrow = 2))
+str(ex_list)
+```
+
+Para selecionar a segunda coluna de todas as matrizes
+
+```{r}
+lapply(ex_list, "[", 2)
+```
+
+### sapply
+
+A função `sapply` funciona como o `lapply` a diferença é que ele retorna apenas um valor por componente da lista e os deposita em um vetor de resposta. Como no exemplo:
+
+```{r}
+sapply(ex_list, "[",1,3)
+```
+
+### tapply
+
+Esta função é um pouco diferente das demais, ela exige que exista alguma variável categórica (fator) para aplicar ação separadamente conforme suas categorias (levels). Por isso, normalmente é aplicada a data.frames.
+
+Vamos utilizar nosso conjunto de dados:
+
+```{r}
+str(dados)
+dados$Graduacao  <- as.factor(dados$Graduacao)
+
+dados[dados == "Avançado"] <- 3
+dados[dados == "Intermediário"] <- 2
+dados[dados == "Básico"] <- 1
+dados[dados == "Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto"] <- 99
+
+dados$Conhecimentos_Genetica <- as.numeric(dados$Conhecimentos_Genetica)
+
+tapply(dados$Conhecimentos_Genetica, dados$Graduacao, mean)
+```
+
+Saiba mais sobre essa família de funções no [link](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/)
+
+Observe que nas funções `apply` podemos trocar as funções prontas do *r base* por funções personalizadas. 
+
+> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão extra**](exercicios.html), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
+
+
+## Gerando sorteio para delineamento experimental
+
+Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
+
+```{r,  message=FALSE, warning=FALSE}
+############################
+#SORTEIO DE EXPERIMENTOS####
+############################
+
+#install.packages("agricolae")
+library(agricolae)
+trt <- c("0","1","2","5","10","20","50","100","Dina")
+rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
+rcbd # Planilha de campo
+```
+
+Podemos exportar e salvar nosso sorteio com:
+
+```{r}
+write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
+file.show("SORTEIO.txt")
+write.csv(rcbd,"SORTEIO.csv",row.names=F)
+```
+
+## PCA - Análise de componentes principais
+
+O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
+
+```{r, eval=FALSE}
+# para instalar, use install.packages("ggfortify")
+library(ggfortify)
+
+autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
+         data = dados, shape = 'area', colour = 'Graduacao', loadings = TRUE, loadings.colour = 'red', 
+         loadings.label = TRUE, loadings.label.colour = 'black',
+         loadings.label.size = 4) +
+  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
+
+# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
+# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
+```
+
+Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
+
+
+# Sugestões, críticas e elogios
+
+Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `biometriamarcadores@gmail.com`.
+
+Acesse também outros materiais em português produzidos pela mesma equipe [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
+
+Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.
+
+Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).
