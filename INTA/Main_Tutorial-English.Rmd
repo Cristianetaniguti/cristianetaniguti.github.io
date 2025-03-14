@@ -1,174 +1,179 @@
-Esse material foi elaborado para o **Introdução ao R e aplicações em Genética**.
+This material is an update and translation of materials developed by students from the Department of Genetics at ESALQ/USP - Brazil. Access the Portuguese content taught in other events at [this website](https://cristianetaniguti.github.io/Workshop_genetica_esalq/).
 
-Sugerimos que, antes de iniciar a prática aqui descrita, siga [este tutorial](https://cristianetaniguti.github.io/Workshop_genetica_esalq/SIFSC11/Tutorial_instalacao.html) para instalação do R e do RStudio.
+We suggest that, before starting the practice described here, follow [this tutorial](https://cristianetaniguti.github.io/INTA/Installation_Tutorial-Portugues.html) for installing R and RStudio.
 
+# Getting Familiar with the RStudio Interface
 
-# Familiarização com a interface do RStudio
-
-Abrindo o RStudio você verá:
+When opening RStudio, you will see:
 
 <img src="imagens/Rstudio.png"  style="width:700px;height:500px;">
 
-A interface é separada em quatro janelas com principais funções:
+The interface is divided into four windows with main functions:
 
-* Edição de código
-* Ambiente de trabalho e histórico
+* Code editing
+* Workspace and history
 * Console
-* Arquivos, gráficos, pacotes e ajuda
+* Files, plots, packages, and help
 
-Explore cada uma das janelas. São inúmeras funcionalidades para cada uma delas, veremos algumas delas no decorrer do curso.
+Explore each of the windows. There are numerous functionalities for each of them, and we will cover some of them throughout the course.
 
-## Um primeiro script
+## A First Script
 
-A janela de edição de código (provavelmente localizada no canto superior esquerdo) será utilizada para escrever o seu código. Abra um novo script clicando no `+` no canto superior esquerdo e selecionando `R script`.
+The code editing window (probably located in the top left corner) will be used to write your code. Open a new script by clicking the `+` in the top left corner and selecting `R script`.
 
-Vamos então iniciar os trabalhos com o tradicional `Hello World`. Digite no seu script:
+Let's begin our work with the traditional `Hello World`. Type in your script:
 
 ```{r}
 cat("Hello world")
 ```
 
-Agora, selecione a linha e aperte o botão `Run` ou utilize `Ctrl + enter`.
+Now, select the line and press the `Run` button or use `Ctrl + enter`.
 
-Ao fazer isso o seu código será processado na janela `Console`, onde aparecerá em azul (se você estiver com as cores padrão do R) o código escrito e, logo em seguida, o resultado desejado. A linha somente não será processada no console se houver o símbolo `#` na frente. Agora, experimente colocar `#` na frente do código escrito. Novamente, selecione a linha e aperte `Run`. 
+When you do this, your code will be processed in the `Console` window, where the written code will appear in blue (if you have R's default colors), followed by the desired result. The line will only not be processed in the console if there is a `#` symbol in front of it. Now, try putting `#` in front of the written code. Again, select the line and press `Run`.
 
 ```{r}
 # cat("Hello world")
 ```
 
-O símbolo `#` é utilizado para **comentários** no código. Esta é uma ótima prática de organização e ajuda a lembrar, posteriormente, o que você estava pensando quando escreveu o código. Também é essencial para que outras pessoas possam entendê-lo. Como no exemplo:
+The `#` symbol is used for **comments** in the code. This is a great organizational practice and helps to remember, later, what you were thinking when you wrote the code. It's also essential for others to understand it. As in the example:
 
 ```{r}
-# Iniciando os trabalhos no R
+# Starting work in R
 cat("Hello world")
 ```
 
-**Importante**: sempre que quiser realizar alguma alteração, edite o seu script e não diretamente no console, pois tudo o que neste é escrito, não terá como ser salvo!
+**Important**: whenever you want to make any changes, edit your script and not directly in the console, because everything written in the console cannot be saved!
 
-Para salvar seu script, você pode utilizar a aba `Files` localizada (como padrão) no canto direito inferior. Você pode procurar uma localização de sua preferência, criar uma nova pasta com o nome `CursoR`. 
+To save your script, you can use the `Files` tab located (by default) in the bottom right corner. You can look for a location of your preference, create a new folder named `CourseR`.
 
-<span style="color:red"> Dica: </span>
+<span style="color:red"> Tip: </span>
 
-* Evite colocar espaços e pontuações no nome das pastas e arquivos, isso pode dificultar o acesso via linha de comando no R. Por exemplo, ao invés de `Curso R`, optamos por `CursoR`.
+* Avoid putting spaces and punctuation in folder and file names, this can make access via command line in R difficult. For example, instead of `Course R`, we opt for `CourseR`.
 
-Depois, basta clicar no disquete localizado no cabeçalho do RStudio ou com `Ctrl + s` e selecionar o diretório `CursoR` criado. Scripts em R são salvos com a extensão `.R`. 
+Then, just click on the floppy disk icon located in the RStudio header or use `Ctrl + s` and select the created `CourseR` directory. R scripts are saved with the `.R` extension.
 
-## Estabelecendo diretório de trabalho
+## Setting the Working Directory
 
-Outra boa prática no R é deixar o script no mesmo diretório onde estão seus dados brutos (arquivos de entrada no script) e os dados processados (gráficos, tabelas, etc). Para isso, vamos fazer com que o R identifique o mesmo diretório em que você salvou o script como **diretório de trabalho**. Assim, ele entenderá que é dali que os dados serão obtidos e é para lá que também irão os resultados.
+Another good practice in R is to keep the script in the same directory where your raw data (input files for the script) and processed data (graphs, tables, etc.) are located. For this, we'll have R identify the same directory where you saved the script as the **working directory**. This way, it will understand that this is where the data will be obtained from and where the results will also go.
 
-Você pode fazer isso utilizando as facilidades do RStudio, basta localizar o diretório `CursoR` pela aba `Files`, clicar em `More` e depois "Set as Working Directory". Repare que irá aparecer no console algo como:
+You can do this using RStudio's facilities, simply locate the `CourseR` directory through the `Files` tab, click on `More` and then "Set as Working Directory". Notice that something like this will appear in the console:
 
 ```{r, eval=FALSE}
-setwd("~/Documents/CursoR")
+setwd("~/Documents/CourseR")
 ```
 
-Ou seja, você pode utilizar este mesmo comando para realizar esta ação. O resultado será nossa pasta de trabalho. Quando estiver perdido/a ou para ter certeza que o diretório de trabalho foi alterado utilize:
+In other words, you can use this same command to perform this action. The result will be our working folder. When you're lost or to make sure the working directory has been changed, use:
 
 ```{r, eval=FALSE}
 getwd()
 ```
 
-## Facilitando a vida com `Tab`
+## Making Life Easier with `Tab`
 
-Agora, imagine que você tem um diretório como `~/Documentos/mestrado/semestre1/disciplina_tal/aula_tal/dados_28174/analise_276182/resultados_161/`. Não é fácil lembrar todo este caminho para escrever num comando `setwd()`.
+Now, imagine you have a directory like `~/Documents/masters/semester1/course_such/class_such/data_28174/analysis_276182/results_161/`. It's not easy to remember this entire path to write in a `setwd()` command.
 
-Além da facilidade da janela do RStudio, você também pode utilizar a tecla `Tab` para completar o caminho para você. Experimente buscando alguma pasta no seu computador. Basta começar a digitar o caminho e apertar `Tab`, ele irá completar o nome para você! Se você tiver mais do que um arquivo com aquele início de nome, aperte duas vezes o `Tab`, ele mostrará todas as opções.
+In addition to the convenience of the RStudio window, you can also use the `Tab` key to complete the path for you. Try it by searching for a folder on your computer. Just start typing the path and press `Tab`, it will complete the name for you! If you have more than one file with that name beginning, press `Tab` twice, it will show you all the options.
 
-O `Tab` funciona não só para indicar caminhos, mas também para comandos e nomes de objetos. É muito comum cometermos erros de digitação no código. Utilizar o `Tab` reduzirá significativamente esses erros.
+The `Tab` key works not only for indicating paths but also for commands and object names. It's very common to make typing errors in code. Using `Tab` will significantly reduce these errors.
 
+`Tab` can be even more powerful if you have access to the [GitHub Copilot](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html) tool. With it, you can use `Tab` to complete the code you're writing. It's an artificial intelligence-based tool that suggests code as you write. It's a paid tool, but you can use it for free for 60 days.
 
-# Operações básicas
+# Basic Operations
 
-Vamos então à linguagem! 
+Let's get to the language!
 
-O R pode funcionar como uma simples **calculadora**, que utiliza a mesma sintaxe que outros programas (como o excel):
+R can function as a simple **calculator**, using the same syntax as other programs (like Excel):
 
 ```{r, eval=FALSE}
-1+1.3                 #Decimal definido com "."
+1+1.3                 #Decimal defined with "."
 2*3
 2^3
 4/2
 
-sqrt(4)              #raíz quadrada
-log(100, base = 10)  #Logaritmo na base 10
-log(100)             #Logaritmo com base neperiana
-
+sqrt(4)              #square root
+log(100, base = 10)  #Logarithm base 10
+log(100)             #Natural logarithm
 ```
 
-Agora, utilize as operações básicas para solucionar expressão abaixo. Lembre-se de utilizar parênteses `()` para estabelecer prioridades nas operações.
+Now, use the basic operations to solve the expression below. Remember to use parentheses `()` to establish priorities in operations.
 
 $(\frac{13+2+1.5}{3})+ log_{4}96$
 
-Resultado esperado:
+Expected result:
 
 ```{r, echo=FALSE}
 ((13+2+1.5)/3) + log(96, base = 4)
 ```
 
-Repare que, se posicionar o parênteses de forma incorreta, o código não resultará em nenhuma mensagem de erro, pois este é um erro que chamamos de **erro lógico**, ou seja, o código roda, mas não faz o que você gostaria que ele fizesse. Esse é o tipo de erro mais difícil de ser consertado. Os erros que produzem uma mensagem, seja um aviso (**warning**) ou um erro (**error**) são chamados de **erros de sintaxe**. Nesses casos, o R retornará uma mensagem para te ajudar a corrigí-los. Os **warnings** não comprometem o funcionamento do código, mas chamam a atenção para algum ponto; já os **errors** precisam necessariamente ser corrigidos para que o código rode.
+Notice that if you position the parentheses incorrectly, the code won't result in any error message, as this is what we call a **logical error** or **silent error**, meaning the code runs but doesn't do what you want it to do. This is the most dangerous and difficult type of error to fix. See an example:
 
-Exemplo de error:
+```{r}
+13+2+1.5/3 + log(96, base = 4)
+```
+
+Errors that produce a message, whether a **warning** or an **error**, are called **syntax errors**. In these cases, R will return a message to help you correct them. **Warnings** don't compromise the code's functionality but draw attention to something; **errors**, however, must necessarily be corrected for the code to run.
+
+Example of an error:
 
 ```{r, eval=FALSE}
 ((13+2+1,5)/3) + log(96, base = 4)
 ```
 
-Você pode também esquecer de fechar algum parênteses, ou aspas, ou colchetes, ou chaves, nesses casos, o R ficará aguardando o comando para fechar o bloco de código sinalizando com um `+`:
+You might also forget to close a parenthesis, quotation mark, bracket, or brace; in these cases, R will wait for the command to close the code block, indicating with a `+`:
 
 ```{r, eval=FALSE}
 ((13+2+1.5)/3 + log(96, base = 4)
 ```
 
-Se acontecer, vá até o console e aperte ESC, que o bloco será finalizado para que você possa corrigí-lo.
+If this happens, go to the console and press ESC, which will end the block so you can correct it.
 
-Os comandos `log` e `sqrt` são duas de muitas outras funções básicas que o R possui. Funções são conjuntos de instruções organizadas para realizar uma tarefa. Para todas elas, o R possui uma descrição para auxiliar no seu uso. Para acessar essa ajuda use:
+The commands `log` and `sqrt` are two of many basic functions that R has. Functions are organized sets of instructions to perform a task. For all of them, R has a description to help in their use. To access this help, use:
 
 ```{r, eval=FALSE}
 ?log
 ```
 
-E será aberta a descrição da função na janela `Help` do RStudio.
+And the function description will open in RStudio's `Help` window.
 
-Se a descrição do próprio R não for suficiente para você entender como funciona a função, busque no google (de preferência em inglês). Existem diversos sites e fóruns com informações didáticas das funções do R.
+If R's own description isn't enough for you to understand how the function works, search on Google (preferably in English). There are many websites and forums with educational information about R functions.
 
-## Operações com vetores
+## Vector Operations
 
-Os vetores são as estruturas mais simples trabalhadas no R. Construímos um vetor com uma sequencia numérica usando:
+Vectors are the simplest structures worked with in R. We build a vector with a numeric sequence using:
 
 ```{r}
 c(1,3,2,5,2)
 ```
 
-**MUITA ATENÇÃO**: O *c* é a função do R (*Combine Values into a Vector or List*) com a qual construímos um vetor! 
+**IMPORTANT NOTE**: The *c* is R's function (*Combine Values into a Vector or List*) with which we build a vector!
 
-Utilizamos o simbolo `:` para criar sequências de números inteiros, como:
+We use the `:` symbol to create sequences of integer numbers, like:
 
 ```{r}
 1:10
 ```
 
-Podemos utilizar outras funções para gerar sequências, como:
+We can use other functions to generate sequences, such as:
 
 ```{r}
 seq(from=0, to=100, by=5)
-# ou
-seq(0,100,5) # Se você já souber a ordem dos argumentos da função
+# or
+seq(0,100,5) # If you already know the order of the function arguments
 ```
 
-* Crie uma sequencia utilizando a função `seq` que varie de 4 a 30, com intervalos de 3 em 3.
+* Create a sequence using the `seq` function that varies from 4 to 30, with intervals of 3.
 
 ```{r, echo=FALSE}
 seq(from=4, to=30, by=3)
 ```
 
-A função `rep` gera sequências com números repetidos:
+The `rep` function generates sequences with repeated numbers:
 
 ```{r}
 rep(3:5, 2)
 ```
 
-Podemos realizar operações utilizando esses vetores:
+We can perform operations using these vectors:
 
 ```{r,eval=FALSE}
 c(1,4,3,2)*2
@@ -176,182 +181,195 @@ c(4,2,1,5)+c(5,2,6,1)
 c(4,2,1,5)*c(5,2,6,1)
 ```
 
-Repare que já esta ficando cansativo digitar os mesmos números repetidamente, vamos resolver isso criando **objetos** para armazenar nossos vetores e muito mais. 
+Notice that it's already getting tiresome to type the same numbers repeatedly, let's solve this by creating **objects** to store our vectors and much more.
 
-# Criando objetos
+# Creating Objects
 
-O armazenamento de informações em objetos e a possível manipulação desses faz do R uma linguagem *orientada por objetos*. Para criar um objeto basta atribuir valores para as variáveis, como a seguir:
+The storage of information in objects and their possible manipulation makes R an *object-oriented* language. To create an object, simply assign values to variables, as follows:
 
 ```{r, results='hide'}
 x = c(30.1,30.4,40,30.2,30.6,40.1)
-# ou
+# or
 x <- c(30.1,30.4,40,30.2,30.6,40.1)
 
 y = c(0.26,0.3,0.36,0.24,0.27,0.35)
 ```
 
-Os mais antigos costumam usar o sinal `<-`, mas tem a mesma função de `=`. Há quem prefira usar o `<-` como atribuição em objetos e `=` apenas para definir os argumentos dentro de funções. Organize-se da forma como preferir.
+Old-school users tend to use the `<-` sign, but it has the same function as `=`. Some prefer to use `<-` for object assignment and `=` only for defining arguments within functions. Organize yourself in the way you prefer.
 
-Para acessar os valores dentro do objeto basta:
+To access the values within the object, simply:
 
 ```{r}
 x
 ```
 
-A linguagem é sensível à letras maiúsculas e minúsculas. Logo, `x` é diferente de `X`:
+The language is case-sensitive. Therefore, `x` is different from `X`:
 
 ```{r, eval=FALSE}
 X
 ```
 
-O objeto `X` não foi criado. 
+The object `X` was not created.
 
-O nome dos objetos é uma escolha pessoal, a sugestão é tentar manter um padrão para melhor organização. Alguns nomes não podem ser usados por estabelecerem papéis fixos no R, são eles:
+The naming of objects is a personal choice, but it's suggested to maintain a pattern for better organization. Here are some tips:
 
-* NA - Not available, simboliza dados faltantes
-* NaN - Not a number, simboliza indefinições matemáticas
-* Inf - Infinite, conceito matemático
-* NULL - Null object, simboliza ausência de informação
+* Use descriptive names
+* Avoid starting with numbers
+* Don't use spaces (use _ or camelCase)
+* Don't use special characters
+* Maintain consistency in the chosen pattern
+* Avoid very long names
+* Don't use accents or non-ASCII characters
 
-Podemos então realizar as operações com o objeto criado:
+Some names cannot be used because they establish fixed roles in R:
+
+* TRUE - True, logical value
+* FALSE - False, logical value
+* if, else, for, while, break, next - Reserved words for conditional and loop structures
+* for, while, repeat - Reserved words for loop structures
+* function - Reserved word for function definition
+* in, NA, NaN, NULL - Reserved words for special values
+* NA_integer__, NA_real_, NA_character_, NA_complex_ - Special values to represent missing data
+
+We can then perform operations with the created object:
 
 ```{r}
 x+2
 x*2
 ```
 
-Para realizar a operação o R alinha os dois vetores e realiza a operação elemento à elemento. Observe:
+To perform the operation, R aligns the two vectors and performs the operation element by element. Observe:
 
 ```{r}
 x + y
 x*y
 ```
 
-Se os vetores tiverem tamanhos diferentes, ele irá repetir o menor para realizar a operação elemento a elemento com todos do maior.
+If the vectors have different sizes, it will repeat the smaller one to perform the element-by-element operation with all elements of the larger one.
 
 ```{r, results='hide'}
 x*2
 x*c(1,2)
 ```
 
-Se caso o menor vetor não for múltiplo do maior, obteremos um aviso:
+If the smaller vector is not a multiple of the larger one, we'll get a warning:
 
 ```{r}
 x*c(1,2,3,4)
 ```
 
-Repare que o **warning** não compromente o funcionamento do código, ele só dá uma dica de que algo pode não estar da forma como você gostaria.
+Notice that the **warning** doesn't compromise the code's functionality; it just gives a hint that something might not be as you'd like.
 
-Podemos também armazenar a operação em outro objeto:
+We can also store the operation in another object:
 
 ```{r, results='hide'}
 z <- (x+y)/2
 z
 ```
 
-Podemos também aplicar algumas funções, como exemplo:
+We can also apply some functions, for example:
 
 ```{r}
-sum(z)  # soma dos valores de z
-mean(z) # média 
-var(z)  # variância
+sum(z)  # sum of z values
+mean(z) # mean
+var(z)  # variance
 ```
 
-## Indexação
+## Indexing
 
-Acessamos somente o 3º valor do vetor criado com `[]`:
+We access only the 3rd value of the created vector with `[]`:
 
 ```{r, results='hide'}
 z[3]
 ```
 
-Também podemos acessar o número da posição 2 a 4 com:
+We can also access the numbers from position 2 to 4 with:
 
 ```{r}
 z[2:4]
 ```
 
-Para obter informações do vetor criado utilize:
+To get information about the created vector, use:
 
 ```{r}
 str(z)
 ```
 
-A função `str` nos diz sobre a estrutura do vetor, que se trata de um vetor **numérico** com 6 elementos. 
+The `str` function tells us about the structure of the vector, which is a **numeric** vector with 6 elements.
 
-Os vetores também podem receber outras categorias como **caracteres**:
+Vectors can also receive other categories such as **characters**:
 
 ```{r}
 clone <- c("GRA02", "URO01", "URO03", "GRA02", "GRA01", "URO01")
 ```
 
-Outra classe são os **fatores**, esses podem ser um pouco complexos de lidar.
+Another class is **factors**, which can be a bit complex to handle.
 
-De forma geral, fatores são valores categorizados por `levels`, como exemplo, se transformarmos nosso vetor de caracteres `clone` em fator, serão atribuidos níveis para cada uma das palavras:
+Generally, factors are values categorized by `levels`. For example, if we transform our character vector `clone` into a factor, levels will be assigned to each word:
 
 ```{r}
-clone_fator <- as.factor(clone)
-str(clone_fator)
-levels(clone_fator)
+clone_factor <- as.factor(clone)
+str(clone_factor)
+levels(clone_factor)
 ```
 
-Dessa forma, teremos apenas 4 níveis para um vetor com 6 elementos, já que as palavras "GRA02" e "URO01" se repetem. Podemos obter o número de elementos do vetor ou o seu comprimento com:
+This way, we'll have only 4 levels for a vector with 6 elements, since the words "GRA02" and "URO01" are repeated. We can get the number of elements in the vector or its length with:
 
 ```{r}
-length(clone_fator)
+length(clone_factor)
 ```
 
-Também há vetores **lógicos**, que recebem valores de verdadeiro ou falso:
+There are also **logical** vectors, which receive true or false values:
 
 ```{r}
-logico <- x > 40
-logico   # Os elementos são maiores que 40?
+logical <- x > 40
+logical   # Are the elements greater than 40?
 ```
 
-Com ele podemos, por exemplo, identificar quais são as posições dos elementos maiores que 40:
+With it we can, for example, identify which positions have elements greater than 40:
 
 ```{r}
-which(logico)  # Obtendo as posiçoes dos elementos TRUE
+which(logical)  # Getting the positions of TRUE elements
 
-x[which(logico)] # Obtendo os números maiores que 40 do vetor x pela posição
-# ou
+x[which(logical)] # Getting numbers greater than 40 from vector x by position
+# or
 x[which(x > 40)]
 ```
 
-Também podemos localizar elementos específicos com:
+We can also locate specific elements with:
 
 ```{r}
 clone %in% c("URO03", "GRA02")
 ```
 
-Também podem ser úteis as funções `any` e `all`. Procure sobre elas.
+The functions `any` and `all` can also be useful. Research about them.
 
-Encontre mais sobre outros operadores lógicos, como o `>` utilizado, neste [link](http://www.statmethods.net/management/operators.html).
+Find more about other logical operators, like the `>` used, at this [link](http://www.statmethods.net/management/operators.html).
 
 **Warning1**
 
-Faça uma sequência numérica, contendo 10 valores inteiros, e salve em um objeto chamado "a".
+Create a numeric sequence containing 10 integer values, and save it in an object called "a".
 
 ```{r}
 (a <- 1:10)
 ```
 
-Crie outra sequência, utilizando números decimais e qualquer operação matemática, de tal forma que seus valores sejam idênticos ao objeto "a".
+Create another sequence, using decimal numbers and any mathematical operation, so that its values are identical to object "a".
 
 ```{r}
 b <- seq(from = 0.1, to = 1, 0.1)
 (b <- b*10)
 ```
 
-Os dois vetores parecem iguais, não?
+The two vectors look equal, don't they?
 
-Então, utilizando um operador lógico, vamos verificar o objeto "b" é igual ao objeto "a".
+Then, using a logical operator, let's verify if object "b" is equal to object "a".
 
 ```{r}
 a==b
 ```
 
-Alguns valores não são iguais. Como isso é possivel?
+Some values are not equal. How is this possible?
 
 ```{r}
 a==round(b)
@@ -359,353 +377,344 @@ a==round(b)
 
 **Warning2**
 
-Não é possível misturar diferentes classes dentro de um mesmo vetor. Ao tentar fazer isso, repare que o R irá tentar igualar para uma única classe:
+It's not possible to mix different classes within the same vector. When trying to do this, notice that R will try to equalize to a single class:
 
 ```{r}
-errado <- c(TRUE, "vish", 1)
-errado
+wrong <- c(TRUE, "oops", 1)
+wrong
 ```
 
-No caso, todos os elementos foram transformados em caracteres.
+In this case, all elements were transformed into characters.
 
-**Algumas Dicas**: 
+**Some Tips**:
 
-* Cuidado com a prioridade das operações, na dúvida, sempre acrescente parenteses conforme seu interesse de prioridade.
-* Lembre-se que, se esquecer de fechar algum `(` ou `[` ou `"`, o console do R ficará esperando você fechar indicando um `+`. Nada será processado até que você digite diretamente no console um `)` ou aperte ESC.
-* Cuidado para não sobrepor objetos já criados criando outros com o mesmo nome. Use, por exemplo: altura1, altura2.
-* Mantenha no seu script .R somente os comandos que funcionaram e, de preferência, adicione comentários. Você pode, por exemplo, comentar dificuldades encontradas, para que você não cometa os mesmos erros mais tarde.
+* Be careful with operation priority; when in doubt, always add parentheses according to your priority interest.
+* Remember that if you forget to close any `(` or `[` or `"`, R's console will wait for you to close it, indicating with a `+`. Nothing will be processed until you directly type a `)` in the console or press ESC.
+* Be careful not to overwrite already created objects by creating others with the same name. Use, for example: height1, height2.
+* Keep in your .R script only the commands that worked and, preferably, add comments. You can, for example, comment on difficulties encountered, so you don't make the same mistakes later.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 1**](exercicios.html#sessao1), se não, faça-os em outro momento e nos envie dúvidas.
+> If you're ahead of your colleagues, you can already do the exercises from [**Session 1**](exercises-Portugues.html#session1); if not, do them at another time and send us your questions.
 
-## Matrizes
+## Matrices
 
-As matrizes são outra classe de objetos muito utilizadas no R, com elas podemos realizar operações de maior escala de forma automatizada.
+Matrices are another class of objects widely used in R, with them we can perform large-scale operations in an automated way.
 
-Por serem usadas em operações, normalmente armazenamos nelas elementos numéricos. Para criar uma matriz, determinamos uma sequência de números e indicamos o número de linhas e colunas da matriz:
+Since they are used in operations, we typically store numeric elements in them. To create a matrix, we determine a sequence of numbers and indicate the number of rows and columns in the matrix:
 
 ```{r}
 X <- matrix(1:12, nrow = 6, ncol = 2)
 X
 ```
 
-Podemos também utilizar sequências já armazenadas em vetores para gerar uma matriz, desde que eles sejam numéricos:
+We can also use sequences already stored in vectors to generate a matrix, as long as they are numeric:
 
 ```{r}
 W <- matrix(c(x,y), nrow = 6, ncol =2)
 W
 ```
 
-Com elas podemos realizar operações matriciais:
+With them we can perform matrix operations:
 
 ```{r}
 X*2
 X*X        
-X%*%t(X)          # Multiplicação matricial
+X%*%t(X)          # Matrix multiplication
 ```
 
-Utilizar essas operações exige conhecimento de álgebra de matrizes, se quiser se aprofundar a respeito, o livro *Linear Models in Statistics, Rencher (2008)* possui um boa revisão à respeito. Você também pode explorar a sintaxe do R para essas operações neste [link](http://www.statmethods.net/advstats/matrix.html).
+Using these operations requires knowledge of matrix algebra. If you want to delve deeper into this, the book *Linear Models in Statistics, Rencher (2008)* has a good review about it. You can also explore R syntax for these operations at this [link](http://www.statmethods.net/advstats/matrix.html).
 
-Acessamos os números internos à matriz dando as coordenadas [linha,coluna], como no exemplo:
+We access the numbers inside the matrix by giving the coordinates [row,column], as in the example:
 
 ```{r}
-W[4,2] # Número posicionado na linha 4 e coluna 2
+W[4,2] # Number positioned in row 4 and column 2
 ```
 
-As vezes pode ser informativo dar nomes às colunas e às linhas da matriz, fazemos isso com:
+Sometimes it can be informative to give names to the columns and rows of the matrix, we do this with:
 
 ```{r}
-colnames(W) <- c("altura", "diametro")
+colnames(W) <- c("height", "diameter")
 rownames(W) <- clone
 W
 ```
 
-Essas funções `colnames` e `rownames` também funcionam nos data.frames.
+These functions `colnames` and `rownames` also work with data.frames.
 
 ## Data.frames
 
-Diferente das matrizes, não realizamos operações com os data.frames, mas eles permitem a união de vetores com classes diferentes. Os *data frames* são semelhantes a tabelas geradas em outros programas, como o excel.
+Unlike matrices, we don't perform operations with data.frames, but they allow the combination of vectors with different classes. Data frames are similar to tables generated in other programs, like Excel.
 
-Os *data frames* são combinações de vetores de mesmo comprimento. Todos os que criamos até agora tem tamanho 6, verifique. 
+Data frames are combinations of vectors of the same length. All the ones we've created so far have size 6, verify this.
 
-Podemos assim combiná-los em colunas de um único data.frame:
-
-```{r}
-campo1 <- data.frame("clone" = clone,     # Antes do sinal de "="  
-                     "altura" = x,        # estabelecemos os nomes  
-                     "diametro" = y,      # das colunas
-                     "idade" = rep(3:5, 2),
-                     "corte"= logico) 
-campo1
-```
-
-Podemos acessar cada uma das colunas com:
+We can thus combine them into columns of a single data.frame:
 
 ```{r}
-campo1$idade
+field1 <- data.frame("clone" = clone,     # Before the "=" sign  
+                     "height" = x,        # we establish the names  
+                     "diameter" = y,      # of the columns
+                     "age" = rep(3:5, 2),
+                     "cut"= logical) 
+field1
 ```
 
-Ou também com:
+We can access each of the columns with:
 
 ```{r}
-campo1[,4] 
+field1$age
 ```
 
-Aqui, o número dentro dos colchetes se refere à coluna, por ser o segundo elemento (separado por vírgula). O primeiro elemento se refere à linha. Como deixamos o primeiro elemento vazio, estaremos nos referindo a todas as linhas para aquela coluna.
-
-Dessa forma, se quisermos obter um conteúdo específico podemos dar as coordenadas com [linha,coluna]:
+Or also with:
 
 ```{r}
-campo1[1,2] 
+field1[,4] 
 ```
 
+Here, the number inside the brackets refers to the column, being the second element (separated by comma). The first element refers to the row. Since we left the first element empty, we're referring to all rows for that column.
 
-* Obtenha o diâmetro do clone "URO03".
+This way, if we want to obtain specific content, we can give the coordinates with [row,column]:
 
+```{r}
+field1[1,2] 
+```
+
+* Get the diameter of clone "URO03".
 
 ```{r, echo=FALSE}
-campo1[3,3] 
+field1[3,3] 
 ```
 
-Mesmo se tratando de um *data frame*, podemos realizar operações com os vetores numéricos que a compõe.
+Even though it's a data frame, we can perform operations with the numeric vectors it contains.
 
-* Com o diâmetro e a altura das árvores, calcule o volume conforme a fórmula a seguir e armazene em um objeto `volume`:
+* With the diameter and height of the trees, calculate the volume according to the following formula and store it in a `volume` object:
 
-$3.14*(diametro/2)^2*altura$
+$3.14*(diameter/2)^2*height$
 
 ```{r, echo=FALSE}
-volume <- 3.14*((campo1$diametro/2)^2)*campo1$altura
+volume <- 3.14*((field1$diameter/2)^2)*field1$height
 volume
 ```
 
-Agora, vamos adicionar o vetor calculado com o volume ao nosso *data frame*. Para isso use a função `cbind`.
+Now, let's add the calculated vector with the volume to our data frame. For this, use the `cbind` function.
 
 ```{r}
-campo1 <- cbind(campo1, volume)
-campo1
-str(campo1)
+field1 <- cbind(field1, volume)
+field1
+str(field1)
 ```
 
-**Algumas dicas**:
+**Some tips**:
 
-* Lembre-se que, para construir matrizes e *data frames*, as colunas devem apresentar o mesmo número de elementos.
+* Remember that, to build matrices and data frames, the columns must have the same number of elements.
 
-* Caso não saiba o operador ou a função que deve ser utilizada, busque no google. Por exemplo, se está em dúvida em como calcular o desvio padrão, busque por "desvio padrão R" ou, melhor ainda, "standard deviation R". Logo nas primeiras páginas você obterá respostas. A comunidade do R é bastante ativa e grande parte das suas perguntas sobre ele já foram respondidas em algum lugar da web.
+* If you don't know which operator or function should be used, search on Google or ask chatgpt or any other tool. For example, if you're unsure how to calculate the standard deviation, search for "standard deviation R". The R community is very active and most of your questions about it have already been answered somewhere on the web.
 
-* Não esqueça que tudo o que fizer no R precisa ser explicitamente indicado, como uma multiplicação 4ac com `4*a*c`. Para gerar um vetor 1,3,2,6 é necessário: `c(1,3,2,6)`.
+* Don't forget that everything you do in R needs to be explicitly indicated, like a multiplication 4ac with `4*a*c`. To generate a vector 1,3,2,6 you need: `c(1,3,2,6)`.
 
+## Lists
 
-## Paramos aqui no primeiro dia!
-
-* Obtenha o arquivo _RData_ com todos os objetos criados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.RData).
-
-* Obtenha o arquivo _Rscript_ com os comandos rodados até então no tutorial [aqui](https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/master/SIFSC11/dia_1.R).
-
-**Coloque ambos no seu Diretório de Trabalho**
-
-## Listas
-
-Listas consistem em uma coleção de objetos, não necessariamente de mesma classe. Nelas podemos armazenar todos os outros objetos já vistos e recuperá-los pela indexação com `[[`. Como exemplo, vamos utilizar alguns objetos que já foram gerados.
+Lists consist of a collection of objects, not necessarily of the same class. In them, we can store all the other objects we've already seen and retrieve them through indexing with `[[`. As an example, let's use some objects that have already been generated.
 
 ```{r}
-minha_lista <- list(campo1 = campo1, media_alt = tapply(campo1$altura, campo1$idade, mean), matrix_ex = W)
-str(minha_lista)
+my_list <- list(field1 = field1, height_mean = tapply(field1$height, field1$age, mean), matrix_ex = W)
+str(my_list)
 ```
 
-Quero acessar o data.frame `campo1`
-
-```{r}
-minha_lista[[1]] 
-# ou
-minha_lista$campo1
-```
-Para acessar uma coluna específica no data.frame `campo1`, que está dentro da minha_lista:  
+I want to access the data.frame `field1`
 
 ```{r}
-minha_lista[[1]][[3]]
-# ou
-minha_lista[[1]]$diametro
-# ou
-minha_lista$campo1$diametro
+my_list[[1]] 
+# or
+my_list$field1
 ```
-Listas são muito úteis, por exemplo, quando vamos utilizar/gerar diversos objetos dentro de um loop. 
+
+To access a specific column in the data.frame `field1`, which is inside my_list:  
+
+```{r}
+my_list[[1]][[3]]
+# or
+my_list[[1]]$diameter
+# or
+my_list$field1$diameter
+```
+
+Lists are very useful, for example, when we are going to use/generate various objects within a loop.
 
 ## Arrays
 
-Este é um tipo de objeto que você provavelmente não irá utilizar agora no início, mas é bom saber da sua existência. São utilizados para armazenar dados com mais de duas dimensões. Por exemplo, se criarmos um array:
+This is a type of object that you probably won't use at the beginning, but it's good to know about its existence. Arrays are used to store data with more than two dimensions. For example, if we create an array:
 
 ```{r}
-(meu_array <- array(1:24, dim = c(2,3,4)))
+(my_array <- array(1:24, dim = c(2,3,4)))
 ```
 
-Teremos quatro matrizes com duas linhas e três colunas e os números de 1 a 24 estarão distribuídos nelas por colunas.
+We will have four matrices with two rows and three columns, and the numbers from 1 to 24 will be distributed in them by columns.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 2**](exercicios.html#sessao2), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
+> If you're ahead of your colleagues, you can already do the exercises from [**Session 2**](exercises-Portugues.html#session2); if not, do them at another time and send us your questions through the forum.
 
+# Importing and Exporting Data
 
-# Importando e exportando dados
-
-Os arquivos RData são exclusivos do R, clicando duas vezes no arquivo ou utilizando:
+RData files are exclusive to R, clicking twice on the file or using:
 
 ```{r}
-load("dia_1.RData")
+load("data/dia_1.RData")
 ```
 
-Você vai recuperar todos os objetos gerados até agora no tutorial. Para gerar esse arquivo RData, eu rodei todos os códigos daqui para cima e usei:
+You will recover all objects generated so far in the tutorial. To generate this RData file, I ran all the codes from here up and used:
 
 ```{r, eval=FALSE}
 save.image(file = "dia_1.RData")
 ```
 
-Este comando salva tudo o que você tem no seu Ambiente Global (todos os objetos que aparecem ali no canto direito superior). Você pode também salvar somente um objeto com:
+This command saves everything you have in your Global Environment (all objects that appear there in the top right corner). You can also save only one object with:
 
 ```{r, eval=FALSE}
-save(campo1, file = "campo1.RData")
+save(field1, file = "field1.RData")
 ```
 
-Se removermos ele do nosso Ambiente Global com:
+If we remove it from our Global Environment with:
 
 ```{r, eval=FALSE}
-rm(campo1)  # Certifique-se que salvou o arquivo RData antes de removê-lo
+rm(field1)  # Make sure you saved the RData file before removing it
 ```
 
-Podemos facilmente obtê-lo novamente com:
+We can easily get it back with:
 
 ```{r, eval=FALSE}
-load("campo1.RData")
+load("field1.RData")
 ```
 
-O formato RData é exclusivo para o R, ele é interessante de ser usado para fazer o que estamos fazendo, paramos a análise em um dia, vamos continuar em um outro e não queremos ter que rodar tudo de novo. Mas muitas vezes precisamos exportar nossos dados para outros programas, que exigem outros formatos, como, por exemplo, `.txt` ou `.csv`. Para isso utilizamos:
+The RData format is exclusive to R, it's interesting to use it to do what we're doing - we stop the analysis one day, we'll continue on another and we don't want to have to run everything again. But often we need to export our data to other programs, which require other formats, such as `.txt` or `.csv`. For this we use:
 
 ```{r, eval=FALSE}
-write.table(campo1, file = "campo1.txt", sep = ";", dec = ".", row.names = FALSE)
-write.csv(campo1, file = "campo1.csv", row.names = TRUE)
+write.table(field1, file = "field1.txt", sep = ";", dec = ".", row.names = FALSE)
+write.csv(field1, file = "field1.csv", row.names = TRUE)
 ```
 
-Obs: Você pode adquirir pacotes para exportar e importar dados com outros fomatos, como exemplo o pacote `xlsx` exporta e importa dados com formato do excel. O pacote `vroom` pode ser utilizado para compactar grandes tabelas.
+Note: You can acquire packages to export and import data with other formats, for example the `xlsx` package exports and imports data with Excel format. The `vroom` package can be used to compress large tables. To install packages, use the function `install.packages("package_name")` and to load the package use `library(package_name)`. We'll see more about packages in the "Package Application" session of this course.
 
-Ao exportar, há diversas opções para a formatação do arquivo, é importante considerá-las se o arquivo for usado em outro sofware posteriormente.
+When exporting, there are several options for file formatting, it's important to consider them if the file will be used in another software later.
 
-Abra os arquivos gerados para visualizar sua formatação.
+Open the generated files in your notepad to view their formatting. Notice that the `.txt` file was saved with the separator `;` and the decimal separator `.`. The `.csv` file was saved with the comma separator `,` and the decimal separator `.`.
 
-Esses arquivos podem ser lidos novamente pelo R, utilizando as funções e suas especificações:
+These files can be read again by R, using the functions and their specifications:
 
 ```{r, eval=FALSE}
-campo1_txt <- read.table(file = "campo1.txt", sep=";", dec=".", header = TRUE)
-campo1_csv <- read.csv(file = "campo1.csv")
-head(campo1_txt)
-head(campo1_csv)
+field1_txt <- read.table(file = "field1.txt", sep=";", dec=".", header = TRUE)
+field1_csv <- read.csv(file = "field1.csv")
+head(field1_txt)
+head(field1_csv)
 ```
 
-Agora que aprendemos a importar dados, vamos trabalhar com o conjunto gerado a partir dos participantes da disciplina Biometria de Marcadores - Turma de 2021.
+Now that we've learned how to import data, let's work with the dataset generated from the participants of the Marker Biometry course (ESALQ/USP - Brazil) - Class of 2021.
 
 <span style="color:red">
-A planilha com os dados está disponível no link abaixo, adicione-a ao seu diretório de trabalho ou indique o caminho da pasta ao importá-la para dentro do R, como a seguir. </span> 
+The spreadsheet with the data is available in the link below, add it to your working directory or indicate the folder path when importing it into R, as follows. </span>
 
-* [dados.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData) 
-* [dados.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
+* [data.RData](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.RData)
+* [data.csv](https://cristianetaniguti.github.io/Workshop_genetica_esalq/CursoRBiometria_2021/dados_alunos2021.csv)
 
-Também podemos importar os dados diretamente do github, apontando o endereço web.
+We can also import the data directly from GitHub by pointing to the web address.
 
 ```{r, eval=FALSE}
-dados <- read.csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/raw/master/SIFSC11/dados_alunos2021.csv")
-
+data <- read.csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/raw/master/SIFSC11/dados_alunos2021.csv")
 ```
 
-Aqui usaremos o argumento `stringAsFactors` que impede que o R transforme os vetores da tabela em fatores, os quais são mais difíceis de trabalhar. O argumento `na.strings` irá indicar como foram nomeados os dados perdidos.
+Here we'll also use the `na.strings` argument which will indicate how missing data were named.
 
 ```{r, eval=FALSE}
-dados <- read.csv(file = "dados_alunos2021.csv", stringsAsFactors = FALSE, na.strings="-", header = T, dec = ",")
-head(dados)
+data <- read.csv(file = "dados_alunos2021.csv", na.strings="-", header = T, dec = ",")
+head(data)
 ```
 
 ```{r}
-load("dados_alunos2021.RData")
+load("data/dados_alunos2021.RData")
 ```
 
-Vamos explorar a estrutura dos dados coletados:
+Let's explore the structure of the collected data:
 
 ```{r}
 str(dados)
-# também
+# also
 dim(dados)
 ```
 
-Repare que nos nomes das colunas ainda estão as perguntas completas feitas no formulário, vamos alterar para nomes mais fáceis de trabalhar:
+Notice that in the column names there are still the complete questions from the form, let's change them to names that are easier to work with:
 
 ```{r}
 colnames(dados)
 
-colnames(dados) = c("Ocupacao", "Graduacao", "Conhecimentos_Genetica", "Conhecimentos_Estatistica", "Conhecimento_Gen_Est", 
+colnames(dados) = c("Occupation", "Graduation", "Genetics_Knowledge", "Statistics_Knowledge", "Gen_Stat_Knowledge", 
                    "Latitude", "Longitude")
 colnames(dados)
 str(dados)
 ```
 
-# Manipulando os dados
+# Manipulating Data
 
-Agora usaremos os dados que temos para aprender diferentes comandos e funções do Ambiente R.
+Now we'll use the data we have to learn different commands and functions in the R Environment.
 
-Primeiro, vamos verificar quantos alunos responderam as questões do formulario da disciplina, contando o número de linhas, para isso use a função `nrow`.
+First, let's check how many students answered the course form questions by counting the number of rows, using the `nrow` function.
 
 ```{r}
 nrow(dados)
 ```
 
-Vamos então verificar se temos no nosso grupo pessoas que compartilham a mesma graduação e ocupação.
+Let's then verify if we have people in our group who share the same graduation and occupation.
 
-Podemos verificar isso facilmente com a função `table`, que indica a frequência de cada observação:
- 
+We can easily check this with the `table` function, which indicates the frequency of each observation:
+
 ```{r, eval=FALSE}
-table(dados$Graduacao)
-table(dados$Ocupacao)
+table(dados$Graduation)
+table(dados$Occupation)
 ```
 
-# Estruturas condicionais
+Note: The function `table` creates a frequency table showing how many times each unique value appears in the specified column.
 
-## if e else
+# Conditional Structures
 
-Para nossa próxima atividade com os dados, vamos primeiro entender como funcionam as estruturas `if` e `else`.
+## if and else
 
-Nas funções condicionais `if` e `else`, estabelecemos uma condição para if, se ela for verdade a atividade será realizada, caso contrário (else) outra tarefa será. Como no exemplo:
+For our next activity with the data, let's first understand how `if` and `else` structures work.
+
+In conditional functions `if` and `else`, we establish a condition for if, if it's true the activity will be performed, otherwise (else) another task will be performed. As in the example:
 
 ```{r}
-if(2 >3){
-  cat("dois é maior que três")
+if(2 > 3){
+  cat("two is greater than three")
 } else {
-  cat("dois não é maior que três")
+  cat("two is not greater than three")
 }
 ```
 
-* Descubra a Nivel de Conhecimentos em Genetica (3ª coluna) da segunda pessoa que o respondeu (linha 2). Envie uma mensagem motivacional se ela possuir conhecimentos basicos, outra se a pessoa ja possuir conhecimento Intermediario ou Avançado (restante das respostas). (dica: o sinal `==` se refere a "exatamente igual a")
+* Find out the Level of Knowledge in Genetics (3rd column) of the second person who responded (row 2). Send a motivational message if they have basic knowledge, another if the person already has Intermediate or Advanced knowledge (remaining responses). (hint: the `==` sign refers to "exactly equal to")
 
 ```{r}
-if(dados[2,3] =="Básico"){
-  cat("Força, Mendel acredita em você!")
+if(dados[2,3] =="Basic"){
+  cat("Keep going, Mendel believes in you!")
 } else {
-  cat("Mendel agradece a preferência")
+  cat("Mendel appreciates your preference")
 }
 ```
 
-Podemos espeficiar mais do que uma condição repetindo a estrutura `if` `else`:
-Agora vamos estudar a ocupação das pessoas que responderam ao questionário.
+We can specify more than one condition by repeating the `if` `else` structure:
+Now let's study the occupation of the people who answered the questionnaire.
 
 ```{r}
-if(dados[2,1] == "Mestrado"){
-  cat("Força, o quinto dia útil esta chegando!")
-} else if (dados[2,1] == "Doutorado"){
-  cat("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
+if(dados[2,1] == "Masters"){
+  cat("Hang in there, payday is coming!")
+} else if (dados[2,1] == "PhD"){
+  cat("Like your master's friends, believe the scholarship will be in by Friday!")
 } else {
-  cat("Esse já tem a carteira assinada, que beleza!")
+  cat("This one already has a steady job, how nice!")
 }
 ```
 
-Mas repare que só é possível utilizar essas estruturas para um elemento individual do vetor ou em todo ele, se quisermos percorrer os elementos individualmente precisamos recorrer a outro recurso.
+But notice that it's only possible to use these structures for an individual element of the vector or for the entire vector; if we want to traverse the elements individually, we need to resort to another resource.
 
-# Estruturas de repetição
+# Repetition Structures
 
 ## For
 
-Esse recurso pode ser a função `for`, uma função muito utilizada e poderosa. Ela constitui uma estrutura de loop, pois irá aplicar a mesma atividade repetidamente até atingir uma determinada condição. Veja exemplos:
+This resource can be the `for` function, a widely used and powerful function. It constitutes a loop structure, as it will apply the same activity repeatedly until reaching a certain condition. See examples:
 
 ```{r}
 for(i in 1:10){
@@ -719,82 +728,82 @@ for(i in 1:10){
 test
 ```
 
-Nos casos acima, `i` funciona como um índice que irá variar de 1 até 10 a operação determinada entre chaves.
+In the cases above, `i` functions as an index that will vary from 1 to 10 in the operation determined between curly braces.
 
-Com essa estrutura, podemos repetir a operação realizada com as estruturas `if` e `else` para todo o vetor:
+With this structure, we can repeat the operation performed with the `if` and `else` structures for the entire vector:
 
 ```{r, eval=F}
 for(i in 1:nrow(dados)){
-  if(dados[i,1] == "Mestrado"){
-    print("Força, o quinto dia útil esta chegando!")
-  } else if (dados[i,1] == "Doutorado"){
-    print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
+  if(dados[i,1] == "Masters"){
+    print("Hang in there, payday is coming!")
+  } else if (dados[i,1] == "PhD"){
+    print("Like your master's friends, believe the scholarship will be in by Friday!")
   } else {
-    print("Esse já tem a carteira assinada, que beleza!")
+    print("This one already has a steady job, how nice!")
   }
 }
 ```
 
-**Dica: Identação**
+**Tip: Indentation**
 
-Repare a diferença:
+Notice the difference:
 
 ```{r, eval=FALSE}
-# Sem identação
+# Without indentation
 for(i in 1:nrow(dados)){
-if(dados[i,1] == "Mestrado"){
-print("Força, o quinto dia útil esta chegando!")
-} else if (dados[i,1] == "Doutorado"){
-print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
+if(dados[i,1] == "Masters"){
+print("Hang in there, payday is coming!")
+} else if (dados[i,1] == "PhD"){
+print("Like your master's friends, believe the scholarship will be in by Friday!")
 } else {
-print("Esse já tem a carteira assinada, que beleza!")
+print("This one already has a steady job, how nice!")
 }
 }
 
-# Com identação correta
+# With correct indentation
 for(i in 1:nrow(dados)){
-  if(dados[i,1] == "Mestrado"){
-    print("Força, o quinto dia útil esta chegando!")
-  } else if (dados[i,1] == "Doutorado"){
-    print("Assim como seus amigos do mestrado, acredite até sexta a bolsa cai!")
+  if(dados[i,1] == "Masters"){
+    print("Hang in there, payday is coming!")
+  } else if (dados[i,1] == "PhD"){
+    print("Like your master's friends, believe the scholarship will be in by Friday!")
   } else {
-    print("Esse já tem a carteira assinada, que beleza!")
+    print("This one already has a steady job, how nice!")
   }
 }
 ```
 
-O editor de código do RStudio tem uma facilitação para identar códigos em R, selecione a área que deseja identar e aperte `Ctrl+i`.
+The RStudio code editor has a feature to indent R code, select the area you want to indent and press `Ctrl+i`.
 
-Agora vamos trabalhar com a coluna 2, que possui a informação da graduação dos participantes. Repare que a função `table` retorna diferentes categorias que poderiam ser resumidas em apenas uma, como  "Engenharia agronômica" e "Agronomia". Vamos utilizar um loop para descobrir quais responderam áreas relacionadas à "Agro". Depois, quais dessas respostas não foram "Agronomia" e pedir para que este participante modifique a resposta digitando apenas "Agronomia". 
+Now let's work with column 2, which contains the participants' graduation information. Notice that the `table` function returns different categories that could be summarized into just one, such as "Agricultural Engineering" and "Agronomy". Let's use a loop to find out which ones responded with areas related to "Agro". Then, which of these responses weren't "Agronomy" and ask this participant to modify the response by typing just "Agronomy".
 
-Dica 1: Para identificar o padrão "Agro" podemos utilizar  a função `grepl`.
-Dica 2: Podemos utilizar if dentro de if
+Tip 1: To identify the "Agro" pattern we can use the `grepl` function.
+Tip 2: We can use if within if
 
 ```{r}
-# Exemplo do uso da função grepl
+# Example of using the grepl function
 dados[,2]
-grepl("Agro", dados[,2]) # Quais linhas contém os caracteres "Agro"
+grepl("Agro", dados[,2]) # Which lines contain the characters "Agro"
 dados[grepl("Agro", dados[,2]),2]
 
 for(i in 1:nrow(dados)){
   if(grepl("Agro", dados[i,2])){
-    if(dados[i,2] != "Agronomia"){
-     print("Por favor, substitua sua resposta por Agronomia.") 
+    if(dados[i,2] != "Agronomy"){
+     print("Please, replace your answer with Agronomy.") 
     }
   } 
 }
 ```
 
-Para que seja possível imprimir conteúdo de objetos durante o loop, usamos a função `cat`, ela não separa cada resposta em uma linha, precisamos colocar o `\n` indicando a quebra de linha.
+To be able to print object content during the loop, we use the `cat` function, it doesn't separate each response into a line, we need to put `\n` indicating the line break.
 
-Agora vamos nos mesmos homogeneizar essas informações. Podemos armazenar em uma variável a posição das linhas identificadas, então corrigiremos manualmente somente essas:
+Now let's homogenize this information ourselves. We can store the position of the identified lines in a variable, then we'll manually correct only those:
 
 ```{r}
 homog <- vector()
 for(i in 1:nrow(dados)){
   if(grepl("Agro", dados[i,2])){
-    if(dados[i,2] != "Agronomia"){
-     print("Por favor, substitua sua resposta por Agronomia.") 
+    if(dados[i,2] != "Agronomy"){
+     print("Please, replace your answer with Agronomy.") 
      homog <- c(homog, i)
     }
   } 
@@ -803,13 +812,13 @@ for(i in 1:nrow(dados)){
 homog
 ```
 
-> Como você faria para corrigir esses elementos errados? Tente!
+> How would you correct these wrong elements? Try it!
 
-['dados[homog, 2] <- "Agronomia"']{.spoiler}
+['dados[homog, 2] <- "Agronomy"']{.spoiler}
 
 ## While
 
-Nesse tipo de estrutura de repetição a tarefa será realizada até que seja atingida determinada condição.
+In this type of repetition structure, the task will be performed until a certain condition is met.
 
 ```{r}
 x <- 1
@@ -820,9 +829,9 @@ while(x < 5){
 }
 ```
 
-É muito importante que nessa estrutura a condição seja atingida, caso contrário o loop irá funcionar infinitamente e você terá que interrompê-lo por meios externos, como, se este utilizando RStudio, clicar no simbolo em vermelho no canto direito superior da janela do console, ou apertar Ctrl+C no console.
+It's very important that in this structure the condition is met, otherwise the loop will run infinitely and you'll have to interrupt it by external means. An example of these "external means" in RStudio is clicking the red symbol in the top right corner of the console window. You can also press Ctrl+C in the console.
 
-Não é muito difícil disso acontecer, basta um pequeno erro como:
+It's not very difficult for this to happen, just a small error like:
 
 ```{r, eval=FALSE}
 x <- 1
@@ -833,7 +842,7 @@ while(x < 5){
 }
 ```
 
-Aqui podemos utilizar os comandos `break` e `next` para atender a outras condições, como:
+Here we can use the `break` and `next` commands to meet other conditions, like:
 
 ```{r}
 x <- 1
@@ -854,9 +863,11 @@ while(x < 5){
 
 ```
 
+The `break` command stops the loop completely when the condition is met, while `next` skips the rest of the current iteration and continues with the next one.
+
 ## Repeat
 
-Esta estrutura também exige uma condição de parada, mas esta condição é necessariamente colocada dentro do bloco de código com o uso do `break`. Ela então repete o bloco de código até a condição o interrompa.
+This structure also requires a stop condition, but this condition is necessarily placed inside the code block using `break`. It then repeats the code block until the condition interrupts it.
 
 ```{r}
 x <- 1
@@ -868,15 +879,17 @@ repeat{
 
 ```
 
-## Loops dentro de loops
+The `repeat` structure is similar to `while`, but with the key difference that the stop condition must be explicitly defined within the code block using `break`. It will continue to execute the code block indefinitely until it encounters the `break` statement.
 
-É possível também utilizarmos estruturas de repetição dentro de estruturas de repetição. Por exemplo, se quisermos trabalhar tanto nas colunas como nas linhas de uma matrix.
+## Loops within Loops
+
+It's also possible to use repetition structures within repetition structures. For example, if we want to work on both columns and rows of a matrix.
 
 ```{r}
-# Criando uma matrix vazia
+# Creating an empty matrix
 ex_mat <- matrix(nrow=10, ncol=10)
 
-# cada número dentro da matrix será o produto no índice da coluna pelo índice da linha
+# each number inside the matrix will be the product of the column index by the row index
 for(i in 1:dim(ex_mat)[1]) {
   for(j in 1:dim(ex_mat)[2]) {
     ex_mat[i,j] = i*j
@@ -885,798 +898,87 @@ for(i in 1:dim(ex_mat)[1]) {
 
 ```
 
-Outro exemplo de uso:
+Another example of use:
 
 ```{r}
-var1 <- c("fertilizante1", "fertilizante2")
+var1 <- c("fertilizer1", "fertilizer2")
 var2 <- c("ESS", "URO", "GRA")
 
 w <- 1
 for(i in var1){
   for(j in var2){
-    nome_arquivo <- paste0(i,"_planta_",j,".txt")
-    arquivo <- data.frame("bloco" = "fake_data", "tratamento" ="fake_data")
-    write.table(arquivo, file = nome_arquivo)
+    file_name <- paste0(i,"_plant_",j,".txt")
+    file <- data.frame("block" = "fake_data", "treatment" ="fake_data")
+    write.table(file, file = file_name)
     w <- w + 1
   }
 }
 
-# Verifique seu diretorio de trabalho, arquivos devem ter sido gerados
+# Check your working directory, files should have been generated
 ```
 
-Fizemos um vídeo com mais detalhes sobre loops no R (quando cursamos a disciplina de Biometria de Marcadores), aumentem nossa quantidade de views e likes por [lá](https://www.youtube.com/watch?v=VYOo7I5htOw).
+> If you're ahead of your colleagues, you can already do the exercises from [**Session 3**](exercises.html#session3), if not, do them at another time and send us your questions through the forum.
 
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão 3**](exercicios.html#sessao3), se não, faça-os em outro momento e nos envie dúvidas pelo fórum.
+**Some tips**:
 
-**Algumas dicas**:
-
-* Cuidado ao rodar o mesmo comando mais de uma vez, algumas variáveis podem não ser mais como eram antes. Para que o comando funcione da mesma forma é necessário que os objetos de entrada estejam da forma como você espera.
-* Lembrem-se que `=` é para definir objetos e `==` é o sinal de igualdade. 
-* Nas estruturas condicionais e de repetição, lembrem-se que é necessário manter a sintaxe esperada: If(){} e for(i in 1:10){}. No *for*, podemos trocar a letra que será o índice, mas é sempre necessário fornecer uma sequência de inteiros ou caracteres.
-* Usar identação ajuda a visualizar o começo e fim de cada estrutura de código e facilita o abrir e fechar de chaves. Identação são aqueles espaços que usamos antes da linha, como:
+* Be careful when running the same command multiple times, some variables might not be the same as they were before. For the command to work the same way, the input objects need to be in the form you expect.
+* Remember that `=` is for defining objects and `==` is the equality sign.
+* In conditional and repetition structures, remember that it's necessary to maintain the expected syntax: If(){} and for(i in 1:10){}. In *for*, we can change the letter that will be the index, but it's always necessary to provide a sequence of integers or characters.
+* Using indentation helps to visualize the beginning and end of each code structure and makes it easier to open and close braces. Indentation refers to those spaces we use before the line, like:
 
 ```{r}
-# Criando uma matrix vazia
+# Creating an empty matrix
 ex_mat <- matrix(nrow=10, ncol=10)
 
-# cada número dentro da matrix será o produto no índice da coluna pelo índice da linha
-for(i in 1:dim(ex_mat)[1]) {   # Primeiro nível, não tem espaço
-  for(j in 1:dim(ex_mat)[2]) { # Segundo nível tem um espaço (tab)
-    ex_mat[i,j] = i*j          # Terceiro nível tem dois espaços
-  }                            # Fechei o segundo nível
-}                              # Fechei o primeiro nível
+# each number inside the matrix will be the product of the column index by the row index
+for(i in 1:dim(ex_mat)[1]) {   # First level, no space
+  for(j in 1:dim(ex_mat)[2]) { # Second level has one space (tab)
+    ex_mat[i,j] = i*j          # Third level has two spaces
+  }                            # Closed the second level
+}                              # Closed the first level
 
 ```
 
+The consistent use of indentation makes your code more readable and helps prevent errors by making the structure clearer. Most modern IDEs, including RStudio, provide automatic indentation features to help maintain this consistency.
 
-# Elaboração de gráficos simples
+# Vectorization
 
-Para outros dados coletados, vamos gerar alguns gráficos simples utilizando as funções básicas do R. Existem pacotes como o `ggplot2`, `plotly` e `shiny` que possuem ferramentas muito poderosas para construção de gráficos, mas exigem um pouco mais de tempo para aprendizagem de sua sintaxe.
+Although loops are intuitive and easier to understand, they are slower and less efficient than vectorization. Vectorization is a technique that allows operations to be applied to all elements of a vector or matrix at once, without the need to iterate over each element individually.
 
-Os tipos mais comuns já possuem funções próprias, mas outros gráficos podem ser customizados de acordo com a necessidade do usuário. Vamos iniciar com um simples gráfico de frequências (ou histograma) para os dados de `latitude`.
+Here is a simple example of non-vectorized code (using a loop) and its vectorized version:
 
 ```{r}
-hist(dados$Latitude)
-```
-
-Vamos adicionar alguns argumentos para dar uma personalizada:
-
-* `breaks` para definir os intervalos para cada barra; 
-
-```{r, echo=FALSE}
-#### Histograma ####
-#Utiliza um vetor de valores para obter as frequências
-hist(dados$Latitude)
-hist(dados$Latitude, breaks = 2)
-hist(dados$Latitude, breaks = 15) 
-
-```
-
-Agora tente fazer o **histograma para a Longitude**, aproveite para tentar alterar alguns parâmetros. Em seguida, serão apresentados outros gráficos que poderão ser utilizados.
-
-## Salvar gráficos
-
-Os gráficos podem ser salvos através dos menus disponíveis no RStudio, ou através de funções que permitem salvar em formatos específicos. Algumas delas são: pdf(); png(); jpeg(); bitmap(). De maneira geral, o parâmetro primordial é fornecer o nome do arquivo que será gerado (contendo sua extensão). Após abrir a função gráfica, deve-se gerar o gráfico de interesse. Por fim, utiliza-se o comando dev.off() para que saída gráfica volte para o console.
-
-```{r eval=FALSE}
-png(filename = "hist_rbase.png")
-hist(dados$Latitude)
-dev.off()
-
-png(filename = "hist_rbase.png", width = 1500, height = 1500, res= 300)
-hist(dados$Latitude)
-dev.off()
-```
-
-Agora, gere um gráfico e salve-o no formato de seu interesse. Em seguida, crie diversos gráficos dentro de uma mesma função gráfica e estude a saída. 
-
-# Um exemplo didático de aplicação em genética
-
-Aqui vamos exercitar um pouco do que aprendemos de R e já introduzir uma das muitas aplicações em genética.
-
-Para melhor didática, este é um exemplo hipotético, a partir de dados simulados para uma população de retrocruzamento.
-
-Mas vamos imaginar que se trata de um experimento de avaliação da resistência de diferentes cultivares de batata contra um fungo patógeno.
-
-Aqui temos a média ajustadas das medida do tamanho da lesão nas folhas de cada cultivar inoculadas.
-
-```{r}
-fenotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/fenotipos.csv", 
-                      stringsAsFactors = F)
-str(fenotipos)
-```
-
-Ajuste os dados deixando apenas um coluna referente ao tamanho da lesão e o nome das cultivares como nome das linhas.
-
-```{r}
-rownames(fenotipos) <- fenotipos$cultivar
-fenotipos <- fenotipos[,-c(1,2)]
-```
-
-E aqui temos os genótipos de cada uma das cultivares. Podemos obtê-los via marcadores moleculares, como os SNPs.
-
-```
-Aa = 1
-aa = 0
-```
-
-```{r}
-genotipos <- read.csv("https://raw.githubusercontent.com/Cristianetaniguti/Workshop_genetica_esalq/gh-pages/4biotec/genotipos.csv", 
-                      stringsAsFactors = F)
-head(genotipos)
-```
-
-Observe que a primeira coluna da matrix é o nome da cultivar. Vamos fazer com que ela vire o nome das linhas.
-
-```{r}
-rownames(genotipos) <- genotipos[,1]
-genotipos <- genotipos[,-1]
-head(genotipos)
-```
-
-Como já vimos, gráficos são ferramentas interessantes para melhor visualização dos dados. Aqui vamos construir um heatmap, cada genótipo receberá uma cor diferente. Assim poderemos visualizar melhor a distribuição deles na população estudada.
-
-```{r, eval=FALSE}
-heatmap(genotipos, Colv = NA, Rowv = NA)
-```
-
-Opa! Aconteceu algo errado, né? É importante prestar atenção no que o erro diz, essas dicas são valiosas. O problema aqui é que a função só recebe objetos matriz e fornecemos para ela um data.frame.
-
-```{r}
-genotipos <- as.matrix(genotipos)
-heatmap(genotipos, Colv = NA, Rowv = NA)
-```
-
-Para que o gráfico fique intuitivo, precisamos fazer algumas alterações. Repare que embora a gente tenha somente genótipos, existem mais cores no gráfico. Vamos corrigir isso.
-
-```{r}
-geno.cores <- heat.colors(2)
-heatmap(genotipos, Colv = NA, Rowv = NA,  col=geno.cores)
-head(genotipos)
-```
-
-Agora eu quero visualizar a relação desses genótipos com os fenótipos. Para isso, vou acrescentar uma coluna ao lado com cores conforme os valores dos fenótipos. Ou seja, farei outro gradiente com cores frias para valores baixos do tamanho da lesão e cores fortes para valores altos.
-
-```{r}
-fenotipos_ordenado <- sort(fenotipos)
-
-desordem <- match(fenotipos, fenotipos_ordenado)
-fenotipos
-fenotipos_ordenado
-desordem
-
-colfunc <- colorRampPalette(c("royalblue", "red"))
-cores <- colfunc(20)[desordem]
-
-heatmap(genotipos, Colv = NA, Rowv = NA, col=heat.colors(2), RowSideColors = cores)
-```
-
-Uma bagunça! Não consigo tirar nenhuma conclusão. Mas.. e se eu ordenar conforme o valor do fenótipos?
-
-```{r}
-ordem <- match(fenotipos_ordenado, fenotipos)
-
-heatmap(genotipos[ordem,], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
-```
-
-Quase conseguimos ver uma tendência.
-
-Como são dados simulados, sabemos que os marcadores de 6 a 10 e de 18 a 20 estão relacionados com a característica. Vamos veer o que acontece se separamos eles.
-
-```{r}
-heatmap(genotipos[ordem,c(6:10,18:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
-```
-
-Não é interessante?!? E ai? Qual genótipo é vantajoso ter nesses locos para o plantio de batata?
-
-E os marcadores não ligados?
-
-```{r}
-heatmap(genotipos[ordem,-c(6:10,17:20)], Rowv = NA, Colv = NA, col=geno.cores, RowSideColors = cores[ordem])
-```
-
-A bagunça continua! Indicando uma aleatoriedade, ou seja, não existe uma correlação entre o genótipo e o fenótipo.
-
-Mas uma análise visual apenas instiga nossa intuição, precisamos de uma análise estatística para realmente verificarmos. Existem muitos métodos estatísticos desenvolvidos para isso, muito robustos que levam em conta vários fatores importante como o desequilibrio de ligação entre os marcadores e a influência da existência de efeitos próximos. Mas por agora faremos a mais simples das análises, já muito obsoleta para esse propósito, mas servirá para o nosso aprendizado. Faremos uma análise de variância para cada marcador individualmente.
-
-```{r}
-mk <- genotipos[,11]
-mk <- gsub(pattern = 0, replacement = "aa", x = mk)
-mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
-mk <- gsub(pattern = 2, replacement = "AA", x = mk)
-
-mk <- as.factor(mk)
-
-modelo <- lm(fenotipos ~ mk)
-summary(modelo)
-```
-
-```{r}
-mk <- genotipos[,10]
-mk <- gsub(pattern = 0, replacement = "aa", x = mk)
-mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
-mk <- gsub(pattern = 2, replacement = "AA", x = mk)
-
-mk <- as.factor(mk)
-
-modelo <- lm(fenotipos ~ mk)
-summary(modelo)
-```
-
-Não queremos ficar digitando este código 25 vezes, né? Vamos aplicar nossos conhecimentos de estruturas de repetição (loops)
-
-```{r}
-p <- vector()
-for(i in 1:dim(genotipos)[2]){
-  mk <- genotipos[,i]
-  mk <- gsub(pattern = 0, replacement = "aa", x = mk)
-  mk <- gsub(pattern = 1, replacement = "Aa", x = mk)
-  mk <- gsub(pattern = 2, replacement = "AA", x = mk)
-  
-  mk <- as.factor(mk)
-  
-  modelo <- lm(fenotipos ~ mk)
-  f <- summary(modelo)$fstatistic
-  p[i] <- pf(f[1],f[2],f[3],lower.tail=F)
+# Not vectorized (using loop)
+numbers <- 1:5
+loop_result <- numeric(length(numbers))
+for(i in 1:length(numbers)) {
+    loop_result[i] <- numbers[i] * 2
 }
 
-which(p < 0.05)
+# Vectorized approach
+numbers <- 1:5
+vectorized_result <- numbers * 2
+
+loop_result == vectorized_result
 ```
 
-
-# Aplicações de pacotes
-
-Existem diversos pacotes disponíveis para variadas aplicações. Utilizaremos o *ggplot2*, que está disponível no repositório oficial do R, o CRAN. Portanto para instalá-lo:
-
-```{r eval=FALSE}
-install.packages("ggplot2")
-```
-
-Depois disso é necessário recrutá-lo toda vez que iniciar um sessão no R:
+> This code transformation can become more complex depending on the scenario. For example, think about how a vectorized version of the previous loop would look like:
 
 ```{r}
-library("ggplot2")
-```
-
-O `ggplot2` é um pacote que permite a construção de gráficos estatísticos, suas funcionalidades vão muito além do que está disponível nos gráficos básicos do R. Saiba mais sobre ele neste [link](https://ggplot2.tidyverse.org/). Encontre [aqui](https://www.r-graph-gallery.com/) vários exemplos de como ele pode ser usado.
-
-
-# Pratique gerando relatórios no RStudio
- 
- Utilize o R no seu dia-a-dia para ir praticando a linguagem. Além das recomendações contidas na [primeira apresentação](), recomendamos também dar uma olhada em como gerar documentos em pdf e html usando a Markdown. Utilizamos essa metodologia para gerar este tutorial e outras apresentações do curso. Pode ser muito prático no dia-a-dia!
- 
-Para utilizar, será necessário a instalação de outros pacotes. Um deles é o próprio `rmarkdown`:
-
-```{r, eval=FALSE}
-install.packages("rmarkdown")
-```
-
-```{r}
-library(rmarkdown)
-```
- 
-Agora crie um arquivo .Rmd utilizando as facilidades do RStudio, clique no ícone com símbolo `+` no canto superior esquerdo. Escolha o opção `R Markdown`. Dê um título ao seu arquivo e escolha a opção `html`. Ao fazer isso, o RStudio já coloca um template inicial, ja com um cabeçalho:
-
-```
----
-title: "Teste"
-author: "Eu"
-date: "June 5, 2018"
-output: html_document
----
-
-```
-
-Este é o mais simples possível, você pode otimizá-lo de diversas maneiras. Saiba mais [aqui](https://rmarkdown.rstudio.com/html_document_format.html).
-
-O template inicial também traz alguns exemplos de sintaxe do markdown. Observe que utilizando `#` para títulos de sessões, `##` para um nível inferior (subtitulos) e assim por diante. Palavras em negrito são escritas em meia a dois `*` e existem diversas outras especificações para essa sintaxe. Veja mais sobre ela [aqui](https://www.markdownguide.org/basic-syntax).
-
-Para compilar o código, basta clicar em `Knit`. Ele irá pedir para que o arquivo .Rmd seja salvo com algum nome em algum lugar.
-
-O markdown também é capaz de entender diretamente a linguagem html, também a css e latex. Para essa última, o latex precisa estar instalado e todas suas dependências.
-
-Existem alguns pacotes que fornecem templates mais robustos para produção de htmls. Para esse tutorial utilizando o pacote `rmdformats` e personalizamos suas cores. Experimente:
-
-```{r, eval=FALSE}
-install.packages("rmdformats")
-```
-
-Agora faça o mesmo procedimento, clique no `+`, escolha `R Markdown` e, antes de escolher um título, mude para `From Template`, escolha o `HTML readthedown template`. Copie e cole o seguinte texto e aperte `Knit`.
-
-```
-# Teste1
-
-Isso aqui é um teste só para dar uma olhada no template
-
-## Testinho
-
-Subsessão
-
-* Item
-
-**negrito**
-
-*itálico*
-
-fiz um [link](https://GENt-esalq.github.io/)!
-
-```
-
-
-Saiba mais no tutorial do R-bloggers, que acreditamos ser um bom começo! Acesse [aqui](https://www.r-bloggers.com/how-to-create-reports-with-r-markdown-in-rstudio/).
-
-# Extra
-
-## Algumas ferramentas básicas de análise de dados
-
-Claramente a análise de dados é algo muito específico de cada conjunto de dados e interesses, aqui apenas exemplificaremos o uso de algumas funções do R em duas situações específicas.
-
-### Avaliando o clima de Londrina
-
-Vamos utilizar outro conjunto de dados para realizarmos mais avaliações utilizando a função `lm`. Acesse o conjunto [clima_lond](clima_lond.RData):
-
-```{r}
-load("clima_lond.RData")
-```
-
-Para obter os dados de precipitação da cidade de Londrina no primeiro semestre de 2017. Vamos utilizar as funções `tapply` e
-`lm` para avaliar os dados.
-
-Algumas avaliações descritivas podem ser feitas pelo uso do `tapply` e de gráficos. A função `summary` também fornece informações gerais do conjunto. É possível usá-la em conjunto com o `tapply`.
-
-```{r}
-# Verificando se as variáveis categórias estão como fatores
-str(clima_lond)
-
-clima_lond$dia <- as.factor(clima_lond$dia)
-
-# A precipitação nesse caso é uma variável contínua, nao categórica, para transformá-la use:
-
-clima_lond$prec.mm <- as.numeric(as.character(clima_lond$prec.mm))
-
-# Já com o tapply podemos ver as diferenças
-
-tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
-```
-
-Repare que os níveis aparecem em ordem alfabética e não conforme o tempo, alteramos isso com:
-
-```{r}
-levels(clima_lond$Mes)
-
-# A função match vai indicar a posição dos elementos do primeiro vetor no segundo vetor
-pos <- match(c("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"), levels(clima_lond$Mes))
-pos
-
-# Aqui utilizamos as posições obtidas para reordenar os meses nos níveis do fator
-clima_lond$Mes = factor(clima_lond$Mes,
-                       levels(clima_lond$Mes)[pos])
-
-# Refazendo
-tapply(clima_lond$prec.mm, clima_lond$Mes, summary)
-
-```
-
-Podemos também avaliar visualmente através de gráficos:
-
-```{r}
-ggplot(clima_lond) + 
-  geom_point(aes(x = Mes, y = prec.mm)) +
-  labs(title = "Precipitação x Mês", x = "Meses do ano de 2017", y = "Precipitação em mm")
-```
-
-```{r}
-barplot(tapply(clima_lond$prec.mm, clima_lond$Mes, sum), 
-        main="Total Mensal",
-        xlab = "Meses do ano de 2017",
-        ylab = "Precipitação em mm")
-
-# Vamos fazer um gráfico de barras que mostre a soma de precipitação em cada mês
-stat_lond <- tapply(clima_lond$prec.mm, clima_lond$Mes, sum)
-str(stat_lond)
-
-# Repare que o resultado do tapply é um vetor com seus elementos nomeados com cada mês
-# Para usar o ggplot nesse caso, precisamos elaborar um data.frame cujas colunas sejam as variáveis que utilizaremos
-stat_lond_edit <- data.frame("mes" = factor(names(stat_lond), 
-                                            levels = c("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho")), "soma" = stat_lond)
-str(stat_lond_edit)
-
-ggplot(stat_lond_edit) +
-  geom_bar(aes(x = mes, y = soma), stat="identity") +
-  labs(title= "Soma da precipitação por mês", x = "Meses do ano de 2017", y = "Soma da precipitação")
-
-```
-
-Vamos então realizar uma análise de variância a fim de verificar se há diferenças significativas entre os meses. As funções `lm` e `summary` diferem apenas na forma de apresentar os resultados. O p-valor nos indica se podemos considerar diferenças do peso conforme o gênero.
-
-```{r}
-mod <- lm(prec.mm ~ Mes, data = clima_lond)
-summary(mod)
-
-modaov <- aov(prec.mm ~ Mes, data = clima_lond)
-summary(modaov)
-```
-
-Podemos também fazer um teste de médias para diferenciar a precipitação no decorrer dos meses. Aqui utilizaremos o método de Tukey:
-
-```{r}
-tukey.test <- TukeyHSD(x=modaov, 'Mes', conf.level=0.95)
-tukey.test
-```
-
-### Avaliando experimento de café
-
-Agora, trabalharemos com dados de um experimento de café. Acesse aqui:
-
-* Arquivo [cafe.txt](https://GENt-esalq.github.io/cursoR2/cafe.txt)
-
-O experimento trata-se de dados em blocos completos casualizados de 10 progênies de café. Nele a coluna `rep` refere-se à repetição, `prog` indica o indivíduo da progênie (prog) e `colheita` indica a colheita.
-
-```{r}
-data <- read.table("cafe.txt", h = TRUE, sep = "\t", dec = ",")
-str(data)
-```
-
-**Não esqueça que é necessário que o arquivo esteja no seu ambiente de trabalho ou que você especifique o caminho completo para que o R o encontre!**
-
-Para essa análise de dados, nossa variável resposta é a produção (`prod`) e a repetição (`rep`), a progênie (`prog`) e a colheita (`colheita`) serão fatores no nosso modelo, identificados por seus níveis.
-
-```{r}
-# Transformar em fator
-data$rep <- as.factor(data$rep)
-data$prog <- as.factor(data$prog)
-data$colheita <- as.factor(data$colheita)
-str(data)
-
-# Outra opção
-data <- transform(data, rep = factor(rep), prog = factor(prog), colheita = factor(colheita))
-str(data)
-```
-
-Vamos analisar somente os dados referentes à primeira colheita. Para isso, podemos obter o subconjunto referente a ela:
-
-```{r}
-# Indexar primeita colheita
-Colheita_1 <- subset(data, colheita == 1)
-str(Colheita_1)
-```
-
-Repare que, ao fazer o subconjunto, os três níveis do fator colheita ainda são mantidos, embora agora tenhamos apenas um. Isso pode ser um problema para a nossa análise. Portanto, devemos remover os níveis excedentes:
-
-```{r}
-# Droplevels
-Colheita_1 <- droplevels(subset(data, colheita == 1))
-str(Colheita_1)
-```
-
-Em seguida, podemos rodar nosso modelo de análise de variância.
-
-```{r}
-# Modelo
-Modelo1 <- aov(prod ~ rep + prog,
-               contrasts = list(prog = "contr.sum"), 
-               data = Colheita_1)
-anova(Modelo1)
-```
-
-Essa análise variância exige alguns pressupostos, podemos verificar eles nos nossos dados usando:
-
-```{r}
-####################################################
-###verificar Pressupostos da análise de variância###
-####################################################
-names(Modelo1)
-Modelo1_residuals <- Modelo1$residuals #armazenando os erros ou resíduos
-
-# teste de Normalidade DOS ERROS##
-#---------------------------------#
-shapiro.test (Modelo1_residuals) # Hipótese de Nulidade
-# a hipótese de que os erros são normais, nesse caso, como o p-value = 0.24
-# ou seja, é maior que >0.05 ou 0.01 (alfa adotado), não se rejeita a hipotese de normalidade 
-```
-
-Vamos trabalhar um poquinho com as informações da ANOVA? Primeiro, guardaremos o valor do quadrado médio:
-
-```{r, eval=TRUE}
-QME <- anova(Modelo1)["Residuals", "Mean Sq"]
-QME
-```
-
-E a média da primeira colheita da nossa variável resposta (produção):
-
-```{r, eval=TRUE}
-med <- mean(Colheita_1$prod, na.rm = TRUE)
-med
-```
-
-Com eles podemos calcular o coeficiente de variação (CV):
-
-```{r, eval=TRUE}
-CVe <- (sqrt(QME)/med)*100
-CVe
-```
-
-> Calcule o CVe e QME para a colheita 2
-
-> Crie uma função calcular o CVe
-
-Possibilidade de respostas:
-
-```{r, eval=TRUE}
-CV_E <- function(anova, med){
-  QME <- anova(anova)["Residuals", "Mean Sq"]
-  CVe <- (sqrt(QME)/med)*100
-  
-  return(CVe)
+# Not vectorized (using loop)
+ex_mat <- matrix(nrow=10, ncol=10)
+
+for(i in 1:dim(ex_mat)[1]) {   
+  for(j in 1:dim(ex_mat)[2]) { 
+    ex_mat[i,j] = i*j          
+  }                            
 }
 
-## 
-CV_E(anova = Modelo1, med = med)
+# Vectorized?
 ```
 
-Podemos também calcular a herdabilidade da característica produção:
+This is a good moment for you to practice using an AI tool to help you transform the code into a vectorized version. You can use chatgpt or copilot, for example. Compare the result of the provided code with what you generated with the loop to verify if the tool is really doing what you want. This transformation is worth it if the loop code is taking too long or if you have to run the same code many times.
 
-```{r, eval=TRUE}
-n_rep <- nlevels(Colheita_1$rep)
-VG <- (anova(Modelo1)["prog", "Mean Sq"]- QME)/n_rep
-VE <- QME
-H_2 <- VG/ (VG + VE)
-H_2
-```
+['ex_mat <- outer(1:10, 1:10, "*")']{.spoiler}
 
-> Crie uma função para estimar a herdabilidade 
 
-## Criando mapas com ggplot
-
-Não vamos entrar em detalhe sobre os códigos que usamos aqui porque ele faz uso do `tidyverse`, um pacote que permite manipular os dados com muita flexibilidade, mas ele iria requerer outro curso focado apenas nele! Esta é uma aplicação para mostrar que conseguimos fazer quase tudo com R e ggplot em mãos. O mais difícil é saber manipular os dados...
-
-```{r}
-### Instalar pacotes ###
-# devtools::install_github("rpradosiqueira/brazilmaps")
-# Need to install 'sf' 
-# install.packages("sf")
-#  and also the dependencies:
-# - 'units' (libudunits2-dev - Linux)
-# - 'gdal' (libgdal-dev - Linux)
-#
-#######################
-
-# Carregar pacote
-library(tidyverse)
-library(sf)
-library(brazilmaps)
-
-# Caso não tenha mais conjunto dados disponível no seu ambiente de trabalho
-dados = read.csv("dados_alunos2021.csv", stringsAsFactors = FALSE, dec = ",")
-
-# ou
-load("dados_alunos2021.RData")
-
-colnames(dados) = c("Ocupacao", "Graduacao", "Conhecimentos_Genetica", "Conhecimentos_Estatistica", "Conhecimento_Gen_Est", 
-                   "Latitude", "Longitude")
-
-# Coletando os dados da base por estado
-estados = brazilmaps::get_brmap("State")
-
-# Adicionando uma coluna com as siglas dos estados, será importane para a próxima etapa
-estados$sigla = c("RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "MS", "MT", "GO", "DF", "RS")
-
-## Aqui buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
-## dos estados
-inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(estados))
-
-## Mapear coordenadas das cidades nos estados
-map_data = st_join(inter_sf, estados %>% 
-                     select(sigla, geometry) %>% 
-                     mutate(geom_state=geometry)) %>%
-  as.data.frame() %>% 
-  select(sigla, geom_state)
-  
-# Verificar quantas pessoas por estado 
-# Juntar com poligonos dos estados
-to_plot = map_data %>%
-  group_by(sigla) %>%
-  summarise(n = n()) %>%
-  right_join(., estados, by=c("sigla"))
-
-# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
-# coordenadas geométricas para construir os mapas. O resto envolve apenas
-# funções e argumentos do ggplot!
-ggplot(to_plot) +
-  geom_sf(aes(geometry = geometry, fill = n)) + 
-  theme_minimal() + scale_fill_continuous(low = "#C6FFDD", high = "#f64f59", na.value="white") +
-  labs(fill = "Número \nde pessoas")
-```
-
-Que tal tentarmos fazer com o mapa mundi?
-
-```{r, eval =F}
-# Pacotes
-
-# install.packages("rnaturalearth")
-# install.packages("rnaturalearthdata")
-# install.packages("rgeos")
-
-library("rnaturalearth")
-library("rnaturalearthdata")
-library("rgeos")
-
-# Mapa mundial
-world <- ne_countries(scale = "medium", returnclass = "sf")
-
-## Buscaremos se as coordenadas das cidades estão contidas nas coordenadas 
-## dos paises
-inter_sf = st_as_sf(dados, coords = c('Longitude', 'Latitude'), crs = st_crs(world))
-
-map_data = st_join(world, inter_sf) %>%
-  filter(!is.na(Graduacao)) %>% 
-  select(name, geometry) %>% 
-  as.data.frame()
-
-
-# Verificar quantas pessoas por país 
-# Juntar com poligonos dos países
-to_plot = map_data %>%
-  group_by(name) %>%
-  summarise(n = n()) %>%
-  right_join(., world, by=c("name"))
-
-# Aqui usamos um outro tipo de plot, o geom_sf(), que precisa de dados de
-# coordenadas geométricas para construir os mapas. O resto envolve apenas
-# funções e argumentos do ggplot!
-ggplot(to_plot) +
-  geom_sf(aes(geometry = geometry, fill = n)) + 
-  theme_minimal() + scale_fill_continuous(low = "#C6FFDD", high = "#f64f59", na.value="white") +
-  labs(fill = "Número \nde pessoas")
-```
-
-## Família de funções `apply`
-
-A família de funções `apply` também podem funcionar como um estrutura de repetição. Sua sintaxe é mais enxuta quando comparada com `for` ou `while` e pode facilitar a elaboração do código. 
-
-Aqui vamos exemplificar o uso de algumas dessas funções.
-
-### apply
-
-A função `apply` é a base de todas as outras funções da família, portanto a compreensão do funcionamento desta é essencial para entender as demais. Se buscar no help da função, ele indicará que os argumentos da função consistem em: apply(X, MARGIN, FUN, ...). Sendo X o conjunto de dados em formato de array (incluindo matrix, que consiste num array de dimensão 2), MARGIN será 1 se a ação deverá ser aplicada à linhas, 2 se for aplicada a colunas e c(1,2) se for aplicada a ambas; FUN é a função que indica ação.
-
-Num simples exemplo temos a matrix:
-
-```{r}
-ex_mat <- matrix(seq(0,21,3), nrow = 2)
-```
-
-Se quisermos somar os elementos das colunas usamos:
-
-```{r}
-apply(ex_mat, 2, sum)
-```
-
-Se quisermos somar os elementos das linhas:
-
-```{r}
-apply(ex_mat, 1, sum)
-```
-
-Se fossemos utilizar o `for` para realizar essa tarefa:
-
-```{r}
-
-# Soma das colunas
-for(i in 1:dim(ex_mat)[2]){
-  print(sum(ex_mat[,i]))
-}
-
-# Soma das linhas
-for(i in 1:dim(ex_mat)[1]){
-  print(sum(ex_mat[i,]))
-}
-```
-
-### lapply
-
-Se diferencia do `apply` por poder receber outros tipos de objetos (mais utilizado com listas) e devolver o resultado  em uma lista.
-
-
-```{r}
-ex_list <- list(A=matrix(seq(0,21,3), nrow = 2), 
-                B=matrix(seq(0,14,2), nrow = 2), 
-                C= matrix(seq(0,39,5), nrow = 2))
-str(ex_list)
-```
-
-Para selecionar a segunda coluna de todas as matrizes
-
-```{r}
-lapply(ex_list, "[", 2)
-```
-
-### sapply
-
-A função `sapply` funciona como o `lapply` a diferença é que ele retorna apenas um valor por componente da lista e os deposita em um vetor de resposta. Como no exemplo:
-
-```{r}
-sapply(ex_list, "[",1,3)
-```
-
-### tapply
-
-Esta função é um pouco diferente das demais, ela exige que exista alguma variável categórica (fator) para aplicar ação separadamente conforme suas categorias (levels). Por isso, normalmente é aplicada a data.frames.
-
-Vamos utilizar nosso conjunto de dados:
-
-```{r}
-str(dados)
-dados$Graduacao  <- as.factor(dados$Graduacao)
-
-dados[dados == "Avançado"] <- 3
-dados[dados == "Intermediário"] <- 2
-dados[dados == "Básico"] <- 1
-dados[dados == "Sabe o teste F? Fui eu que desenvolvi, mas não publiquei porque sou modesto"] <- 99
-
-dados$Conhecimentos_Genetica <- as.numeric(dados$Conhecimentos_Genetica)
-
-tapply(dados$Conhecimentos_Genetica, dados$Graduacao, mean)
-```
-
-Saiba mais sobre essa família de funções no [link](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/)
-
-Observe que nas funções `apply` podemos trocar as funções prontas do *r base* por funções personalizadas. 
-
-> Se estiver adiantada/o em relação aos colegas, você já pode fazer os exercícios da [**Sessão extra**](exercicios.html), se não, faça-os no conforto do seu lar e nos envie dúvidas pelo fórum.
-
-
-## Gerando sorteio para delineamento experimental
-
-Que tal pensarmos em um delineamento experimental e sortearmos as unidades experimentais? Com o pacote `agricolae` elaboraremos o sorteio de um experimento de blocos completos casualizados.
-
-```{r,  message=FALSE, warning=FALSE}
-############################
-#SORTEIO DE EXPERIMENTOS####
-############################
-
-#install.packages("agricolae")
-library(agricolae)
-trt <- c("0","1","2","5","10","20","50","100","Dina")
-rcbd <- design.rcbd(trt, 6, serie = 1, seed = 1, "default") # seed = 1
-rcbd # Planilha de campo
-```
-
-Podemos exportar e salvar nosso sorteio com:
-
-```{r}
-write.table(rcbd,"SORTEIO.txt", row.names=FALSE, sep="\t")
-file.show("SORTEIO.txt")
-write.csv(rcbd,"SORTEIO.csv",row.names=F)
-```
-
-## PCA - Análise de componentes principais
-
-O PCA é uma análise exploratória muito frequente quando utilizada por usuários que possuem muitos dados. Nela, torna-se possível visualizar dados que deveriam ter diversas dimensões em apenas duas componentes mais informativas. Para isto, usamos a função `autoplot()`.
-
-```{r, eval=FALSE}
-# para instalar, use install.packages("ggfortify")
-library(ggfortify)
-
-autoplot(prcomp(~ conhecimentoR + altura + peso + idade, data = dados),
-         data = dados, shape = 'area', colour = 'Graduacao', loadings = TRUE, loadings.colour = 'red', 
-         loadings.label = TRUE, loadings.label.colour = 'black',
-         loadings.label.size = 4) +
-  labs(shape = "Área de \ninteresse", color = "Formação", title = "PCA")
-
-# Os parâmetros relacionados com "LOADINGS" são na verdade a direção onde a váriável mais cresce em duas dimensões
-# Ela serve apenas como uma aproximação, já que os dados reais precisariam de mais dimensões, que nosso olho não pode ver
-```
-
-Agora que você fez um plot de PCA, você pode perceber que ele é apenas uma variação do `geom_point()`, isto permite que você adicione todas as camadas de ggplot que você quiser sobre este gráfico. Já fizemos isto com as legendas!
-
-
-# Sugestões, críticas e elogios
-
-Caso tenha sugestões para aprimoramento desse material, enviar e-mail para `biometriamarcadores@gmail.com`.
-
-Acesse também outros materiais em português produzidos pela mesma equipe [aqui](http://cristianetaniguti.github.io/Workshop_genetica_esalq/).
-
-Este material foi produzido por alunos do programa de pós-graduação em Genética e Melhoramento de Plantas. Cristiane Taniguti, Fernando Correr e e Wellingson Araújo ministraram o Treinamento.
-
-Também recomendamos materiais em inglês [aqui](https://GENt-esalq.github.io/cursoR/english_tutorials.html).

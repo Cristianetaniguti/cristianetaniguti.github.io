@@ -13,10 +13,10 @@ Este entrenamiento es parte de una iniciativa colaborativa entre Breeding Insigh
 
 ## Materiales
 
-* Tutorial de instalación de R y RStudio - [Español](Installation_Tutorial-Espanol.html) - [Português](Installation_Tutorial-Portugues.html) - [English](Installation_Tutorial-English.html)
+* Tutorial de instalación de R y RStudio - [Español](Installation_Tutorial-Espanol.html) - [Português](Installation_Tutorial-Portugues.html) - [English](Installation_Tutorial2-English.html)
 * Presentación teórica - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
-* **Tutorial principal** - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
-* Tareas - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
+* **Tutorial principal** - [Español](Main_Tutorial-Espanol.html) - [Português](Main_Tutorial-Portugues.html) - [English](Main_Tutorial-English.html)
+* Tareas - [Español](exercises-Espanhol.html) - [Português](exercises-Portugues.html) - [English](exercises-English.html)
 
 ---
 
@@ -52,6 +52,7 @@ Este entrenamiento es parte de una iniciativa colaborativa entre Breeding Insigh
 ### Sesión 3 (2h)
 * Estructuras condicionales
 * Estructuras de repetición
+* Vectorización
 * Generación de gráficos
 
 **Tarea Sesión 3** *(tiempo estimado: 2h)*
