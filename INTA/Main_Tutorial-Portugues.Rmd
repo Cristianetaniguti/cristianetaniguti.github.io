@@ -636,7 +636,7 @@ dados <- read.csv("https://github.com/Cristianetaniguti/Workshop_genetica_esalq/
 Aqui usaremos também o argumento `na.strings` que irá indicar como foram nomeados os dados perdidos.
 
 ```{r, eval=FALSE}
-dados <- read.csv(file = "dados_alunos2021.csv", na.strings="-", header = T, dec = ",")
+dados <- read.csv(file = "data/dados_alunos2021.csv", na.strings="-", header = T, dec = ",")
 head(dados)
 ```
 
