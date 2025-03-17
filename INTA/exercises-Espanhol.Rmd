@@ -5,6 +5,11 @@ output:
       css: readthedownstatgen.css
 ---
 
+<center><img src="logos/logos.png" width="700" /></center>
+
+<br>
+<br>
+
 # Ejercicios
 
 
