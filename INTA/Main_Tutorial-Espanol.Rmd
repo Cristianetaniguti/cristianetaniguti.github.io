@@ -1,3 +1,8 @@
+<center><img src="logos/logos.png" width="700" /></center>
+
+<br>
+<br>
+
 Este material es una actualización y traducción de los materiales elaborados por los estudiantes del Departamento de Genética de ESALQ/USP - Brasil. Acceda al contenido en portugués impartido en otros eventos [en este sitio](https://cristianetaniguti.github.io/Workshop_genetica_esalq/).
 
 Sugerimos que, antes de comenzar la práctica descrita aquí, siga [este tutorial](https://cristianetaniguti.github.io/INTA/Installation_Tutorial-Espanol.html) para la instalación de R y RStudio.
