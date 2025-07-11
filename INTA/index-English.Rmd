@@ -5,9 +5,7 @@ output:
     highlight: github
 ---
 
-<img src="logos/BI.png" align="left" width="230" />
-<img src="logos/Cornell.png" width="230" hspace="80"/>
-<img src="logos/USDA.png" align="right" width="150"/>
+<center><img src="logos/logos.png" width="700" /></center>
 
 <br>
 <br>
@@ -22,7 +20,7 @@ This training is part of a collaborative initiative between Breeding Insight - C
 
 ## Materials
 
-* R and RStudio Installation tutorial - [Español](Installation_Tutorial-Espanol.html) - [Português](Installation_Tutorial-Portugues.html) - [English](Installation_Tutorial-English.html)
+* R and RStudio Installation tutorial - [Español](Installation_Tutorial-Espanol.html) - [Português](Installation_Tutorial-Portugues.html) - [English](Installation_Tutorial2-English.html)
 * Theoretical presentation - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * **Main tutorial** - [Español](wait.html) - [Português](wait.html) - [English](wait.html)
 * Homework - [Español](wait.html) - [Português](wait.html) - [English](wait.html)

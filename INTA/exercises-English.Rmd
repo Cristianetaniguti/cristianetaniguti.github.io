@@ -5,6 +5,11 @@ output:
       css: readthedownstatgen.css
 ---
 
+<center><img src="logos/logos.png" width="700" /></center>
+
+<br>
+<br>
+
 # Exercises
 
 # **Session 1**: Operators and basic operations
@@ -287,210 +292,198 @@ while(sum(a) < 10000){
 [2001 2002 2003 2004 2005]{.spoiler}
 
 
-3 - Repita a frase "x tigre(s) triste(s) comeram x pratos de trigo", em que x seja um número inteiro da sua escolha.
+3 - Repeat the phrase "x sad tiger(s) ate x plates of wheat", where x is an integer of your choice.
 
 ```{r echo=FALSE, eval=FALSE}
-# Numero de tigres/pratos
-numero <- 3
+# Number of tigers/plates
+number <- 3
 
-# Estrutura de repetição
-for(num in 1:numero){
+# Repetition structure
+for(num in 1:number){
   if(num == 1){
-    print(paste(num, "tigre triste comeu", num, "prato de trigo."))
+    print(paste(num, "sad tiger ate", num, "plate of wheat."))
   } else {
-    print(paste(num, "tigres tristes comeram", num, "pratos de trigo."))
+    print(paste(num, "sad tigers ate", num, "plates of wheat."))
   }
 }
 ```
 
 **Answers**:
 
-Se a escolha do valor foi um:
-[1 tigre triste comeu 1 prato de trigo.]{.spoiler}
+If the chosen value was one:
+[1 sad tiger ate 1 plate of wheat.]{.spoiler}
 
-Se a escolha do valor foi dois:
-[1 tigre triste comeu 1 prato de trigo. 2 tigres tristes comeram 2 pratos de trigo.]{.spoiler}
+If the chosen value was two:
+[1 sad tiger ate 1 plate of wheat. 2 sad tigers ate 2 plates of wheat.]{.spoiler}
 
-4 - **Hora de descontrair!** Você conhece a música [Hey Jude](https://www.youtube.com/watch?v=7qMls5yxP1w)? Repita quantas vezes você quiser o verso:
 
-"Na, na, na, na-na-na na
-
-Na-na-na na, hey Jude"
+4 - **Time to relax!** Create a loop to repeat a pattern from the famous Beatles song finale.
 
 ```{r, echo=FALSE, eval = FALSE}
-vezes <- 10
+times <- 10
 
-for(repete in 1:vezes){
+for(repeat_count in 1:times){
   print("Na, na, na, na-na-na na")
-  print("Na-na-na na, hey Jude")
+  print("Na-na-na na, hey Jude") 
 }
-
 ```
 
-5 - Que tal mais uma música popular? O exercício agora vai ser com essa [música](https://www.youtube.com/watch?v=C7pupFaI80A) que quase todos devem conhecer! Você irá fazer o seguinte:
+5 - How about a popular children's song? The exercise will now be with this [song](https://www.youtube.com/watch?v=C7pupFaI80A) that almost everyone should know! You will do the following:
 
-* 1 - Defina o número da prole de patos
-* 2 - Imprima o número da prole e a frase "patinhos foram passear"
-* 3 - Adicione as seguintes linhas:
-    * Além das montanhas
-    * Para brincar
-    * A mamãe gritou
-    * *Repita o número de quacks* (**Isso difere da música, mas fica mais legal**)
-* 4 - Diminua um patinho da prole, caso a prole seja menor do que um
-* 5 - Imprima os versos
-    * Mas só **numero da prole - 1** patinhos
-    * Voltaram de lá
-* 6 - Imprima linha vazia
-* 7 - Retorne no passo 2 se a prole for maior que 1
-* 8 - Se restar um patinho, coloque a última estrofe:
+* 1 - Define the number of ducklings
+* 2 - Print the number of ducklings and the phrase "little ducks went out to play"
+* 3 - Add the following lines:
+    * Over the mountain
+    * To play
+    * Mother duck called
+    * *Repeat the number of quacks* (**This differs from the song, but it's more fun**)
+* 4 - Decrease one duckling from the group, if the group is less than one
+* 5 - Print the verses
+    * But only **number of ducklings - 1** little ducks
+    * Came back
+* 6 - Print empty line
+* 7 - Return to step 2 if there's more than 1 duckling
+* 8 - If one duckling remains, add the last verse:
 
-    "1 patinho foi passear
+    "1 little duck went out to play
 
-    Além das montanhas
+    Over the mountain
 
-    Para brincar
+    To play
 
-    A mamãe gritou
+    Mother duck called
 
-    Quack 
+    Quack
 
-    Mas nenhum patinho
+    But no little ducks
 
-    Voltou de lá"
+    Came back"
 
-* 9 - Fica a seu critério colocar a última estrofe, mas de um jeito legal hein!
+* 9 - It's up to you to add the final verse, but make it fun!
 
 ```{r, eval=FALSE}
-prole = 3
-prole_aux = prole
+ducklings = 3
+ducklings_aux = ducklings
 
-while(prole != 0){
-  if(prole > 1){
-    # Imprima o primeiro verso usando o numero de patos
-     print(paste(prole, " patinhos foram passear", sep = " "))
+while(ducklings != 0){
+  if(ducklings > 1){
+    # Print first verse using number of ducks
+     print(paste(ducklings, " little ducks went out to play", sep = " "))
     
-    # Imprima os três versos seguintes
-     print("Além das montanhas")
-     print("Para brincar")
-     print("A mamãe gritou")
+    # Print the next three verses
+     print("Over the mountain")
+     print("To play")
+     print("Mother duck called")
      
-    # Repita o numero de Quacks
-     print(paste(rep("Quack", prole, sep=" ")))
+    # Repeat the number of Quacks
+     print(paste(rep("Quack", ducklings, sep=" ")))
      
-    # Reduza a prole em 1
-     prole = prole -1
+    # Reduce the number of ducklings by 1
+     ducklings = ducklings -1
      
-
-    
-     if(prole > 1){
-       # Penultimo verso da estrofe
-       print(paste("Mas só", prole, "patinhos", sep = " "))
-       # Ultimo verso
-       print("Voltaram de lá")
+     if(ducklings > 1){
+       # Second to last verse of the stanza
+       print(paste("But only", ducklings, "little ducks", sep = " "))
+       # Last verse
+       print("Came back")
        print(" ")
      } else {
-       # Penultimo verso da estrofe
-       print(paste("Mas só", prole, "patinho", sep = " "))
-       # Ultimo verso
-       print("Voltou de lá")
+       # Second to last verse of the stanza
+       print(paste("But only", ducklings, "little duck", sep = " "))
+       # Last verse
+       print("Came back")
        print(" ")
      }
   } else {
-    # Imprima os três versos seguintes
-    print("1 patinho foi passear")
-    print("Além das montanhas")
-    print("Para brincar")
-    print("A mamãe gritou")
+    # Print the final verses
+    print("1 little duck went out to play")
+    print("Over the mountain")
+    print("To play")
+    print("Mother duck called")
     print("Quack")
-    print("Mas nenhum patinho")
-    print("Voltou de lá")
+    print("But no little ducks")
+    print("Came back")
     print(" ")
-    prole = prole - 1
-    print("A mamãe patinha")
-    print("Foi procurar")
-    print("Além das montanhas")
-    print("Na beira do mar")
-    print("A mamãe gritou")
-    print(paste(rep("Quack", prole_aux), sep=" "))
-    print(paste("E os", prole_aux, "patinhos", sep=" "))
-    print("Voltaram de lá")
+    ducklings = ducklings - 1
+    print("Mother duck")
+    print("Went to look")
+    print("Over the mountain")
+    print("By the shore")
+    print("Mother duck called")
+    print(paste(rep("Quack", ducklings_aux), sep=" "))
+    print(paste("And all", ducklings_aux, "little ducks", sep=" "))
+    print("Came back")
   }
-    
 }
 ```
 
-
-6 - Utilize a expressão abaixo para gerar médias de produtividade, considerando 50 genótipos de soja, de forma aleatória:
+6 - Use the expression below to generate productivity means, considering 50 soybean genotypes, randomly:
 
 ```{r, eval = FALSE}
 set.seed(123456)
-produtividade = rnorm(50, mean = 3500.00, sd = 800)
+productivity = rnorm(50, mean = 3500.00, sd = 800)
 ```
 
-Suponhamos que a média nacional de produtividade de soja seja de 3500.00 kg/ha. Utilizando estruturas condicionais, verifique se os genótipos apresentam valores acima ou abaixo da produtividade média nacional, retornando as frases "acima da média" ou "abaixo da média", respectivamente.
+Let's assume that the national average soybean productivity is 3500.00 kg/ha. Using conditional structures, check if the genotypes show values above or below the national average productivity, returning the phrases "above average" or "below average", respectively.
 
 ```{r echo=FALSE, eval=FALSE}
 set.seed(123456)
-produtividade = rnorm(50, mean = 3500.00, sd = 800)
-resultado = c()
-for(i in 1:length(produtividade)){
-  if (produtividade[i] > 3500.00){
-    resultado[i] <- ("acima da média")
-  } else {resultado[i] <- ("abaixo da média")}
+productivity = rnorm(50, mean = 3500.00, sd = 800)
+result = c()
+for(i in 1:length(productivity)){
+  if (productivity[i] > 3500.00){
+    result[i] <- ("above average")
+  } else {result[i] <- ("below average")}
 }
 
-(resultado)
+(result)
 ```
 
 **Answers**:
 
-[[1] "acima da média"  "abaixo da média" "abaixo da média" "acima da média"  "acima da média"  "acima da média" 
- [7] "acima da média"  "acima da média"  "acima da média"  "abaixo da média" "abaixo da média" "abaixo da média"
-[13] "abaixo da média" "acima da média"  "acima da média"  "acima da média"  "abaixo da média" "acima da média" 
-[19] "acima da média"  "acima da média"  "abaixo da média" "acima da média"  "acima da média"  "acima da média" 
-[25] "acima da média"  "abaixo da média" "acima da média"  "acima da média"  "acima da média"  "abaixo da média"
-[31] "abaixo da média" "acima da média"  "abaixo da média" "abaixo da média" "abaixo da média" "abaixo da média"
-[37] "acima da média"  "acima da média"  "acima da média"  "abaixo da média" "abaixo da média" "acima da média" 
-[43] "acima da média"  "abaixo da média" "acima da média"  "abaixo da média" "abaixo da média" "abaixo da média"
-[49] "acima da média"  "abaixo da média"]{.spoiler}
+[[1] "above average"  "below average" "below average" "above average"  "above average"  "above average" 
+ [7] "above average"  "above average"  "above average"  "below average" "below average" "below average"
+[13] "below average" "above average"  "above average"  "above average"  "below average" "above average" 
+[19] "above average"  "above average"  "below average" "above average"  "above average"  "above average" 
+[25] "above average"  "below average" "above average"  "above average"  "above average"  "below average"
+[31] "below average" "above average"  "below average" "below average" "below average" "below average"
+[37] "above average"  "above average"  "above average"  "below average" "below average" "above average" 
+[43] "above average"  "below average" "above average"  "below average" "below average" "below average"
+[49] "above average"  "below average"]{.spoiler}
 
-# **Sessão 4**: Funções
+# **Session 4**: Functions
 
-Utilize o conjunto de dados disponível abaixo para gerar médias de produtividade, considerando 25 genótipos de soja avaliados em 15 ambientes, de forma aleatória:
+Use the dataset available below to generate productivity means, considering 25 soybean genotypes evaluated in 15 environments, randomly:
 
 ```{r, eval=FALSE}
 set.seed(123456)
-dados = data.frame(Genotypes = rep(seq(1,25,1), 15), Environments = rep(x = seq(1:15), each = 25), yield = rnorm(375, 3000:3500, 800))
+data = data.frame(Genotypes = rep(seq(1,25,1), 15), Environments = rep(x = seq(1:15), each = 25), yield = rnorm(375, 3000:3500, 800))
 ```
 
-Elabore uma função para calcular as médias e o coeficiente de variação ($CV = \frac{\mu}{\sigma}*100$) em cada ambiente, e também avaliar a precisão experimental (até 20% = alta; entre 20 e 30% = média; acima de 30% = baixa). A função deve retornar os resultados contendo a identificação de cada ambiente, as médias, os CV's e as precisões.
+Create a function to calculate the means and coefficient of variation ($CV = \frac{\mu}{\sigma}*100$) in each environment, and also evaluate the experimental precision (up to 20% = high; between 20 and 30% = medium; above 30% = low). The function should return the results containing the identification of each environment, the means, CVs, and precisions.
 
-<span style="color:red"> Pode ser que a essa altura do curso você ja tenha que ter trabalhado com diversas frustrações: o código não roda, precisou de várias tentativas até dar certo. Talvez você se sinta caindo naquele gráfico de andamento do aprendizado que mostramos na apresentação teórica. Por isso, colocamos aqui alguns vídeos motivacionais. São três palestras TED excelentes (como costuma ser os TEDs).</span>
+<span style="color:red">At this point in the course, you may have already dealt with various frustrations: the code doesn't run, it took several attempts to get it right. You might feel like you're falling into that learning progress graph we showed in the theoretical presentation. That's why we've included some motivational videos here. These are three excellent TED talks (as TEDs usually are).</span>
 
-Esses dois tem legenda em portugues. É só ajustar as configurações:
+These two have subtitles in multiple languages. Just adjust the settings:
 
 * [Teach girls bravery, not perfection | Reshma Saujani](https://www.youtube.com/watch?v=fC9da6eqaqg)
-Especial para mulheres. Fala como aprender a programar nos educa a lidarmos melhor com nossas frustrações e nos desvia da cultura imposta de perfeição.
+Special for women. Discusses how learning to code teaches us to better deal with our frustrations and diverts us from the imposed culture of perfection.
 
 * [Mitch Resnick: Let's teach kids to code](https://www.youtube.com/watch?v=Ok6LbV6bqaE)
-O palestrante é um dos desenvolvedores do programa Scratch, que consiste num jogo que ensina lógica de programação. O palestrante destaca a importância de aprender alguma linguagem de programação dos dias de hoje.
+The speaker is one of the developers of Scratch, which is a game that teaches programming logic. The speaker emphasizes the importance of learning a programming language in today's world.
 
-Esse só em inglês:
+This one is in English only:
 
 * [You Should Learn to Program: Christian Genco at TEDxSMU](https://www.youtube.com/watch?v=xfBWk4nw440)
-Destaca os impactos de saber programar no dia-a-dia.
+Highlights the impacts of knowing how to program in daily life.
 
+# **Extra**: The `apply` Family
 
-
-# **Extra**: Família dos `apply`
-
-1 - Utilize a função abaixo para gerar médias de produtividade, considerando 25 genótipos de soja avaliados em 15 ambientes, de forma aleatória:
+1 - Use the function below to generate productivity means, considering 25 soybean genotypes evaluated in 15 environments, randomly:
 
 ```{r, eval=FALSE}
 set.seed(123456)
-dados = data.frame(Genotypes = rep(seq(1,25,1), 15), Environments = rep(x = seq(1:15), each = 25), yield = rnorm(375, 3000:3500, 800))
+data = data.frame(Genotypes = rep(seq(1,25,1), 15), Environments = rep(x = seq(1:15), each = 25), yield = rnorm(375, 3000:3500, 800))
 ```
 
-Utilizando funções da família "apply", obtenha as médias gerais de cada genótipo e também de cada ambiente.
-
-
+Using functions from the "apply" family, obtain the general means of each genotype and also of each environment.
