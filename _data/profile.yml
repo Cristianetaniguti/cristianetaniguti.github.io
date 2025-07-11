@@ -21,13 +21,13 @@ experience: # Remove for hiding the experience section
 education: # Remove for hiding the experience section
   - start: 2017-03
     end: 2021-04
-    education : Ph.D in Genetics and Plant Breeding, University of S o Paulo - ESALQ/USP
+    education : Ph.D in Genetics and Plant Breeding, University of Sao Paulo - ESALQ/USP
   - start: 2015-03
     end: 2017-01
-    education: Master Degree in Genetics and Plant Breeding, University of S o Paulo - ESALQ/USP
+    education: Master Degree in Genetics and Plant Breeding, University of Sao Paulo - ESALQ/USP
   - start: 2009-02
     end: 2017-01
-    education: Bachelor s Degree in Genetics and Plant Breeding, Federal University of S o Carlos - UFSCar
+    education: Bachelor s Degree in Genetics and Plant Breeding, Federal University of Sao Carlos - UFSCar
 
 interests: # Remove for hiding the interests section
   - Statistical Genetics
@@ -38,32 +38,35 @@ interests: # Remove for hiding the interests section
   - Data visualization
   - Polyploid species
 skills: # Remove for hiding the skills section
-  - skill: R - advanced
+  - skill: R - expert
+    value: 100
+  - skill: Shiny - expert
     value: 100
   - skill: Git - advanced
-    value: 100
-  - skill: Shiny - advanced
-    value: 100
+    value: 75
   - skill: Unix|Linux - advanced
-    value: 100
+    value: 75
   - skill: Latex - advanced
-    value: 100
+    value: 75
   - skill: Bash - advanced
-    value: 100
+    value: 75
+  - skill: Docker - advanced
+    value: 75
   - skill: Workflow Description Language (WDL) - advanced
-    value: 100
-  - skill: Docker - Intermediate
-    value: 66
-  - skill: Emacs - Intermediate
-    value: 66
-  - skill: Inkscape - Intermediate
-    value: 66
-  - skill: HTML & CSS - Intermediate
-    value: 66
-  - skill: Rcpp - Beginner
-    value: 33
-  - skill: Python - Beginner
-    value: 33
+    value: 75
+  - skill: Nextflow - intermediate
+    value: 50
+  - skill: Emacs - intermediate
+    value: 50
+  - skill: Inkscape - intermediate
+    value: 50
+  - skill: HTML & CSS - intermediate
+    value: 50
+  - skill: Rcpp - intermediate
+    value: 50
+  - skill: Python - intermediate
+    value: 50
+    
 social:
   email:  cht47@cornell.edu
   orcid: 0000-0002-2021-6883

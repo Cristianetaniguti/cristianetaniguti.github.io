@@ -1,4 +1,9 @@
 - presentation:
+    title: Introduction to R Programming
+    event: 16h course to members of Instituto Nacional de Innovacion y Transparencia en Tecnologia Agropecuaria (INTA) - Costa Rica
+    date: 2025
+    slides: https://breeding-insight.github.io/learn-hub/r-intro/
+- presentation:
     title: Enhancing Genetic Insights with Polyploid Tools and User-friendly Interfaces
     event: Plant Science Symposium - University of Florida
     date: 2025
