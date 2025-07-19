@@ -1,3 +1,10 @@
+---
+title: "Get Ready for the Tools for Polyploids Training Workshop"
+output:
+  html_document: default
+  pdf_document: default
+---
+
 Here we describe the requirements for the Tools for Polyploid Training Workshop being held on March 17, 2023 both virtually and in person, in Nelson (New Zealand). This Workshop will be a "hands-on" training. We will share codes and example data sets to allow attendees to try the tools for polyploid genetic analysis.
 
 # Schedule

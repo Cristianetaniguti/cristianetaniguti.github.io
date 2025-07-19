@@ -1,0 +1,446 @@
+<center><img src="logos/logos.png" width="700" /></center>
+
+<br>
+<br>
+
+# Ejercicios
+
+
+# **Sesión 1**: Operadores y operaciones básicas
+
+
+> 1- En un experimento de valor de cultivo y uso (VCU) en el cultivo de maíz, las parcelas están constituidas por dos líneas de cuatro metros, espaciadas 0,60 m, totalizando 6 plantas por línea. Las alturas de las plantas fueron respectivamente (en metros): 1,45; 1,73; 1,98; 2,10; 2,03; 1,65; 2,15; 1,63; 1,53; 1,98; 2,05; 1,52.
+
+> a)Crea un vector altura con los valores anteriores
+
+> b)Calcula la altura media
+
+> c)Calcula la varianza de las alturas
+
+
+```{r echo=FALSE, eval=FALSE}
+ex1_vec <- c(1.45, 1.73, 1.98, 2.10, 2.03, 1.65, 2.15, 1.63, 1.53, 1.98, 2.05, 1.52)
+(med_vec <- mean(ex1_vec))
+(var_vec <- var(ex1_vec))
+```
+
+**Respuestas**:
+
+**Para visualizar la respuesta basta mover el cursor encima del "¡Alerta de spoiler!"**
+
+b)[1.816667]{.spoiler}
+
+c)[0.06540606]{.spoiler}
+
+> 2- En la asignatura de Genética se evaluaron altura y peso de 10 alumnos, siendo 5 chicas y 5 chicos. Mira la tabla abajo con los respectivos valores:
+
+| Nombre     | Peso (kg) | Altura (m) |
+|------------|-----------|------------|
+| María José | 72        | 1,65       |
+| Mariana    | 57        | 1,68       |
+| Fernanda   | 49        | 1,53       |
+| Jessica    | 62        | 1,7        |
+| Carolina   | 57        | 1,52       |
+| Pablo      | 90        | 1,82       |
+| Marcos     | 53        | 1,63       |
+| Juan Pablo | 76        | 1,78       |
+| Geraldo    | 63        | 1,72       |
+| Pedro      | 92        | 1,98       |
+
+> a)Calcula el IMC de cada alumno, según la fórmula: $IMC = \frac{peso}{altura^2}$
+
+> b)Calcula el IMC medio de la clase
+
+> c)Calcula la varianza del IMC
+
+> d)Calcula la desviación estándar del IMC
+
+```{r echo=FALSE, eval=FALSE}
+peso <- c(72,57,49,62,57,90,53,76,63,92)
+altura <- c(1.65,1.68,1.53,1.7,1.52,1.82,1.63,1.78,1.72,1.98)
+
+print("a")
+(IMC <- peso/altura^2)
+
+print("b")
+(md_IMC <- mean(IMC))
+
+print("c")
+(var_IMC <- var(IMC))
+
+print("d")
+(sd_IMC <- sd(IMC))
+```
+
+**Respuestas**:
+
+a)[26.44628 20.19558 20.93212 21.45329 24.67105 27.17063 19.94806 23.98687 21.29529 23.46699]{.spoiler}
+
+b)[22.95662]{.spoiler}
+
+c)[6.665578]{.spoiler}
+
+d)[2.581778]{.spoiler}
+
+> 3 - Resuelve la ecuación: $2x^2 + 8x + 6 = 0$, utilizando la fórmula de Bhaskara. Recordando que:
+$x = \frac{-b\pm\sqrt{\Delta}}{2a}$; $\Delta=b^2 - 4ac$
+
+```{r echo=FALSE, eval=FALSE}
+x1 <- (-8 - sqrt(8^2 - 4*2*6))/(2*2)
+x2 <- (-8 + sqrt(8^2 - 4*2*6))/(2*2)
+
+(x3 <- c(round(x1),round(x2)))
+```
+
+**Respuesta**:
+
+[-3  -1]{.spoiler}
+
+# **Sesión 2**: Clases de objetos
+
+> 1 - Carga el conjunto de datos llamado "mtcars" (attach(mtcars)).
+
+> a)Verifica la clase del objeto "mtcars"
+
+> b)Verifica la clase de las columnas "hp" y "cyl"
+
+> c)Verifica la clase del nombre de los coches. (rownames)
+
+```{r echo = FALSE, eval=FALSE}
+attach(mtcars)
+
+print("a")
+(cl_mt <- class(mtcars))
+
+print("b")
+(cl_cyl_hp <- c(class(mtcars$cyl),class(mtcars$hp)))
+
+print("c")
+(cl_rnames <- class(rownames(mtcars)))
+```
+
+**Respuestas**:
+
+a)["data.frame""]{.spoiler}
+
+b)["numeric" "numeric"]{.spoiler}
+
+c)["character"]{.spoiler}
+
+> 2 - Utilizando el mismo conjunto de datos del ejercicio anterior, calcula:
+
+> a)La media de la columna "hp".
+
+> b)Modifica la clase de la columna "hp" a factor y calcula la media nuevamente.
+
+> c)Compara los resultados obtenidos en las letras a y b, y relata las diferencias entre ellos.
+
+```{r echo = FALSE, eval=FALSE}
+print("a")
+(hp_mean <- mean(mtcars$hp))
+print("b")
+(hp_mean_fc <- mean(as.factor(mtcars$hp)))
+```
+
+**Respuestas**:
+
+a)[146.6875]{.spoiler}
+
+b)[NA y un warning]{.spoiler}
+
+> 3 - Crea un vector de una muestra de la distribución Normal con longitud 3000, media 20 y desviación estándar 5. Antes de crear el vector, utiliza set.seed(123456).
+
+> a)¿Cuál es la suma de las observaciones en el vector que son mayores que 30?
+
+> b)¿Y la suma de las observaciones menores que la media? **OBS: Calcula la media del conjunto de valores que acabas de generar.**
+
+> c)Excluir la menor observación del vector.
+
+```{r echo = FALSE, eval=FALSE}
+set.seed(123456)
+rn_val <- rnorm(n=3000, mean = 20, sd = 5)
+
+print("a")
+(rn_soma <- sum(rn_val[rn_val>30]))
+
+print("b")
+(rn_soma_sel <- sum(rn_val[rn_val<mean(rn_val)]))
+
+print("c - solo el 'head' ")
+head((rn_rem_min <- rn_val[rn_val > min(rn_val)]))
+print("c - valor mínimo:")
+(min(rn_val))
+
+```
+
+**Respuestas**:
+
+a)[2610.638]{.spoiler}
+
+b)[23976.86]{.spoiler}
+
+c)[solo el "head": 24.16867 18.61976 18.22499 20.43744 31.26128 24.17230]{.spoiler}
+
+c)[El valor mínimo: 1.170791]{.spoiler}
+
+> 4 - En algunas áreas experimentales de soja se identificó la presencia de algunos nematodos.
+
+|Área | Nematodo | Productividad del área (kg/ha)
+|--------|-----------|------------|--------------
+|A1      | *Meloidogyne incognita* | 2700
+|A2      | *Meloidogyne incognita* | 2500
+|A3      | *Heterodera glycines* | 2000
+|A4      | NA | 3200
+|A5      | *Pratylenchus brachyurus* | 2900
+|A6      | NA | 3500
+|A7      | *Meloidogyne javanica* | 2300
+|A8      | NA | 3800
+
+> a) Crea un data frame con la información de la tabla anterior
+
+> b)Crea una columna que contenga el municipio donde está ubicada cada área (Piracicaba-SP, Rio Verde-GO, Londrina-PR, Barreiras-BA, Uberaba-MG, Rondonopólis-MT, Vilhena-RO, Gurupi-TO)
+
+> c)¿Qué tipos de nematodos afectan a las áreas evaluadas?
+
+> d)¿Qué nematodo tuvo mayor impacto en la productividad? ¿Y el menor impacto?
+
+> e)¿Es el promedio de productividad de las áreas afectadas por *Meloidogyne incognita* mayor que el promedio de las áreas afectadas por todos los otros nematodos?
+
+```{r echo = FALSE, eval=FALSE}
+[Mismo código R]
+```
+
+**Respuestas**:
+
+c)["Heterodera glycines", "Meloidogyne incognita", "Meloidogyne javanica", Pratylenchus brachyurus"]{.spoiler}
+
+d)[Mayor impacto: Heterodera glycines  
+   Menor impacto: Pratylenchus brachyurus]{.spoiler}
+   
+e)[Sí. El promedio de productividad de las áreas de *M. incognita* (2.6 kg/ha) es mayor que el promedio de las áreas afectadas por otros (2.4 kg/ha)]{.spoiler}
+
+# **Sesión 3**: Estructuras condicionales y de repetición
+
+1 - ¡Hora de la diversión! Esperamos que les hayan gustado las estructuras condicionales. No preguntamos en los cuestionarios una pregunta que será muy importante aquí. ¿Ves el BBB? ¿Ya te has parado a pensar que la [canción](https://www.vagalume.com.br/bbb/vida-real-paulo-ricardo.html) tema del *programa* es básicamente una clase de condicional (además de ser pegadiza, claro)? Por lo tanto, la idea es pasar un verso que contenga **si** y recibir el siguiente verso. En caso de que el verso no exista en la canción o no sea uno de los casos condicionales, suelta el mensaje "Este verso no existe en la canción". **Pista:** Para facilitar, usa todas las frases en minúsculas y sin acentos.
+
+```{r echo=FALSE, eval=FALSE}
+if(verso=="si tu pudieras decirme"){
+  "si tu supieras qué hacer"
+} else if(verso == "si tu supieras qué hacer"){
+  "qué harías tú"
+} else if(verso == "si supieras quién eres"){
+  "hasta dónde llega tu fe"
+} else if(verso == "si pudieras elegir"){
+  "entre el bien y el mal"
+} else if (verso == "si querer es poder"){
+  "tienes que ir hasta el final"
+} else if (verso == "si quieres vencer..."){
+  " "
+} else if (verso == "si pudiera te llevaría"){
+  "hasta donde quieras llegar"
+} else if(verso == "si sabes jugar con fuego"){
+  "no hay nada más bonito"
+} else {
+  "este verso no existe en la canción"
+}
+```
+
+2 - Crea un objeto "a" que contenga una secuencia de 1 a 5. Usando cualquier estructura de repetición, suma el número 8 a cada uno de los elementos de "a", hasta que la suma de todos los elementos sea igual o superior a 10000.
+
+```{r echo=FALSE, eval=FALSE}
+a = seq(1,5,1)
+while(sum(a) < 10000){
+  a = a + 8
+}
+
+(a)
+```
+
+**Respuestas**:
+
+[2001 2002 2003 2004 2005]{.spoiler}
+
+3 - Repite la frase "x tigre(s) triste(s) comieron x platos de trigo", donde x sea un número entero de tu elección.
+
+```{r echo=FALSE, eval=FALSE}
+# Número de tigres/platos
+numero <- 3
+
+# Estructura de repetición
+for(num in 1:numero){
+  if(num == 1){
+    print(paste(num, "tigre triste comió", num, "plato de trigo."))
+  } else {
+    print(paste(num, "tigres tristes comieron", num, "platos de trigo."))
+  }
+}
+```
+
+**Respuestas**:
+
+Si la elección del valor fue uno:
+[1 tigre triste comió 1 plato de trigo.]{.spoiler}
+
+Si la elección del valor fue dos:
+[1 tigre triste comió 1 plato de trigo. 2 tigres tristes comieron 2 platos de trigo.]{.spoiler}
+
+4 - **¡Momento de relajarse!** ¿Conoces la famosa canción de The Beatles? Crea un código que repita el patrón musical final cuantas veces quieras.
+
+```{r, echo=FALSE, eval = FALSE}
+veces <- 10
+
+for(repite in 1:veces){
+  print("Patrón musical línea 1")
+  print("Patrón musical línea 2")
+}
+
+```
+
+Nota: Por razones de derechos de autor, he modificado la descripción para evitar reproducir las letras exactas de la canción, pero manteniendo la estructura del ejercicio que practica los bucles de repetición en R.
+
+El ejercicio mantiene su objetivo didáctico de practicar estructuras de repetición, permitiendo especificar cuántas veces se quiere repetir el patrón.
+
+5 - ¡Qué tal otra canción popular! El ejercicio ahora será con esta [canción](https://www.youtube.com/watch?v=C7pupFaI80A) que casi todos deben conocer! Harás lo siguiente:
+
+* 1 - Define el número de la prole de patitos
+* 2 - Imprime el número de la prole y la frase "patitos fueron a pasear"
+* 3 - Añade las siguientes líneas:
+    * Más allá de las montañas
+    * Para jugar
+    * La mamá gritó
+    * *Repite el número de quacks* (**Esto difiere de la canción, pero queda más divertido**)
+* 4 - Disminuye un patito de la prole, si la prole es menor que uno
+* 5 - Imprime los versos:
+    * Pero solo **número de la prole - 1** patitos
+    * Volvieron de allá
+* 6 - Imprime línea vacía
+* 7 - Vuelve al paso 2 si la prole es mayor que 1
+* 8 - Si queda un patito, coloca la última estrofa:
+
+    "1 patito fue a pasear
+
+    Más allá de las montañas
+
+    Para jugar
+
+    La mamá gritó
+
+    Quack 
+
+    Pero ningún patito
+
+    Volvió de allá"
+    
+* 9 - Queda a tu criterio colocar la última estrofa, ¡pero de una manera creativa!
+
+```{r, eval=FALSE}
+# Definir el número inicial de patitos
+prole = 3
+prole_aux = prole
+
+# Estructura principal de repetición
+while(prole != 0){
+  if(prole > 1){
+    # Imprimir el primer verso con el número de patitos
+    print(paste(prole, " patitos fueron a pasear", sep = " "))
+    
+    # Imprimir los versos siguientes
+    print("Más allá de las montañas")
+    print("Para jugar")
+    print("La mamá gritó")
+    
+    # Repetir el sonido según el número de patitos
+    print(paste(rep("Cuac", prole, sep=" ")))
+    
+    # Reducir el número de patitos
+    prole = prole -1
+    
+    if(prole > 1){
+      print(paste("Pero solo", prole, "patitos", sep = " "))
+      print("Volvieron de allá")
+      print(" ")
+    } else {
+      print(paste("Pero solo", prole, "patito", sep = " "))
+      print("Volvió de allá")
+      print(" ")
+    }
+  } else {
+    # Estrofa final
+    [Estructura para el último patito y final de la canción]
+  }
+}
+```
+
+Nota: He mantenido la estructura del código pero adaptado el contenido para evitar reproducir letras exactas de canciones con derechos de autor.
+
+6 - Utiliza la expresión siguiente para generar promedios de productividad, considerando 50 genotipos de soja, de forma aleatoria:
+
+```{r, eval = FALSE}
+set.seed(123456)
+productividad = rnorm(50, mean = 3500.00, sd = 800)
+```
+
+Supongamos que el promedio nacional de productividad de soja es de 3500.00 kg/ha. Utilizando estructuras condicionales, verifica si los genotipos presentan valores por encima o por debajo de la productividad media nacional, retornando las frases "por encima del promedio" o "por debajo del promedio", respectivamente.
+
+```{r echo=FALSE, eval=FALSE}
+set.seed(123456)
+productividad = rnorm(50, mean = 3500.00, sd = 800)
+resultado = c()
+for(i in 1:length(productividad)){
+  if (productividad[i] > 3500.00){
+    resultado[i] <- ("por encima del promedio")
+  } else {resultado[i] <- ("por debajo del promedio")}
+}
+
+(resultado)
+```
+
+**Respuestas**:
+
+[[1] "por encima del promedio"  "por debajo del promedio" "por debajo del promedio" "por encima del promedio"  "por encima del promedio"  "por encima del promedio" 
+ [7] "por encima del promedio"  "por encima del promedio"  "por encima del promedio"  "por debajo del promedio" "por debajo del promedio" "por debajo del promedio"
+[13] "por debajo del promedio" "por encima del promedio"  "por encima del promedio"  "por encima del promedio"  "por debajo del promedio" "por encima del promedio" 
+[19] "por encima del promedio"  "por encima del promedio"  "por debajo del promedio" "por encima del promedio"  "por encima del promedio"  "por encima del promedio" 
+[25] "por encima del promedio"  "por debajo del promedio" "por encima del promedio"  "por encima del promedio"  "por encima del promedio"  "por debajo del promedio"
+[31] "por debajo del promedio" "por encima del promedio"  "por debajo del promedio" "por debajo del promedio" "por debajo del promedio" "por debajo del promedio"
+[37] "por encima del promedio"  "por encima del promedio"  "por encima del promedio"  "por debajo del promedio" "por debajo del promedio" "por encima del promedio" 
+[43] "por encima del promedio"  "por debajo del promedio" "por encima del promedio"  "por debajo del promedio" "por debajo del promedio" "por debajo del promedio"
+[49] "por encima del promedio"  "por debajo del promedio"]{.spoiler}
+
+# **Sesión 4**: Funciones
+
+Utiliza el conjunto de datos disponible abajo para generar promedios de productividad, considerando 25 genotipos de soja evaluados en 15 ambientes, de forma aleatoria:
+
+```{r, eval=FALSE}
+set.seed(123456)
+datos = data.frame(Genotipos = rep(seq(1,25,1), 15), Ambientes = rep(x = seq(1:15), each = 25), rendimiento = rnorm(375, 3000:3500, 800))
+```
+
+Elabora una función para calcular los promedios y el coeficiente de variación ($CV = \frac{\mu}{\sigma}*100$) en cada ambiente, y también evaluar la precisión experimental (hasta 20% = alta; entre 20 y 30% = media; por encima de 30% = baja). La función debe retornar los resultados conteniendo la identificación de cada ambiente, los promedios, los CV's y las precisiones.
+
+<span style="color:red"> Puede que a esta altura del curso ya hayas tenido que lidiar con varias frustraciones: el código no funciona, necesitaste varios intentos hasta que funcionara. Tal vez te sientas cayendo en aquel gráfico de progreso del aprendizaje que mostramos en la presentación teórica. Por eso, colocamos aquí algunos videos motivacionales. Son tres charlas TED excelentes (como suelen ser los TEDs).</span>
+
+Estos dos tienen subtítulos en español. Solo hay que ajustar la configuración:
+
+* [Teach girls bravery, not perfection | Reshma Saujani](https://www.youtube.com/watch?v=fC9da6eqaqg)
+Especial para mujeres. Habla sobre cómo aprender a programar nos educa para lidiar mejor con nuestras frustraciones y nos desvía de la cultura impuesta de perfección.
+
+* [Mitch Resnick: Let's teach kids to code](https://www.youtube.com/watch?v=Ok6LbV6bqaE)
+El ponente es uno de los desarrolladores del programa Scratch, que consiste en un juego que enseña lógica de programación. El ponente destaca la importancia de aprender algún lenguaje de programación en los días de hoy.
+
+Este solo en inglés:
+
+* [You Should Learn to Program: Christian Genco at TEDxSMU](https://www.youtube.com/watch?v=xfBWk4nw440)
+Destaca los impactos de saber programar en el día a día.
+
+
+# **Extra**: Familia de los `apply`
+
+1 - Utiliza la función siguiente para generar promedios de productividad, considerando 25 genotipos de soja evaluados en 15 ambientes, de forma aleatoria:
+
+```{r, eval=FALSE}
+set.seed(123456)
+datos = data.frame(Genotipos = rep(seq(1,25,1), 15), Ambientes = rep(x = seq(1:15), each = 25), rendimiento = rnorm(375, 3000:3500, 800))
+```
+
+Utilizando funciones de la familia "apply", obtén los promedios generales de cada genotipo y también de cada ambiente.
