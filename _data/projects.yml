@@ -99,9 +99,7 @@
             alt: "A screenshot of the vignette page"
           description: <li><a style="color:blue" href="https://cristianetaniguti.github.io/Qploidy/Qploidy.html">How to use Qploidy</a></li>
         - title: 2. Input data
-          description: <li>Axiom Array summary file</li>
-            <li>Illumina Array summary file</li> 
-            <li>VCF format</li>
+          description: <li>Axiom Array summary file</li> <li>Illumina Array summary file</li> <li>VCF format</li>
 
 - project :
     print: True # If 'False' is selected, it will not be displayed in 'home.html > aside > .proj-content'. 
