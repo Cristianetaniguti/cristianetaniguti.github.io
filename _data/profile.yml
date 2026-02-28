@@ -1,23 +1,17 @@
 ﻿image: assets/img/profile_pic.jpg
 username: Cris Taniguti (she/her)
-description: Hello! Welcome to my personal webpage! Here, I present my blog and an overview of my professional profile. I am a Ph.D. in Genetics in Plant Breeding. My research has focused on statistical genetics, computational biology, and polyploid species. I am from Brazil, but I currently live in Ithaca (NY - US) where I am the Genomics Coordinator at Breeding Insight - Cornell University. Outside of work, I love art performances and I have already performed aerial silk and other circus activities on streets, in theaters, and in open TV events.
+description: Hello and welcome to my personal website. I share my blog and an overview of my professional work. I hold a Ph.D. in Genetics and Plant Breeding, with a research focus on genomics, computational biology, statistical genetics, and polyploid species. Originally from Brazil, I now live in Ithaca, NY, and serve as Genomics Coordinator for Breeding Insight at University of Florida.
 webpage: https://cristianetaniguti.github.io
 experience: # Remove for hiding the experience section
-  - start: 2024-06
+  - start: 2026-02
     end: current
-    experience : Genomics Coordinator, Cornell Universiry - Breeding Insight
+    experience : Genomics Coordinator, University of Florida - Breeding Insight
+  - start: 2024-06
+    end: 2026-02
+    experience : Genomics Coordinator, Cornell University - Breeding Insight
   - start: 2021-07
     end: 2024-6
     experience : Postdoctoral Research Associate, Texas A&M University - Department of Horticultural Sciences
-  - start: 2014-01
-    end: 2014-07
-    experience: Intern, Sugarcane Technology Center (CTC)
-  - start: 2012-04
-    end: 2012-07
-    experience: Summer student, McGill University (McGill)
-  - start: 2009-07
-    end: 2010-02
-    experience: Technical training, Accert! Chemistry and Biotechnology
 education: # Remove for hiding the experience section
   - start: 2017-03
     end: 2021-04
@@ -30,6 +24,7 @@ education: # Remove for hiding the experience section
     education: Bachelor s Degree in Genetics and Plant Breeding, Federal University of Sao Carlos - UFSCar
 
 interests: # Remove for hiding the interests section
+  - Genomics
   - Statistical Genetics
   - Computational biology
   - High-throughput sequencing
@@ -68,7 +63,7 @@ skills: # Remove for hiding the skills section
     value: 50
     
 social:
-  email:  cht47@cornell.edu
+  email:  ctaniguti@ufl.edu
   orcid: 0000-0002-2021-6883
   scholar: Z4vaXQkAAAAJ&hl=en
   publons:
