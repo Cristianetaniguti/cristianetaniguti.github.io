@@ -13,26 +13,22 @@
     }
   }
   .card-container {
-    overflow: hidden;
-    column-count: 3;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
+    // Grid instead of CSS multi-column: in multi-column layouts some
+    // browsers (notably Safari) re-flow cards when the hover transform
+    // is applied, making a card jump away from the cursor.
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 20px;
     @media (max-width: 1200px) {
-      column-count: 2;
-      -webkit-column-count: 2;
-      -moz-column-count: 2;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     @media (max-width: 576px) {
-      column-count: 1;
-      -webkit-column-count: 1;
-      -moz-column-count: 1;
+      grid-template-columns: minmax(0, 1fr);
     }
     .card-wrapper {
       padding: 8px 10px;
-      margin: 10px auto;
-      display: inline-block;
-      width: 100%;
       .card {
+        height: 100%;
         -webkit-transition-duration: 0.8s;
         -moz-transition-duration: 0.8s;
         -ms-transition-duration: 0.8s;
