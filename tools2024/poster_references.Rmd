@@ -1,3 +1,10 @@
+---
+title: "References of PAG 2024 poster"
+subtitle: "Investigating Ploidy and Aneuploidy Patterns Among Rosa spp. and the Effect on Linkage Analysis"
+output: html_document
+date: "2024-01-06"
+---
+
 * Leroy, T., Albert, E., Thouroude, T., Baudino, S., Caissard, J.-C., Chastellier, A., Chameau, J., Jeauffre, J., Loubert, T., Nindya Paramita, S., Pernet, A., Soufflet-Freslon, V., Oghina-Pavie, C., Foucher, F., Hibrand-Saint Oyant, L., & Clotault, J. (2023). Dark side of the honeymoon: reconstructing the Asian x European rose breeding history through the lens of genomics. BioRxiv. https://doi.org/10.1101/2023.06.22.546162
 
 * Lau J., Young E. L., Collins S., Windham M. T., Klein P. E., Byrne D. H., Riera-Lizarazu O. Rose Rosette Disease Resistance Loci Detected in Two Interconnected Tetraploid Garden Rose Populations. Frontiers in Plant Science 13 (2022). https://10.3389/fpls.2022.916231 

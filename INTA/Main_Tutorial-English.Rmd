@@ -1,3 +1,12 @@
+---
+title: "Introduction to R Programming"
+date: "`r Sys.Date()`"
+author: "Breeding Insight - Cornell University"
+output:
+    rmdformats::readthedown:
+      css: readthedownstatgen.css
+---
+
 <center><img src="logos/logos.png" width="700" /></center>
 
 <br>

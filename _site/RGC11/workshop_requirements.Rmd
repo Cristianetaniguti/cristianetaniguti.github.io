@@ -1,0 +1,151 @@
+Here we describe the requirements for the Tools for Polyploid Training Workshop being held on March 17, 2023 both virtually and in person, in Nelson (New Zealand). This Workshop will be a "hands-on" training. We will share codes and example data sets to allow attendees to try the tools for polyploid genetic analysis.
+
+# Schedule
+
+| Time  | Subject                                             | Speaker                                      |
+|-------|-----------------------------------------------------|----------------------------------------------|
+| 8:30  | Introduction and computer setup for session         | David Byrne, Susan Thomson, and David Chagne |
+| 9:00  | Reads2Map                                           | Cris Taniguti                                |
+| 10:00 | Break                                               |                                              |
+| 10:10 | Reads2Map                                           | Cris Taniguti                                |
+| 11:00 | Haplotyping from sequence data                      | Tim Millar                                   |
+| 12:00 | Lunch – group picture                               |                                              |
+| 1:00  | Mapping software                                    | Jeekin Lau                                   |
+| 2:00  | QTL and GWAS analysis                               | Jeekin Lau                                   |
+| 3:00  | Break                                               |                                              |
+| 3:10  | QTL and GWAS analysis                               | Jeekin Lau                                   |
+| 4:00  | VIEWpoly                                            | Cris Taniguti and Olivia Angelin-Bonnet      |
+| 4:40  | An interactive dashboard to explore breeding values | Olivia Angelin-Bonnet                        |
+| 5:00  | Adjourn                                             |                                              |
+
+# Required computational resources
+
+In-person attendees will have access to a local server with the required resources. In-person attendees that prefer to use their personal computer/server and virtual attendees will require:
+
+* Linux system (or [\textcolor{blue}{WSL}](https://ubuntu.com/wsl))
+* At least 4Gb RAM
+* At least 16Gb HD
+* At least 4 cpus
+
+**Warning**: We will use small example data sets for use with limited resources and time for this learning experience. However, in your "real life" analysis you will certainly need more resources. Especially for the analysis that has large sequencing data files as inputs such as Reads2Map and MCHap.
+
+# Required software
+
+The sessions "Reads2Map" and "Haplotyping from sequence data" will require a Linux system with Docker (or singularity) and Java installed. The sessions "Mapping software", "QTL and GWAS analysis", "VIEWpoly", and "An interactive dashboard to explore breeding values" will require R, RStudio, and some R packages in Windows, Linux, or macOS. 
+
+## "Reads2Map" and "Haplotyping from sequence data" sessions requirements
+
+* Java 
+
+Java usually comes preinstalled in Linux system, but if not see how to install [\textcolor{blue}{here}](https://www.java.com/en/download/help/linux_x64_install.html). 
+
+* Docker
+
+[\textcolor{blue}{Docker}](https://www.docker.com/) is a container runtime. It will allow us to use diverse software without the need of installing each one of them and their dependencies. You can find instructions on how to install Docker in Linux, macOS, or Windows [\textcolor{blue}{here}](https://docs.docker.com/engine/install/). [\textcolor{blue}{Docker desktop}](https://docs.docker.com/get-docker/) can also be useful to manage containers, volumes, and images.
+
+Docker requires administrator permissions. If you work on a server or a computer that was issued by University or company, you may need to contact an IT person for setting up Docker. Check also the singularity option. 
+
+* Singularity
+
+Singularity is also a container runtime, but it does not require administrator permissions. Servers usually already have it installed. [\textcolor{blue}{This document}](https://docs.sylabs.io/guides/3.0/user-guide/installation.html#singularity-on-a-shared-resource) can provide answers to many common questions.
+
+* Containers
+
+You can find bellow the container images that we will use. Use the commands to download them.
+
+Using Docker:
+
+```{bash, eval=FALSE}
+# For Reads2Map session
+docker pull biocontainers/fastqc:v0.11.9_cv7
+docker pull ewels/multiqc:latest
+docker pull kfdrc/bwa-picard:latest-dev
+docker pull cristaniguti/r-samtools:latest
+docker pull cristaniguti/freebayes:0.0.1
+docker pull taniguti/gatk-picard:latest
+docker pull \
+   us.gcr.io/broad-gotc-prod/genomes-in-the-cloud:2.5.7-2021-06-09_16-47-48Z
+docker pull cristaniguti/reads2map:0.0.5
+
+# For MCHap session
+docker pull timothymillar/mchap:latest
+
+```
+
+Using Singularity:
+
+```{bash, eval=FALSE}
+# If you are using a server you may need to direct the singularity cache to 
+# a specific directory. For that, use:
+mkdir .singularity
+cd .singularity
+
+export SINGULARITY_CACHEDIR=$SCRATCH/.singularity
+
+# For Reads2Map session
+singularity pull biocontainers_fastqc_v0.11.9_cv7.sif \
+   docker://biocontainers/fastqc:v0.11.9_cv7
+singularity pull ewels_multiqc.sif docker://ewels/multiqc:latest
+singularity pull kfdrc_bwa-picard_latest-dev.sif docker://kfdrc/bwa-picard:latest-dev
+singularity pull cristaniguti_r-samtools_latest.sif \
+   docker://cristaniguti/r-samtools:latest
+singularity pull cristaniguti_freebayes_0.0.1.sif docker://cristaniguti/freebayes:0.0.1
+singularity pull taniguti_gatk-picard_latest.sif docker://taniguti/gatk-picard:latest
+singularity pull \ 
+   us.gcr.io_broad-gotc-prod_genomes-in-the-cloud:2.5.7-2021-06-09_16-47-48Z.sif \
+   docker://us.gcr.io/broad-gotc-prod/genomes-in-the-cloud:2.5.7-2021-06-09_16-47-48Z
+singularity pull cristaniguti_reads2map_0.0.5.sif docker://cristaniguti/reads2map:0.0.5
+
+# For MCHap session
+singularity pull timothymillar_mchap_latest.sif docker://timothymillar/mchap:latest
+
+```
+
+**Warning**: If you are using Docker, do not forget to remove all images and containers after you finish your analysis to avoid occupying space in the computer.
+
+
+## "Mapping software", "QTL and GWAS analysis", "VIEWpoly", and "An interactive dashboard to explore breeding values" sessions requirements
+
+* R
+
+[\textcolor{blue}{This page}](https://cran.r-project.org/) provides links to download R for Linux, macOS, or Windows. For Windows and macOS, an installer will guide you through the installation process. R comes preinstalled on many Linux systems. If it does not, the exact installation procedure can vary across Linux platforms. CRAN guides the process by grouping each set of source files with documentation or README files that explain how to install them.
+
+* RStudio
+
+Use [\textcolor{blue}{this page}](https://posit.co/products/open-source/rstudio/) to download RStudio for Linux, macOS, or Windows. In all cases, an installer will help you in the installation process.
+
+* R packages
+
+Bellow, you find R codes to install the required packages. We include how to install the stable and the development version of each one. The non-commented lines install the versions that will be used in the Workshop.
+
+```{r, eval=FALSE}
+# Linkage map 
+## CRAN version (we will use this one)
+install.packages("mappoly")
+## development version 
+#install.packages("devtools")
+#devtools::install_github("mmollina/MAPpoly")
+
+# QTL mapping
+## CRAN version (we will use this one)
+install.packages("qtlpoly")
+## development version
+#devtools::install_github("gabrielgesteira/QTLpoly")
+
+# HIDECAN
+## CRAN version
+#install.packages("hidecan")
+## development version (we will use this one)
+devtools::install_github("PlantandFoodResearch/hidecan")
+
+# VIEWpoly
+## CRAN version
+#install.packages("viewpoly")
+## development version (we will use this one)
+devtools::install_github("mmollina/VIEWpoly")
+
+# GWASpoly
+devtools::install_github("jendelman/GWASpoly") 
+
+```
+
