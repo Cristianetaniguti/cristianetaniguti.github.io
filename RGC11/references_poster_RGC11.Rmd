@@ -1,12 +1,3 @@
----
-title: "The challenges while building linkage maps for diploid and polyploid
- species with genotyping-by-sequencing markers"
-author: Cristiane Hayumi Taniguti, Jeekin Lau,  Antonio Augusto Franco Garcia, Marcelo Mollinari, David Byrne, Oscar Riera-Lizarazu
-date: "`r Sys.Date()`"
-output:
-  rmdformats::html_clean:
-    highlight: kate
----
 ```{r setup, include=FALSE}
 ## Global options
 knitr::opts_chunk$set(cache = TRUE)
